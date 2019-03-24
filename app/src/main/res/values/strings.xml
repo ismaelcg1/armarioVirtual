@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">pruebaProyecto</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TEXTOS LOGIN -->
+    <string name="nombreActividadLogin">Registro</string>
+    <string name="textoInicialActividadLogin">Armario Virtual</string>
+    <string name="emailActividadLogin">Introduzca su email</string>
+    <string name="passwordActividadLogin">Introduzca su contraseña</string>
+    <string name="textoBotonActividadLogin">Entrar</string>
+    <string name="textoPasswordOlvidadaActividadLogin">¿Has olvidado tu contraseña? Cámbiala aquí</string>
+    <!-- Al poner el texto dentro de la etiqueta <u> </u> ponemos el texto subrayado -->
+    <string name="textoNoTengoCuentaActividadLogin"><u>¿No tienes cuenta? Pulsa aquí para registrarte</u></string>
+
+    <string name="textoRegistroGoogleActividadLogin">Registrarte con tu cuenta de Google:</string>
+
+    <string name="textoEmailVacioActividadLogin">Debe rellenar el campo email</string>
+    <string name="textoPasswordVacioActividadLogin">Debe rellenar el campo contraseña</string>
+    <string name="toastRegistroCorrectoActividadLogin">Realizando registro de:</string>
+    <string name="toastRegistroIncorrectoActividadLogin">Autentificación fallida!</string>
+    <string name="toastLoginCorrectoActividadLogin">Autentificación correcta!</string>
+    <string name="toastLoginIncorrectoActividadLogin">Autentificación fallida...</string>
+
+    <!-- TEXTOS DIALOG_PRIMER_REGISTRO -->
+    <string name="nombreActividadRegistroInicialDialogCompletarLogin">Regístrate</string>
+    <string name="repitaPasswordDialogCompletarLogin">Repita su contraseña</string>
+    <string name="generoDialogCompletarLogin">Género:</string>
+    <string name="generoMasculinoDialogCompletarLogin">Masculino</string>
+    <string name="generoFemeninoDialogCompletarLogin">Femenino</string>
+    <string name="fechaDeNacimientoDialogCompletarLogin">Fecha de nacimiento:</string>
+    <string name="seleccionarFechaoDialogCompletarLogin">Seleccionar fecha</string>
+    <string name="alturaDialogCompletarLogin">Introduzca su altura:</string>
+    <string name="pesoDialogCompletarLogin">Introduzca su peso:</string>
+
+
+
+</resources>
