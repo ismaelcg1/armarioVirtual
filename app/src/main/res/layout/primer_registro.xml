@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -92,6 +93,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:checked="true"
                         android:text="@string/generoMasculinoDialogCompletarLogin" />
 
                     <RadioButton
@@ -140,17 +142,20 @@
                     android:layout_weight="1"
                     android:text="@string/alturaDialogCompletarLogin" />
 
-                <NumberPicker
-                    android:id="@+id/numberPickerAltura"
+                <TextView
+                    android:id="@+id/textViewSeleccionaAltura"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    android:layout_weight="1"
+                    android:hint="@string/textViewAlturaCompletarLogin" />
+
+                <Button
+                    android:id="@+id/buttonSeleccionarAltura"
+                    android:layout_width="20dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/icono_altura_50" />
+
 
             </LinearLayout>
 
@@ -166,17 +171,21 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/pesoDialogCompletarLogin" />
-                <NumberPicker
-                    android:id="@+id/numberPickerPeso"
+
+                <TextView
+                    android:id="@+id/textViewSeleccionaPeso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView" />
+                    android:layout_weight="1"
+                    android:hint="@string/textViewPesoCompletarLogin" />
+
+                <Button
+                    android:id="@+id/buttonSeleccionarPeso"
+                    android:layout_width="20dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/icono_balanza_50" />
+
             </LinearLayout>
 
         </LinearLayout>

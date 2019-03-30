@@ -36,6 +36,8 @@
     <string name="seleccionarFechaoDialogCompletarLogin">Seleccionar fecha</string>
     <string name="alturaDialogCompletarLogin">Introduzca su altura:</string>
     <string name="pesoDialogCompletarLogin">Introduzca su peso:</string>
+    <string name="textViewAlturaCompletarLogin">(Altura)</string>
+    <string name="textViewPesoCompletarLogin">( Peso )</string>
 
 
 

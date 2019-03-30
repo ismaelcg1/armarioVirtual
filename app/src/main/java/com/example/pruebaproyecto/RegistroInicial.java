@@ -1,50 +1,50 @@
 package com.example.pruebaproyecto;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-
 import java.util.Calendar;
 
-public class RegistroInicial extends AppCompatActivity {
 
-    private TextView mDisplayDate;
+public class RegistroInicial extends AppCompatActivity implements View.OnClickListener, DialogPersonalizado.finalizarDialog {
+
+    private TextView mDisplayDate, textViewSeleccionarPeso, textViewSeleccionarAltura;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private Toolbar appToolbar;
+    // String comprobación
+    private String seleccion = "";
+    // Ponemos el contexto para el Dialog
+    private Context contexto;
+    // Botones para seleccionar en un Dialog en un numberPicker
+    private Button botonSeleccionarAltura, botonSeleccionarPeso;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.primer_registro);
+        // Inicializamos el contexto
+        contexto = this;
+
         mDisplayDate = findViewById(R.id.tvDate);
         appToolbar = findViewById(R.id.appToolbar);
-
-        // Para el numberSpicker
-        NumberPicker npAltura = findViewById(R.id.numberPickerAltura);
-        NumberPicker npPeso = findViewById(R.id.numberPickerPeso);
-
-        npAltura.setMinValue(2);
-        npAltura.setMaxValue(20);
-
-        npAltura.setOnValueChangedListener(onValueChangeListener);
-
-        npPeso.setMinValue(30);
-        npPeso.setMaxValue(130);
-
-        npPeso.setOnValueChangedListener(onValueChangeListener);
+        textViewSeleccionarPeso = findViewById(R.id.textViewSeleccionaPeso);
+        textViewSeleccionarAltura = findViewById(R.id.textViewSeleccionaAltura);
+        botonSeleccionarAltura = findViewById(R.id.buttonSeleccionarAltura);
+        botonSeleccionarPeso = findViewById(R.id.buttonSeleccionarPeso);
 
         // *************************************************
         // Pongo el titulo en la toolbar
@@ -59,6 +59,11 @@ public class RegistroInicial extends AppCompatActivity {
             }
         });
 
+
+        // Hacemos el setOnClickListener para los Buttons
+        botonSeleccionarAltura.setOnClickListener(this);
+        botonSeleccionarPeso.setOnClickListener(this);
+
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +76,7 @@ public class RegistroInicial extends AppCompatActivity {
                         RegistroInicial.this,
                         android.R.style.Theme_Holo_Light_Dialog_MinWidth,
                         mDateSetListener,
-                        year,month,day);
+                        year, month, day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }
@@ -88,17 +93,8 @@ public class RegistroInicial extends AppCompatActivity {
     }
 
 
-    NumberPicker.OnValueChangeListener onValueChangeListener =
-            new 	NumberPicker.OnValueChangeListener(){
-                @Override
-                public void onValueChange(NumberPicker numberPicker, int i, int i1) {
-                    Toast.makeText(RegistroInicial.this,
-                            "selected number "+numberPicker.getValue(), Toast.LENGTH_SHORT);
-                }
-            };
 
-
-    public void registrarNuevoUsuario () {
+    public void registrarNuevoUsuario() {
 /*
         // --- Esto es para registrar desde 0, cambiar a Registro Inicial, OJO con los layout.
         mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
@@ -163,6 +159,47 @@ public class RegistroInicial extends AppCompatActivity {
                     }
                 });*/
 
+
+    }
+
+    private void updateUI() {
+
+
+    }
+
+
+    @Override
+    public void onClick(View v) {
+
+
+        switch (v.getId()) {
+            case R.id.buttonSeleccionarAltura:
+                seleccion = "Altura";
+                new DialogPersonalizado(contexto, RegistroInicial.this, seleccion);
+
+                break;
+            case R.id.buttonSeleccionarPeso:
+                seleccion = "Peso";
+                new DialogPersonalizado(contexto, RegistroInicial.this, seleccion);
+                Toast.makeText(this, "HOLAA", Toast.LENGTH_SHORT).show();  // String peso definido correctamente
+
+                break;
+            default:
+                Toast.makeText(this, "Error switch - onClick", Toast.LENGTH_SHORT).show();
+                break;
+        }
+
+    }
+
+    @Override
+    public void resultado(int num) {
+        // Dependiendo de la operación que hayamos seleccionado:
+
+        if (seleccion.equalsIgnoreCase("Altura")) {
+            textViewSeleccionarAltura.setText(""+num+" Cm");
+        } else if (seleccion.equalsIgnoreCase("Peso")) {
+            textViewSeleccionarPeso.setText(""+num+" Kg");
+        }
 
     }
 }
