@@ -34,5 +34,5 @@ dependencies {
     // Para NumberPicker
     implementation 'com.alex-zaitsev:meternumberpicker:1.0.5'
     // Para hacer fotos:
-    implementation 'com.mcxiaoke.volley:library-aar:1.0.0'
+    implementation 'com.karumi:dexter:5.0.0'
 }

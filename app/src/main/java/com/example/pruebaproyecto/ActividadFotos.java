@@ -1,180 +1,204 @@
 package com.example.pruebaproyecto;
 
-import android.app.DownloadManager;
-import android.app.ProgressDialog;
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.api.Response;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Hashtable;
-import java.util.Map;
+import java.util.Calendar;
+import java.util.List;
 
-public class ActividadFotos extends AppCompatActivity implements View.OnClickListener{
+public class ActividadFotos extends AppCompatActivity {
 
-    private Button btnBuscar;
-    private Button btnSubir;
-
-    private ImageView imageView;
-
-    private EditText editTextName;
-
-    private Bitmap bitmap;
-
-    private int PICK_IMAGE_REQUEST = 1;
-
-    private String UPLOAD_URL ="https://serverandrofast.webcindario.com/upload.php";
-
-    private String KEY_IMAGEN = "foto";
-    private String KEY_NOMBRE = "nombre";
-    private Toolbar appToolbar;
+    private ImageView botonInsertarImagen;
+    private Button subirPrenda;
+    private static final String IMAGE_DIRECTORY = "/imagenes_Armario_Virtual";
+    private int GALLERY = 1, CAMERA = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actividad_fotos);
+        setContentView(R.layout.actividad_insertar_fotos);
+        requestMultiplePermissions();
 
-        btnBuscar = findViewById(R.id.btnBuscar);
-        btnSubir = findViewById(R.id.btnSubir);
+        botonInsertarImagen = findViewById(R.id.imageViewInsertarImagen);
+        subirPrenda = findViewById(R.id.buttonSubirPrenda);
 
-        editTextName = findViewById(R.id.editText);
-
-        imageView  = findViewById(R.id.imageView);
-
-
-        appToolbar = findViewById(R.id.appToolbar);
-
-        // *************************************************
-        // Pongo el titulo en la toolbar
-        appToolbar.setTitle(R.string.nombreActividadRegistroInicialDialogCompletarLogin);
-        // Asigno la flecha de atras a la toolbar
-        appToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
-        // Hago que cuando se pulse la flecha de atras se cierre la actividad
-        appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        botonInsertarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                showPictureDialog();
             }
         });
 
-        btnBuscar.setOnClickListener(this);
-        btnSubir.setOnClickListener(this);
-    }
-
-    public String getStringImagen(Bitmap bmp){
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] imageBytes = baos.toByteArray();
-        String encodedImage = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.FROYO) {
-            encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
-        }
-        return encodedImage;
-    }
-/*
-    private void uploadImage(){
-        //Mostrar el diálogo de progreso
-        final ProgressDialog loading = ProgressDialog.show(this,"Subiendo...","Espere por favor...",false,false);
-        StringRequest stringRequest = new StringRequest(DownloadManager.Request.Method.POST, UPLOAD_URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String s) {
-                        //Descartar el diálogo de progreso
-                        loading.dismiss();
-                        //Mostrando el mensaje de la respuesta
-                        Toast.makeText(ActividadFotos.this, s , Toast.LENGTH_LONG).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        //Descartar el diálogo de progreso
-                        loading.dismiss();
-
-                        //Showing toast
-                        Toast.makeText(ActividadFotos.this, volleyError.getMessage().toString(), Toast.LENGTH_LONG).show();
-                    }
-                }){
-
-
+        subirPrenda.setOnClickListener(new View.OnClickListener() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                //Convertir bits a cadena
-                String imagen = getStringImagen(bitmap);
-
-                //Obtener el nombre de la imagen
-                String nombre = editTextName.getText().toString().trim();
-
-                //Creación de parámetros
-                Map<String,String> params = new Hashtable<String, String>();
-
-                //Agregando de parámetros
-                params.put(KEY_IMAGEN, imagen);
-                params.put(KEY_NOMBRE, nombre);
-
-                //Parámetros de retorno
-                return params;
+            public void onClick(View v) {
+                showPictureDialog();
             }
-        };
+        });
 
-        //Creación de una cola de solicitudes
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
 
-        //Agregar solicitud a la cola
-        requestQueue.add(stringRequest);
-    }
-*/
-    private void showFileChooser() {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Imagen"), PICK_IMAGE_REQUEST);
+
     }
 
+    private void showPictureDialog(){
+        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        pictureDialog.setTitle("Select Action");
+        String[] pictureDialogItems = {
+                "Select photo from gallery",
+                "Capture photo from camera" };
+        pictureDialog.setItems(pictureDialogItems,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                choosePhotoFromGallary();
+                                break;
+                            case 1:
+                                takePhotoFromCamera();
+                                break;
+                        }
+                    }
+                });
+        pictureDialog.show();
+    }
+
+    public void choosePhotoFromGallary() {
+        Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(galleryIntent, GALLERY);
+    }
+
+    private void takePhotoFromCamera() {
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, CAMERA);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == this.RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == GALLERY) {
+            if (data != null) {
+                Uri contentURI = data.getData();
+                try {
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    bitmap = Bitmap.createScaledBitmap(bitmap, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
-            try {
-                //Cómo obtener el mapa de bits de la Galería
-                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
-                //Configuración del mapa de bits en ImageView
-                imageView.setImageBitmap(bitmap);
-            } catch (IOException e) {
-                e.printStackTrace();
+                    String path = saveImage(bitmap);
+                    Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    botonInsertarImagen.setImageBitmap(bitmap);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    Toast.makeText(ActividadFotos.this, "Failed!", Toast.LENGTH_SHORT).show();
+                }
             }
+
+        } else if (requestCode == CAMERA) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            Bitmap bitmap = Bitmap.createScaledBitmap(thumbnail, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
+            botonInsertarImagen.setImageBitmap(bitmap);
+            saveImage(bitmap);
+            Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
     }
 
-    @Override
-    public void onClick(View v) {
-
-        if(v == btnBuscar){
-            showFileChooser();
+    public String saveImage(Bitmap myBitmap) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        File wallpaperDirectory = new File(
+                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
+        // have the object build the directory structure, if needed.
+        if (!wallpaperDirectory.exists()) {
+            wallpaperDirectory.mkdirs();
         }
 
-        if(v == btnSubir){
-            // uploadImage();
+        try {
+            File f = new File(wallpaperDirectory, Calendar.getInstance()
+                    .getTimeInMillis() + ".jpg");
+            f.createNewFile();
+            FileOutputStream fo = new FileOutputStream(f);
+            fo.write(bytes.toByteArray());
+            MediaScannerConnection.scanFile(this,
+                    new String[]{f.getPath()},
+                    new String[]{"image/jpeg"}, null);
+            fo.close();
+            Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath());
+
+            return f.getAbsolutePath();
+        } catch (IOException e1) {
+            e1.printStackTrace();
         }
+        return "";
+    }
+
+    private void  requestMultiplePermissions(){
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
+                            //openSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 }
