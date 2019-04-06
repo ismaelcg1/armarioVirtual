@@ -13,7 +13,7 @@
     <string name="emailActividadLogin">Introduzca su email</string>
     <string name="passwordActividadLogin">Introduzca su contraseña</string>
     <string name="textoBotonActividadLogin">Entrar</string>
-    <string name="textoPasswordOlvidadaActividadLogin">¿Has olvidado tu contraseña? Cámbiala aquí</string>
+    <string name="textoPasswordOlvidadaActividadLogin">¿Has olvidado tu contraseña? <u>Cámbiala aquí</u></string>
     <!-- Al poner el texto dentro de la etiqueta <u> </u> ponemos el texto subrayado -->
     <string name="textoNoTengoCuentaActividadLogin"><u>¿No tienes cuenta? Pulsa aquí para registrarte</u></string>
 
@@ -26,7 +26,7 @@
     <string name="toastLoginCorrectoActividadLogin">Autentificación correcta!</string>
     <string name="toastLoginIncorrectoActividadLogin">Autentificación fallida...</string>
 
-    <!-- TEXTOS DIALOG_PRIMER_REGISTRO -->
+    <!-- TEXTOS DIALOG_PRIMER_REGISTRO -->                                                                  <!-- CAMBIAR COompletarLogin por RegistroInicial  -->
     <string name="nombreActividadRegistroInicialDialogCompletarLogin">Regístrate</string>
     <string name="repitaPasswordDialogCompletarLogin">Repita su contraseña</string>
     <string name="generoDialogCompletarLogin">Género:</string>
@@ -38,7 +38,14 @@
     <string name="pesoDialogCompletarLogin">Introduzca su peso:</string>
     <string name="textViewAlturaCompletarLogin">(Altura)</string>
     <string name="textViewPesoCompletarLogin">( Peso )</string>
-
-
+    <string name="botonRegistrarmeRegistroInicial">Regístrame</string>
+    <!-- Toast de errores -->
+    <string name="toastEmailVacioRegistroIncial">Campo email vacio. Por favor, introduzca su email.</string>
+    <string name="toastPasswordVaciaRegistroIncial">Campo de contraseña vacia. Por favor, introduzca su contraseña.</string>
+    <string name="toastPasswordRepetidaVaciaRegistroIncial">Campo de repetir contraseña vacio. Por favor, vuelva a introducir su contraseña</string>
+    <string name="toastPasswordNoCoincidenRegistroIncial">Ambas contraseñas deben ser iguales. Por favor, introduzca la misma contraseña en ambos campos</string>
+    <string name="toastFechaVaciaRegistroIncial">Fecha de nacimiento no introducida. Por favor, seleccione su fecha de nacimiento.</string>
+    <string name="toastAlturaVaciaRegistroIncial">Altura no seleccionada. Por favor, introduzca su altura (en centímetros)</string>
+    <string name="toastPesoVacioRegistroIncial">Peso no seleccionado. Por favor, introduzca su peso (en Kg)</string>
 
 </resources>

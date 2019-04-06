@@ -84,12 +84,13 @@
                     android:text="@string/generoDialogCompletarLogin" />
 
                 <RadioGroup
+                    android:id="@+id/radioGroupGenero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
                     <RadioButton
-                        android:id="@+id/radioButton"
+                        android:id="@+id/radioButtonMasculino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -97,7 +98,7 @@
                         android:text="@string/generoMasculinoDialogCompletarLogin" />
 
                     <RadioButton
-                        android:id="@+id/radioButton2"
+                        android:id="@+id/radioButtonFemenino"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -190,5 +191,17 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnRegistrarme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/botonRegistrarmeRegistroInicial" />
     </LinearLayout>
 </LinearLayout>

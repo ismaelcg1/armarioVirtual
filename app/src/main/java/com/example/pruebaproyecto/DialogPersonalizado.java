@@ -15,8 +15,7 @@ public class DialogPersonalizado {
 
     private NumberPicker numberPickerPeso, numberPickerAltura;
     private LinearLayout linearLayoutNumberPickerAltura, linearLayoutNumberPickerPeso;
-    private Button aceptarAltura, aceptarPeso, cancelarAltura, cancelarPeso, seleccionPeso, seleccionAltura;
-    private String seleccion;
+    private Button aceptarAltura, aceptarPeso, cancelarAltura, cancelarPeso;
 
     // Para mostrar un dialog y pasar parámetros
     public interface finalizarDialog {
