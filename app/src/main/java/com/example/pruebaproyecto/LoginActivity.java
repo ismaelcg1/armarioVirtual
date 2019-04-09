@@ -4,18 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,17 +23,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button botonDrawer;
     private TextInputLayout email, password;
     private ProgressDialog progressDialog;
-    private LinearLayout layout_login, layout_progress_bar;
     private TextView textoNoRegistrado;
 
     // Para autentificación con FireBase
     private FirebaseAuth mAuth = null;
-
-    // Para ProgressBar
-    private ProgressBar mProgressBar;
-    private TextView mLoadingText;
-    private int mProgressStatus = 0;
-    private Handler mHandler = new Handler();
 
     // Para ver si el usuario está registrado:
     private boolean usuarioCorrecto;
@@ -47,13 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        // Enlazamos nuestras variables a la vista
-        botonDrawer = findViewById(R.id.buttonDrawer);
-        email = findViewById(R.id.textEmail);
-        password = findViewById(R.id.textPassword);
-        layout_login = findViewById(R.id.layoutLogin);
-        layout_progress_bar = findViewById(R.id.layoutProgressBar);
-        textoNoRegistrado = findViewById(R.id.textoClickable);
+        conectarVariablesConVista();
 
         progressDialog = new ProgressDialog(this);
 
@@ -63,10 +46,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // Para autentificación con FireBase
         mAuth = FirebaseAuth.getInstance();
 
-
-        // Para progressBar
-        mProgressBar = findViewById(R.id.progressbar);
-        mLoadingText = findViewById(R.id.LoadingCompleteTextView);
 
         /*
 
@@ -86,6 +65,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String uid = user.getUid();
         }
 */
+    }
+
+    private void conectarVariablesConVista() {
+        botonDrawer = findViewById(R.id.buttonDrawer);
+        email = findViewById(R.id.textEmail);
+        password = findViewById(R.id.textPassword);
+        textoNoRegistrado = findViewById(R.id.textoClickable);
     }
 
     // Para autentificación con FireBase, vemos si el usuario se ha registrado:
@@ -186,10 +172,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.textoClickable:
                 // Cambiamos color de texto al pulsar
                 textoNoRegistrado.setTextColor(Color.parseColor("#EBB93509"));
-                /*
-                DialogoCompletarLogin dialogoRegistro = new DialogoCompletarLogin();
-                dialogoRegistro.show(fragmentManager, "tagAlerta");
-*/
 
                 Intent intent2 = new Intent(this, RegistroInicial.class);
                 startActivity(intent2);

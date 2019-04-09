@@ -44,12 +44,12 @@ public class DialogPersonalizado {
         numberPickerAltura = dialogo.findViewById(R.id.numberPickerAltura);
         numberPickerAltura.setMinValue(130);
         numberPickerAltura.setMaxValue(210);
-        // Ponemos por defecto que salga una altura                            ¿?????????
+        // Ponemos por defecto que salga una altura
         numberPickerAltura.setValue(170);
         numberPickerAltura.setOnValueChangedListener(onValueChangeListener);
         numberPickerPeso.setMinValue(30);
         numberPickerPeso.setMaxValue(130);
-        // Ponemos por defecto que salga un peso                            ¿?????????
+        // Ponemos por defecto que salga un peso
         numberPickerPeso.setValue(70);
         numberPickerPeso.setOnValueChangedListener(onValueChangeListener);
 

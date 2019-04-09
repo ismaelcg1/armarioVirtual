@@ -18,15 +18,15 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
                 <ImageButton
                     android:id="@+id/imageViewInsertarImagen"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="match_parent"
                     android:clickable="true"
                     app:srcCompat="@android:drawable/ic_menu_add" />
             </LinearLayout>

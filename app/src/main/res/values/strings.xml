@@ -39,6 +39,12 @@
     <string name="textViewAlturaCompletarLogin">(Altura)</string>
     <string name="textViewPesoCompletarLogin">( Peso )</string>
     <string name="botonRegistrarmeRegistroInicial">Regístrame</string>
+    <string name="requerirEmailRegistroInicial">Email requerido</string>
+    <string name="requerirPasswordRegistroInicial">Contraseña requerida</string>
+    <string name="requerirPasswordRepetidaRegistroInicial">Repetir contraseña para validar</string>
+    <string name="formatoEmailIncorrectoRegistroInicial">El formato de email no es correcto</string>
+    <string name="formatoPasswordIncorrectoRegistroInicial">Formato:\n- De 8 a 15 carácteres\n- 1 Mayúscula\n- 1 Minúscula\n- 1 Carácter especial\n- 1 Dígito\n- Sin espacios en blanco</string>
+
     <!-- Toast de errores -->
     <string name="toastEmailVacioRegistroIncial">Campo email vacio. Por favor, introduzca su email.</string>
     <string name="toastPasswordVaciaRegistroIncial">Campo de contraseña vacia. Por favor, introduzca su contraseña.</string>
