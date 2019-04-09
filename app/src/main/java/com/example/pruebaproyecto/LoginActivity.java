@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,6 +18,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -109,19 +113,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         emailUser = email.getEditText().getText().toString().trim(); // Para quitar espacios en blanco --> trim()
         passwordUser = password.getEditText().getText().toString().trim();
 
-        // PRUEBAS
-        Log.i("Email: ", "" + emailUser);
-        Log.i("Password: ", "" + passwordUser);
-
         usuarioCorrecto = false;
 
         // Vemos si se han insertado los datos o están los campos vacios:
-        if (emailUser.isEmpty()) {
-            Toast.makeText(LoginActivity.this, getResources().getString(R.string.textoEmailVacioActividadLogin), Toast.LENGTH_SHORT).show();
-            // return; // Se detendría la ejecución ??
-        } else if (passwordUser.isEmpty()) {
-            Toast.makeText(LoginActivity.this, getResources().getString(R.string.textoPasswordVacioActividadLogin), Toast.LENGTH_SHORT).show();
-            // return; // Se detendría la ejecución ??
+        if (!validarDatos(emailUser, passwordUser)) {
+            return;
         } else {
             // -------------
 
@@ -134,8 +130,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 // Sign in success, update UI with the signed-in user's information
 
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginCorrectoActividadLogin), Toast.LENGTH_SHORT).show();
-                                // PRUEBAS
-                                Toast.makeText(LoginActivity.this, "usuarioCorrecto = "+usuarioCorrecto, Toast.LENGTH_SHORT).show();
 
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 // -----
@@ -156,6 +150,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     });
 
         }
+    }
+
+    private boolean validarEmailPassword(String email, String password) {
+        boolean correcto = false;
+        Pattern pattern;
+        Matcher mather;
+
+        if (password == null) {
+            // Patrón para validar el email
+            pattern = Pattern
+                    .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            mather = pattern.matcher(email);
+
+            if (mather.find() == true) {
+                // Email válido
+                correcto = true;
+            } else {
+                correcto = false;
+            }
+        } else if (email == null) {
+            // Patrón para validar password, con 1 dígito, carácter especial, mayuscula, minúscula, no espacios en blanco, 8-15 caracteres.
+            pattern = Pattern
+                    .compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$");
+            mather = pattern.matcher(password);
+
+            if (mather.find() == true) {
+                // Email válido
+                correcto = true;
+            } else {
+                correcto = false;
+            }
+        }
+        return correcto;
+    }
+
+
+    private boolean validarDatos(String emailUser, String passwordUser) {
+
+        if (emailUser.isEmpty()) {
+            Toast.makeText(LoginActivity.this,
+                    getResources().getString(R.string.requerirEmailRegistroInicial), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!validarEmailPassword(emailUser, null)) { // Validamos también que el formato del email esté correcto.
+            // Formato incorrecto
+            Toast.makeText(LoginActivity.this,
+                    getResources().getString(R.string.formatoEmailIncorrectoRegistroInicial), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if (passwordUser.isEmpty()) {
+            Toast.makeText(LoginActivity.this,
+                    getResources().getString(R.string.requerirPasswordRegistroInicial), Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (!validarEmailPassword(null, passwordUser)){
+            Toast.makeText(LoginActivity.this,
+                    getResources().getString(R.string.formatoPasswordIncorrectoRegistroInicial), Toast.LENGTH_LONG).show();
+            return false;
+        }
+        return true;
     }
 
 
