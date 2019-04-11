@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:hint="@string/repitaPasswordDialogCompletarLogin"
+                    android:hint="@string/repitaPasswordRegistroInicial"
                     android:inputType="textPassword" />
             </LinearLayout>
 
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/generoDialogCompletarLogin" />
+                        android:text="@string/generoDialogRegistroInicial" />
 
                     <RadioGroup
                         android:id="@+id/radioGroupGenero"
@@ -102,14 +102,14 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:checked="true"
-                            android:text="@string/generoMasculinoDialogCompletarLogin" />
+                            android:text="@string/generoMasculinoRegistroInicial" />
 
                         <RadioButton
                             android:id="@+id/radioButtonFemenino"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/generoFemeninoDialogCompletarLogin" />
+                            android:text="@string/generoFemeninoRegistroInicial" />
                     </RadioGroup>
 
                 </LinearLayout>
@@ -125,7 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/fechaDeNacimientoDialogCompletarLogin" />
+                        android:text="@string/fechaDeNacimientoRegistroInicial" />
 
                     <TextView
                         android:id="@+id/tvDate"
@@ -133,7 +133,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_weight="1"
-                        android:hint="@string/seleccionarFechaoDialogCompletarLogin"
+                        android:hint="@string/seleccionarFechaRegistroInicial"
                         android:textAppearance="@style/TextAppearance.AppCompat.Button" />
                 </LinearLayout>
 
@@ -148,14 +148,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/alturaDialogCompletarLogin" />
+                        android:text="@string/alturaRegistroInicial" />
 
                     <TextView
                         android:id="@+id/textViewSeleccionaAltura"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="@string/textViewAlturaCompletarLogin" />
+                        android:hint="@string/textViewAlturaRegistroInicial" />
 
                     <Button
                         android:id="@+id/buttonSeleccionarAltura"
@@ -178,14 +178,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/pesoDialogCompletarLogin" />
+                        android:text="@string/pesoRegistroInicial" />
 
                     <TextView
                         android:id="@+id/textViewSeleccionaPeso"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:hint="@string/textViewPesoCompletarLogin" />
+                        android:hint="@string/textViewPesoRegistroInicial" />
 
                     <Button
                         android:id="@+id/buttonSeleccionarPeso"

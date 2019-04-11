@@ -16,7 +16,6 @@ public class DialogPersonalizado {
     private NumberPicker numberPickerPeso, numberPickerAltura;
     private LinearLayout linearLayoutNumberPickerAltura, linearLayoutNumberPickerPeso;
     private Button aceptarAltura, aceptarPeso, cancelarAltura, cancelarPeso;
-
     // Para mostrar un dialog y pasar parámetros
     public interface finalizarDialog {
         void resultado(int num);
@@ -93,7 +92,6 @@ public class DialogPersonalizado {
             });
 
             cancelarPeso.setOnClickListener(new View.OnClickListener() {
-
                 @Override
                 public void onClick(View v) {
                     dialogo.dismiss();

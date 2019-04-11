@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">pruebaProyecto</string>
+    <string name="app_name">ArmarioVirtual</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -8,7 +8,7 @@
     <string name="action_settings">Settings</string>
 
     <!-- TEXTOS LOGIN -->
-    <string name="nombreActividadLogin">Registro</string>
+    <string name="nombreActividadLogin">Identificación</string>
     <string name="textoInicialActividadLogin">Armario Virtual</string>
     <string name="emailActividadLogin">Introduzca su email</string>
     <string name="passwordActividadLogin">Introduzca su contraseña</string>
@@ -26,18 +26,18 @@
     <string name="toastLoginCorrectoActividadLogin">Autentificación correcta!</string>
     <string name="toastLoginIncorrectoActividadLogin">Autentificación fallida...</string>
 
-    <!-- TEXTOS DIALOG_PRIMER_REGISTRO -->                                                                  <!-- CAMBIAR COompletarLogin por RegistroInicial  -->
-    <string name="nombreActividadRegistroInicialDialogCompletarLogin">Regístrate</string>
-    <string name="repitaPasswordDialogCompletarLogin">Repita su contraseña</string>
-    <string name="generoDialogCompletarLogin">Género:</string>
-    <string name="generoMasculinoDialogCompletarLogin">Masculino</string>
-    <string name="generoFemeninoDialogCompletarLogin">Femenino</string>
-    <string name="fechaDeNacimientoDialogCompletarLogin">Fecha de nacimiento:</string>
-    <string name="seleccionarFechaoDialogCompletarLogin">Seleccionar fecha</string>
-    <string name="alturaDialogCompletarLogin">Introduzca su altura:</string>
-    <string name="pesoDialogCompletarLogin">Introduzca su peso:</string>
-    <string name="textViewAlturaCompletarLogin">(Altura)</string>
-    <string name="textViewPesoCompletarLogin">( Peso )</string>
+    <!-- TEXTOS PRIMER_REGISTRO -->
+    <string name="nombreActividadRegistroInicial">Regístrate</string>
+    <string name="repitaPasswordRegistroInicial">Repita su contraseña</string>
+    <string name="generoDialogRegistroInicial">Género:</string>
+    <string name="generoMasculinoRegistroInicial">Masculino</string>
+    <string name="generoFemeninoRegistroInicial">Femenino</string>
+    <string name="fechaDeNacimientoRegistroInicial">Fecha de nacimiento:</string>
+    <string name="seleccionarFechaRegistroInicial">Seleccionar fecha</string>
+    <string name="alturaRegistroInicial">Introduzca su altura:</string>
+    <string name="pesoRegistroInicial">Introduzca su peso:</string>
+    <string name="textViewAlturaRegistroInicial">(Altura)</string>
+    <string name="textViewPesoRegistroInicial">( Peso )</string>
     <string name="botonRegistrarmeRegistroInicial">Regístrame</string>
     <string name="requerirEmailRegistroInicial">Email requerido</string>
     <string name="requerirPasswordRegistroInicial">Contraseña requerida</string>
@@ -53,5 +53,12 @@
     <string name="toastFechaVaciaRegistroIncial">Fecha de nacimiento no introducida. Por favor, seleccione su fecha de nacimiento.</string>
     <string name="toastAlturaVaciaRegistroIncial">Altura no seleccionada. Por favor, introduzca su altura (en centímetros)</string>
     <string name="toastPesoVacioRegistroIncial">Peso no seleccionado. Por favor, introduzca su peso (en Kg)</string>
+    <string name="toastEmailVerificacionEnviadoCorrectoRegistroIncial">Email de verificación enviado a:</string>
+    <string name="toastEmailVerificacionEnviadoIncorrectoRegistroIncial">Fallo al enviar email de verificación</string>
+
+    <!-- Para SnackBar -->
+    <string name="snackBarEnviarEmail">Email no verificado. ¿Quieres recibir un email de verificación?</string>
+    <string name="snackBarBotonEnviarEmail">Sí, envíamelo</string>
+
 
 </resources>

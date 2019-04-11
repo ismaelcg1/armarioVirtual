@@ -69,7 +69,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         conectarVariablesConVista();
 
         // Pongo el titulo en la toolbar
-        appToolbar.setTitle(R.string.nombreActividadRegistroInicialDialogCompletarLogin);
+        appToolbar.setTitle(R.string.nombreActividadRegistroInicial);
         // Asigno la flecha de atras a la toolbar
         appToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
@@ -190,7 +190,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
 
     private void registrarNuevoUsuario() {
-
         // Cogemos los datos :
         String emailUser = email.getText().toString();
         String passwordUser = password.getText().toString();
@@ -262,25 +261,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         updateUI(null, false);
     }
 
-    private void sendEmailVerification() {
-        final FirebaseUser user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(RegistroInicial.this,
-                                    "Verification email sent to " + user.getEmail(),
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(RegistroInicial.this,
-                                    "Failed to send verification email.",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-    }
-
     private boolean validateForm(String emailUser, String passwordUser, String passwordUserRepetida) {
         boolean valid = true;
 
@@ -329,7 +309,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         } else {
             mMostrarFecha.setError(null);
         }
-
         return valid;
     }
 
@@ -415,7 +394,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     @Override
     public void resultado(int num) {
         // Dependiendo de la operación que hayamos seleccionado:
-
         if (seleccion.equalsIgnoreCase("Altura")) {
             altura = num;
             textViewAltura.setText(""+num+" Cm"); // textViewSeleccionarAltura
@@ -423,6 +401,5 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             peso = num;
             textViewPeso.setText(""+num+" Kg"); // textViewSeleccionarPeso
         }
-
     }
 }

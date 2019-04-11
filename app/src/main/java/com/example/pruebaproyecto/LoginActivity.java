@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -39,7 +40,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
-
+        // Cambiamos el título de la actividad:
+        this.setTitle(R.string.nombreActividadLogin);
         conectarVariablesConVista();
 
         progressDialog = new ProgressDialog(this);
@@ -84,28 +86,39 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        //TODO
-        //updateUI(currentUser);
-    }
-
-    /*
-    private void updateUI(FirebaseUser user) {
-        hideProgressDialog();
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
+        if (currentUser != null) {
+            email.getEditText().setText(""+currentUser.getEmail());
         }
+        updateUI(currentUser);
     }
-*/
+
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null) {
+            if (user.isEmailVerified()) {
+                // Inicializamos la actividad principal si todo es correcto:
+                Intent intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
+                startActivity(intent);
+            } else {
+                // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
+                snackBarVerificacion();
+            }
+        }
+        // else ¿?
+    }
+
+    private void snackBarVerificacion() {
+        // Cogemos la vista con getWindow().getDecorView().getRootView()
+        Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_INDEFINITE)
+                .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                .setAction(getResources().getString(R.string.snackBarBotonEnviarEmail), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sendEmailVerification();
+                    }
+                })
+                .show();
+    }
 
     public void comprobarUsuario() {
 
@@ -119,7 +132,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (!validarDatos(emailUser, passwordUser)) {
             return;
         } else {
-            // -------------
 
             // Este método es para cuando un usuario se halla registrado, que no se tenga que volver a registrar:
             mAuth.signInWithEmailAndPassword(emailUser, passwordUser)
@@ -132,20 +144,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginCorrectoActividadLogin), Toast.LENGTH_SHORT).show();
 
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                // -----
-                                // Inicializamos la actividad principal si todo es correcto:
-                                Intent intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
-                                startActivity(intent);
-                                // -----
-                                //updateUI(user);
+                                // Actualizamos la vista:
+                                updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginIncorrectoActividadLogin), Toast.LENGTH_SHORT).show();
                                 Toast.makeText(LoginActivity.this, "Authentication failed.",
                                         Toast.LENGTH_SHORT).show();
-                                //updateUI(null);
+                                updateUI(null);
                             }
-                            // ...
                         }
                     });
 
@@ -158,7 +165,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Matcher mather;
 
         if (password == null) {
-            // Patrón para validar el email
+            // Patrón para validar el email (si es muy largo (+65 caracteres) no lo da por válido)
             pattern = Pattern
                     .compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                             + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -186,6 +193,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return correcto;
     }
 
+    private void sendEmailVerification() {
+        final FirebaseUser user = mAuth.getCurrentUser();
+        user.sendEmailVerification()
+                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this,
+                                    getResources().getString(R.string.toastEmailVerificacionEnviadoCorrectoRegistroIncial)
+                                            + " " + user.getEmail(),
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this,
+                                    getResources().getString(R.string.toastEmailVerificacionEnviadoIncorrectoRegistroIncial),
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
 
     private boolean validarDatos(String emailUser, String passwordUser) {
 
@@ -215,8 +241,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        // FragmentManager es para los Dialog
-        // FragmentManager fragmentManager = getSupportFragmentManager();
 
         switch (v.getId()) {
             case R.id.buttonDrawer:
