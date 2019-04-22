@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#F0F14C13</color>
+    <color name="colorPrimary">#FF9800</color>
+    <color name="colorPrimaryDark">#c66900</color>
+    <color name="colorAccent">#a98274</color> <!--  ffc947 -->
 
     <!-- Colores personalizados -->
+    <color name="colorNegro">#BE000000</color>
     <color name="colorBlanco">#FFFFFF</color>
 
     <!-- Color pruebas -->
     <color name="colorPruebas">#EB972703</color>
+
 
 </resources>

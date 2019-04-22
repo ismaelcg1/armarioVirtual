@@ -2,17 +2,13 @@ package com.example.pruebaproyecto;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,10 +21,9 @@ import java.util.regex.Pattern;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button botonDrawer;
+    private Button botonIniciarSesion, btnCuentaNueva;
     private TextInputLayout email, password;
     private ProgressDialog progressDialog;
-    private TextView textoNoRegistrado;
 
     // Para autentificación con FireBase
     private FirebaseAuth mAuth = null;
@@ -42,16 +37,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.login);
         // Cambiamos el título de la actividad:
         this.setTitle(R.string.nombreActividadLogin);
+
         conectarVariablesConVista();
 
         progressDialog = new ProgressDialog(this);
 
         // Aplicamos al botón que pueda ser 'pulsado'
-        botonDrawer.setOnClickListener(this);
+        botonIniciarSesion.setOnClickListener(this);
+        btnCuentaNueva.setOnClickListener(this);
 
         // Para autentificación con FireBase
         mAuth = FirebaseAuth.getInstance();
-
 
         /*
 
@@ -74,10 +70,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void conectarVariablesConVista() {
-        botonDrawer = findViewById(R.id.buttonDrawer);
+        botonIniciarSesion = findViewById(R.id.btnIniciarSesion);
         email = findViewById(R.id.textEmail);
         password = findViewById(R.id.textPassword);
-        textoNoRegistrado = findViewById(R.id.textoClickable);
+        btnCuentaNueva = findViewById(R.id.btnCrearNuevaCuenta);
     }
 
     // Para autentificación con FireBase, vemos si el usuario se ha registrado:
@@ -243,13 +239,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.buttonDrawer:
+            case R.id.btnIniciarSesion:
                 comprobarUsuario();
                 break;
 
-            case R.id.textoClickable:
-                // Cambiamos color de texto al pulsar
-                textoNoRegistrado.setTextColor(Color.parseColor("#EBB93509"));
+            case R.id.btnCrearNuevaCuenta:
 
                 Intent intent2 = new Intent(this, RegistroInicial.class);
                 startActivity(intent2);

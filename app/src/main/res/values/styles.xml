@@ -18,8 +18,58 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
     <!-- Mis estilos -->
 
+    <!-- LOGIN -->
+    <style name="LoginActivityLayoutPrincipal">
+        <item name="android:layout_margin">5sp</item>
+    </style>
+    <style name="LoginActivityImagenLogin">
+        <item name="android:gravity">center|right</item>
+    </style>
+    <style name="LoginActivityTextoInicialLayout">
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="LoginActivityEstiloTextoInicial">
+        <item name="android:textSize">27sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorNegro</item>
+        <item name="android:layout_marginTop">5sp</item>
+    </style>
+    <style name="LoginActivityLayout">
+        <item name="android:padding">12sp</item>
+    </style>
+    <style name="LoginActivityMargenInferior">
+        <item name="android:layout_marginBottom">15sp</item>
+    </style>
+    <style name="LoginActivityPasswordOlvidada">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorNegro</item>
+    </style>
+    <style name="LoginActivityMargenSuperior">
+        <item name="android:layout_marginTop">15sp</item>
+    </style>
+    <style name="LoginActivityMargenSuperiorBotones" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@drawable/boton_redondeado1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="LoginActivityTextos">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorNegro</item>
+    </style>
+
+    <style name="LoginActivityTextoNoCuenta">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorNegro</item>
+        <item name="android:layout_marginTop">15sp</item>
+    </style>
+
+    <!-- REGISTRO INICIAL -->
+    <style name="PrimerRegistroLayoutPrincipal">
+        <item name="android:layout_margin">10sp</item>
+    </style>
 
 </resources>
