@@ -49,7 +49,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     // Para los layout a mostrar:
     private LinearLayout layout_registro_inicial, layout_progress_bar;
     //
-    private EditText email, password, passwordRepetida;
+    private EditText nombreUsuario, email, password, passwordRepetida;
     private RadioGroup radioGroup;
     private boolean generoMasculinoSeleccionado;
     private int peso, altura;
@@ -59,6 +59,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     private TextView mLoadingText;
     private int mProgressStatus = 0;
     private Handler mHandler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +122,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         textViewSeleccionarAltura = findViewById(R.id.textViewSeleccionaAltura);
         botonSeleccionarAltura = findViewById(R.id.buttonSeleccionarAltura);
         botonSeleccionarPeso = findViewById(R.id.buttonSeleccionarPeso);
+        nombreUsuario = findViewById(R.id.editTextNombre);
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         passwordRepetida = findViewById(R.id.editTextPasswordRepetida);
@@ -191,15 +193,29 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
     private void registrarNuevoUsuario() {
         // Cogemos los datos :
+        String nombreUser = nombreUsuario.getText().toString();
         String emailUser = email.getText().toString();
         String passwordUser = password.getText().toString();
         String passwordUserRepetida = passwordRepetida.getText().toString();
 
-        if (!validateForm(emailUser, passwordUser, passwordUserRepetida)) {
+        if (!validateForm(nombreUser, emailUser, passwordUser, passwordUserRepetida)) {
             return; // Paramos la ejecución
         } else if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
             Toast.makeText(this, getResources().getString(R.string.toastPasswordNoCoincidenRegistroIncial), Toast.LENGTH_LONG).show();
         } else { // Si no hay ningún campo sin completar, registramos desde 0...
+
+
+
+
+            Toast.makeText(this, "Pulsado botón Registrame", Toast.LENGTH_SHORT).show();
+
+
+            /*
+            * EL PROBLEMA ES QUE NO PUEDE ACCEDER AL PULSAR EL BOTON A TASK, QUIZÁS SEA POR ALGO DEL CONTEXTO DE LA ACTIVITY
+            * */
+
+
+
             mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -220,7 +236,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                     public void run() {
                                         while (mProgressStatus < 100){
                                             mProgressStatus++;
-                                            android.os.SystemClock.sleep(50);
+                                            android.os.SystemClock.sleep(500); // 100
                                             mHandler.post(new Runnable() {
                                                 @Override
                                                 public void run() {
@@ -261,16 +277,26 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         updateUI(null, false);
     }
 
-    private boolean validateForm(String emailUser, String passwordUser, String passwordUserRepetida) {
+    private boolean validateForm(String nombreUser, String emailUser, String passwordUser, String passwordUserRepetida) {
         boolean valid = true;
 
         if (TextUtils.isEmpty(emailUser)) {
             email.setError(getResources().getString(R.string.requerirEmailRegistroInicial));
             valid = false;
-        } else if (validarEmailPassword(emailUser, null)) { // Validamos también que el formato del email esté correcto.
+        } else  if (validarEmailPassword(emailUser, null)) { // Validamos también que el formato del email esté correcto.
             email.setError(null);
         } else { // Formato incorrecto
             email.setError(getResources().getString(R.string.formatoEmailIncorrectoRegistroInicial));
+        }
+
+        if (TextUtils.isEmpty(nombreUser) ) {
+            nombreUsuario.setError(getResources().getString(R.string.requerirNombreRegistroInicial));
+            valid = false;
+        } else if (nombreUser.length() > 20) {
+            nombreUsuario.setError(getResources().getString(R.string.nombreNoCorrectoRegistroInicial));
+        } else {
+            nombreUsuario.setError(null);
+            //interfaz.cogerNombre(nombreUsuario.getText().toString());
         }
 
         if (TextUtils.isEmpty(passwordUser)) {
@@ -336,6 +362,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             // Abrimos la actividad inicial:
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
 
             /*
             mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,

@@ -113,29 +113,5 @@ public class DialogPersonalizado {
                 }
             };
 
-    /*
-    @Override
-    public void onClick(View v) {
-
-
-        switch (v.getId()) {
-            case R.id.textViewSeleccionaPeso:
-                seleccion = "Peso";
-                linearLayoutNumberPickerAltura.setVisibility(View.GONE);
-                linearLayoutNumberPickerPeso.setVisibility(View.VISIBLE);
-                break;
-
-            case R.id.textViewSeleccionaAltura:
-                seleccion = "Altura";
-                linearLayoutNumberPickerAltura.setVisibility(View.VISIBLE);
-                linearLayoutNumberPickerPeso.setVisibility(View.GONE);
-                break;
-            default:
-                seleccion = "";
-                break;
-
-        }
-    }*/
-
 
 }

@@ -8,10 +8,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutNumberPickerAltura"
-        android:layout_width="match_parent"
+        style="@style/estiloLayoutPrincipalNumberPicker"
+        android:layout_width="190sp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView9"
+            style="@style/estiloTextosNumberPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textoNumberPickerAlturaRegistroInicial" />
 
         <NumberPicker
             android:id="@+id/numberPickerAltura"
@@ -32,17 +40,21 @@
 
             <Button
                 android:id="@+id/buttonCancelarAltura"
+                style="@style/PrimerRegistroBotonesNumberPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cancelar" />
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/cancelarNumberPickerRegistroInicial" />
 
             <Button
                 android:id="@+id/buttonAceptarAltura"
+                style="@style/PrimerRegistroBotonesNumberPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Aceptar" />
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/aceptarNumberPickerRegistroInicial" />
 
         </LinearLayout>
 
@@ -50,10 +62,18 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutNumberPickerPeso"
-        android:layout_width="match_parent"
+        style="@style/estiloLayoutPrincipalNumberPicker"
+        android:layout_width="190sp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            style="@style/estiloTextosNumberPicker"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textoNumberPickerPesoRegistroInicial" />
 
         <NumberPicker
             android:id="@+id/numberPickerPeso"
@@ -72,17 +92,21 @@
 
             <Button
                 android:id="@+id/buttonCancelarPeso"
+                style="@style/PrimerRegistroBotonesNumberPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Cancelar" />
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/cancelarNumberPickerRegistroInicial" />
 
             <Button
                 android:id="@+id/buttonAceptarPeso"
+                style="@style/PrimerRegistroBotonesNumberPicker"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Aceptar" />
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/aceptarNumberPickerRegistroInicial" />
 
         </LinearLayout>
 

@@ -9,6 +9,8 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -24,6 +26,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button botonIniciarSesion, btnCuentaNueva;
     private TextInputLayout email, password;
     private ProgressDialog progressDialog;
+    private TextView cambiarPassword;
+    private CheckBox terminosCondiciones;
 
     // Para autentificación con FireBase
     private FirebaseAuth mAuth = null;
@@ -39,12 +43,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.setTitle(R.string.nombreActividadLogin);
 
         conectarVariablesConVista();
-
         progressDialog = new ProgressDialog(this);
 
         // Aplicamos al botón que pueda ser 'pulsado'
         botonIniciarSesion.setOnClickListener(this);
         btnCuentaNueva.setOnClickListener(this);
+        cambiarPassword.setOnClickListener(this);
 
         // Para autentificación con FireBase
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +78,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         email = findViewById(R.id.textEmail);
         password = findViewById(R.id.textPassword);
         btnCuentaNueva = findViewById(R.id.btnCrearNuevaCuenta);
+        cambiarPassword = findViewById(R.id.cambiaPassword);
+        terminosCondiciones = findViewById(R.id.checkBoxTerminosCondiciones);
     }
 
     // Para autentificación con FireBase, vemos si el usuario se ha registrado:
@@ -93,8 +99,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (user != null) {
             if (user.isEmailVerified()) {
                 // Inicializamos la actividad principal si todo es correcto:
-                Intent intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
-                startActivity(intent);
+                Intent intent2 = new Intent(getApplicationContext(), MainActivityDrawer.class);
+                startActivity(intent2);
+                finish();
             } else {
                 // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
                 snackBarVerificacion();
@@ -106,7 +113,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void snackBarVerificacion() {
         // Cogemos la vista con getWindow().getDecorView().getRootView()
         Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_INDEFINITE)
-                .setActionTextColor(getResources().getColor(R.color.colorAccent))
+                .setActionTextColor(getResources().getColor(R.color.colorPrimaryDark))
                 .setAction(getResources().getString(R.string.snackBarBotonEnviarEmail), new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -135,9 +142,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-
-                                Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginCorrectoActividadLogin), Toast.LENGTH_SHORT).show();
+                                // Autentificación correcta
 
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 // Actualizamos la vista:
@@ -145,8 +150,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginIncorrectoActividadLogin), Toast.LENGTH_SHORT).show();
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }
                         }
@@ -234,20 +237,57 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return true;
     }
 
+    public void sendPasswordReset(final String email) {
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(LoginActivity.this,
+                                    getResources().getString(R.string.cambioPasswordActividadLogin)+" "+email, Toast.LENGTH_LONG).show();
+                        } else {
+                            // falloCambioPasswordActividadLogin
+                            Toast.makeText(LoginActivity.this,
+                                    getResources().getString(R.string.falloCambioPasswordActividadLogin), Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+    }
+
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.btnIniciarSesion:
-                comprobarUsuario();
+                // Vemos si el checkBox está pulsado:
+                if (!terminosCondiciones.isChecked()) {
+                    Toast.makeText(LoginActivity.this, getResources()
+                            .getString(R.string.terminosCondicionesIncorrectoActividadLogin), Toast.LENGTH_LONG).show();
+                } else {
+                    comprobarUsuario();
+                }
                 break;
 
             case R.id.btnCrearNuevaCuenta:
-
                 Intent intent2 = new Intent(this, RegistroInicial.class);
                 startActivity(intent2);
+                break;
 
+            case R.id.cambiaPassword:
+                final String emailUser = email.getEditText().getText().toString().trim();
+                if (emailUser.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, getResources()
+                            .getString(R.string.rellenaEmailCambioPasswordActividadLogin), Toast.LENGTH_LONG).show();
+                } else if (!validarEmailPassword(emailUser, null)) {
+                    Toast.makeText(LoginActivity.this, getResources()
+                            .getString(R.string.formatoEmailIncorrectoRegistroInicial), Toast.LENGTH_LONG).show();
+                } else {
+                    sendPasswordReset(emailUser);
+                }
                 break;
 
             default:

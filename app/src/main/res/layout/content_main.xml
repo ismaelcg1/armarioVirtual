@@ -23,15 +23,32 @@
     </LinearLayout>
 
     <LinearLayout
+        style="@style/layoutMainActivityDrawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="2"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/nombreUsuario"
+            style="@style/saludoMainActivityDrawer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello World!" />
+            android:text="@string/saludoMainActivityDrawer" />
+
+        <TextView
+            android:id="@+id/prendasAdd"
+            style="@style/prendasAddMainActivityDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prendasAnadidasMainActivityDrawer" />
+
+        <TextView
+            android:id="@+id/accesoriosAdd"
+            style="@style/prendasAddMainActivityDrawer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/prendasAnadidasMainActivityDrawer" />
+
     </LinearLayout>
 </LinearLayout>

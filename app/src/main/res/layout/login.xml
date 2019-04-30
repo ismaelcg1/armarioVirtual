@@ -25,7 +25,7 @@
                 style="@style/LoginActivityTextoInicialLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="7"
                 android:orientation="vertical">
 
                 <TextView
@@ -40,7 +40,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -84,8 +84,8 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
@@ -101,7 +101,8 @@
                         android:selectAllOnFocus="true"
                         android:textColor="@color/colorNegro"
                         android:textColorHint="@color/colorNegro"
-                        android:textColorLink="@color/colorPrimary" />
+                        android:textColorLink="@color/colorPrimary"
+                        android:textSize="17sp" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -117,75 +118,120 @@
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="-5sp"
                         android:hint="@string/passwordActividadLogin"
                         android:inputType="textPassword"
-                        android:textColorLink="@color/colorPrimary" />
+                        android:textColorLink="@color/colorPrimary"
+                        android:textSize="17sp" />
                 </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/textView3"
-                    style="@style/LoginActivityPasswordOlvidada"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/textoPasswordOlvidadaActividadLogin" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        style="@style/LoginActivityTextos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15sp"
+                        android:text="@string/textoPasswordOlvidadaActividadLogin" />
+
+                    <TextView
+                        android:id="@+id/cambiaPassword"
+                        style="@style/LoginActivityTextos"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8sp"
+                        android:clickable="true"
+                        android:gravity="left"
+                        android:text="@string/textoPasswordOlvidadaCambiarActividadLogin" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/LoginActivityMargenSuperiorTerminosBotonEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/checkBoxTerminosCondiciones"
+                    style="@style/LoginActivityTextos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center|left"
+                    android:text="@string/terminosCondicionesActividadLogin"
+                    android:textSize="14sp" />
 
                 <Button
                     android:id="@+id/btnIniciarSesion"
                     style="@style/LoginActivityMargenSuperiorBotones"
                     android:layout_width="250sp"
                     android:layout_height="wrap_content"
-                    android:text="@string/textoBotonActividadLogin" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
-
-
-                <TextView
-                    android:id="@+id/textoNoCuenta"
-                    style="@style/LoginActivityTextoNoCuenta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:shadowColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:singleLine="false"
-                    android:text="@string/textoNoTengoCuentaActividadLogin"
-                    android:textStyle="bold" />
-
-                <Button
-                    android:id="@+id/btnCrearNuevaCuenta"
-                    style="@style/LoginActivityMargenSuperiorBotones"
-                    android:layout_width="250sp"
-                    android:layout_height="wrap_content"
                     android:background="@drawable/boton_redondeado2"
-                    android:text="@string/textoCrearCuentaActividadLogin" />
-
-
+                    android:text="@string/textoBotonActividadLogin" />
             </LinearLayout>
 
             <LinearLayout
-                style="@style/LoginActivityMargenSuperior"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/textView4"
-                    style="@style/LoginActivityTextos"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/textoRegistroGoogleActividadLogin" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/button2"
-                    style="@style/LoginActivityMargenSuperiorBotones"
-                    android:layout_width="250sp"
-                    android:layout_height="wrap_content"
-                    android:text="GOOGLE, NO VA" />
+
+                    <TextView
+                        android:id="@+id/textoNoCuenta"
+                        style="@style/LoginActivityTextoNoCuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:shadowColor="@color/common_google_signin_btn_text_dark_focused"
+                        android:singleLine="false"
+                        android:text="@string/textoNoTengoCuentaActividadLogin"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/btnCrearNuevaCuenta"
+                        style="@style/LoginActivityMargenSuperiorBotones"
+                        android:layout_width="160sp"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/boton_redondeado1"
+                        android:text="@string/textoCrearCuentaActividadLogin" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/LoginActivityMargenSuperior"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/LoginActivityTextos"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textoRegistroGoogleActividadLogin" />
+
+                    <Button
+                        android:id="@+id/button2"
+                        style="@style/LoginActivityMargenSuperiorBotones"
+                        android:layout_width="160sp"
+                        android:layout_height="wrap_content"
+                        android:text="GOOGLE, NO VA" />
+                </LinearLayout>
+
             </LinearLayout>
 
         </LinearLayout>

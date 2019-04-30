@@ -3,35 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
-    </group>
-
-    <item android:title="Communicate">
+    <item android:title="@string/appMainActivityDrawer">
         <menu>
             <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:id="@+id/mi_armario"
+                android:icon="@drawable/ic_menu_gallery"
+                android:title="@string/texto1MainActivityDrawer" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/add_elemento"
+                android:icon="@drawable/ic_menu_camera"
+                android:title="@string/texto2MainActivityDrawer" />
+            <item
+                android:id="@+id/eliminar_elemento"
+                android:icon="@drawable/ic_menu_slideshow"
+                android:title="@string/texto3MainActivityDrawer" />
+            <item
+                android:id="@+id/consultar_elemento"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/texto4MainActivityDrawer" />
+            <item
+                android:id="@+id/intercambio"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/texto5MainActivityDrawer" />
+        </menu>
+    </item>
+
+    <item android:title="@string/configuracionMainActivityDrawer">
+        <menu>
+            <item
+                android:id="@+id/configuracion_usuario"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/texto6MainActivityDrawer" />
+            <item
+                android:id="@+id/desarrollador"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Send" />
+                android:title="@string/texto7MainActivityDrawer" />
         </menu>
     </item>
 

@@ -31,23 +31,24 @@
         <item name="android:gravity">center</item>
     </style>
     <style name="LoginActivityEstiloTextoInicial">
-        <item name="android:textSize">27sp</item>
+        <item name="android:textSize">25sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorNegro</item>
         <item name="android:layout_marginTop">5sp</item>
     </style>
     <style name="LoginActivityLayout">
-        <item name="android:padding">12sp</item>
+        <item name="android:paddingBottom">12sp</item>
+        <item name="android:paddingLeft">12sp</item>
+        <item name="android:paddingRight">12sp</item>
     </style>
     <style name="LoginActivityMargenInferior">
-        <item name="android:layout_marginBottom">15sp</item>
-    </style>
-    <style name="LoginActivityPasswordOlvidada">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/colorNegro</item>
+        <item name="android:layout_marginBottom">12sp</item>
     </style>
     <style name="LoginActivityMargenSuperior">
-        <item name="android:layout_marginTop">15sp</item>
+        <item name="android:layout_marginTop">14sp</item>
+    </style>
+    <style name="LoginActivityMargenSuperiorTerminosBotonEntrar">
+        <item name="android:layout_marginTop">5sp</item>
     </style>
     <style name="LoginActivityMargenSuperiorBotones" parent="Widget.AppCompat.Button.Colored">
         <item name="android:layout_marginTop">10sp</item>
@@ -59,16 +60,69 @@
     <style name="LoginActivityTextos">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/colorNegro</item>
+        <item name="android:gravity">center</item>
     </style>
 
-    <style name="LoginActivityTextoNoCuenta">
-        <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/colorNegro</item>
-        <item name="android:layout_marginTop">15sp</item>
+    <style name="LoginActivityTextoNoCuenta" parent="LoginActivityTextos">
+        <item name="android:layout_marginTop">12sp</item>
     </style>
 
     <!-- REGISTRO INICIAL -->
     <style name="PrimerRegistroLayoutPrincipal">
+        <item name="android:layout_marginRight">14sp</item>
+        <item name="android:layout_marginLeft">14sp</item>
+        <item name="android:layout_marginBottom">14sp</item>
+    </style>
+    <style name="PrimerRegistroLayoutDatosSecundarios">
+        <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+    <style name="PrimerRegistroLayoutParteSecundaria">
+        <item name="android:layout_margin">8sp</item>
+    </style>
+    <style name="PrimerRegistroLayoutImagen">
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="PrimerRegistroTextoInicial">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+    <style name="PrimerRegistroTextos">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="PrimerRegistroBotonesNumberPicker">
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:layout_margin">4sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="estiloTextosNumberPicker">
+        <item name="android:layout_margin">2sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="estiloLayoutPrincipalNumberPicker">
+        <item name="android:layout_margin">8sp</item>
+    </style>
+    <style name="PrimerRegistroBotonRegistrar">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:layout_marginTop">5sp</item>
+    </style>
+
+    <!-- MainActivityDrawer-->
+    <style name="saludoMainActivityDrawer" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="prendasAddMainActivityDrawer">
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="layoutMainActivityDrawer">
         <item name="android:layout_margin">10sp</item>
     </style>
 
