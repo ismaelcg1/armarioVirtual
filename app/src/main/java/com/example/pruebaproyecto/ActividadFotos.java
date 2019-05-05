@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,21 +35,40 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 
-public class ActividadFotos extends AppCompatActivity {
+public class ActividadFotos extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener {
 
     private ImageView botonInsertarImagen;
-    private Button subirPrenda;
     private static final String IMAGE_DIRECTORY = "/imagenes_Armario_Virtual";
     private int GALLERY = 1, CAMERA = 2;
+    private Toolbar appToolbar;
+
+    private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnMarca, btnEstilo, btnMaterial;
+    private TextInputLayout textoTalla, textoEpoca, textoColor, textoMarca, textoEstilo, textoMaterial;
+    private String seleccion, talla, epoca;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actividad_insertar_fotos);
+        setContentView(R.layout.actividad_insertar);
+
+        conectarVariablesConVista();
+        btnTalla.setOnClickListener(this);
+
+        // Pongo el titulo en la toolbar
+        appToolbar.setTitle(R.string.nombreInicialActividadInsertar);
+        // Asigno la flecha de atras a la toolbar
+        appToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
+        // Hago que cuando se pulse la flecha de atras se cierre la actividad
+        appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         requestMultiplePermissions();
 
         botonInsertarImagen = findViewById(R.id.imageViewInsertarImagen);
-        subirPrenda = findViewById(R.id.buttonSubirPrenda);
+        subirPrenda = findViewById(R.id.bSubirPrenda);
 
         botonInsertarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,16 +84,14 @@ public class ActividadFotos extends AppCompatActivity {
             }
         });
 
-
-
     }
 
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
-        pictureDialog.setTitle("Select Action");
+        pictureDialog.setTitle(getResources().getString(R.string.pictureDialogTituloActividadInsertar));
         String[] pictureDialogItems = {
-                "Select photo from gallery",
-                "Capture photo from camera" };
+                getResources().getString(R.string.pictureDialogGaleriaActividadInsertar),
+                getResources().getString(R.string.pictureDialogRealizarFotoActividadInsertar)};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -88,6 +107,25 @@ public class ActividadFotos extends AppCompatActivity {
                     }
                 });
         pictureDialog.show();
+    }
+
+    protected void conectarVariablesConVista() {
+        appToolbar = findViewById(R.id.appToolbar);
+        subirPrenda = findViewById(R.id.bSubirPrenda);
+        btnTalla = findViewById(R.id.bTalla);
+        btnEpoca = findViewById(R.id.bEpoca);
+        btnColor = findViewById(R.id.bColor);
+        btnMarca = findViewById(R.id.bMarca);
+        btnEstilo = findViewById(R.id.bEstilo);
+        btnMaterial = findViewById(R.id.bMaterial);
+
+        textoTalla = findViewById(R.id.tallaPrenda);
+        textoEpoca = findViewById(R.id.epocaPrenda);
+        textoColor = findViewById(R.id.colorPrenda);
+        textoMarca = findViewById(R.id.marcaPrenda);
+        textoEstilo = findViewById(R.id.estiloPrenda);
+        textoMaterial = findViewById(R.id.materialPrenda);
+
     }
 
     public void choosePhotoFromGallary() {
@@ -176,7 +214,7 @@ public class ActividadFotos extends AppCompatActivity {
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
                         // check if all permissions are granted
                         if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.permisosAceptadosActividadInsertar), Toast.LENGTH_SHORT).show();
                         }
 
                         // check for permanent denial of any permission
@@ -200,5 +238,39 @@ public class ActividadFotos extends AppCompatActivity {
                 })
                 .onSameThread()
                 .check();
+    }
+
+    @Override
+    public void cogerParametro(String seleccionado) {
+
+
+        switch (seleccion) {
+            case "Talla":
+                talla = seleccionado;
+                textoTalla.getEditText().setText(talla);
+                break;
+            case "Epoca":
+                epoca = seleccionado;
+                textoEpoca.getEditText().setText(epoca);
+                break;
+                default:
+
+                    break;
+        }
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bTalla:
+                seleccion = "Talla";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+            case R.id.bEpoca:
+                seleccion = "Epoca";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+        }
     }
 }

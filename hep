@@ -1,0 +1,59 @@
+[33mcommit a351cefa9abb7d209c4829e7b67eaa83e417bfb1[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Tue Apr 30 20:01:29 2019 +0300
+
+    Cambio estilo definitivo numberPicker, cambio de contraseña, nuevos iconos registro inicial,  cambio interfaz registro inicial, paleta de colores...
+
+[33mcommit 35e6fafa04a7e7f7305c600ac336e86c8220f7c8[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Mon Apr 22 16:11:41 2019 +0300
+
+    Cambio de interfaz, añadidos nuevos estilos, botones redondeados, cambio de paleta de colores...
+
+[33mcommit ec78fdbf8046258a0b87c87acedf0f015936cde6[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Fri Apr 12 02:01:49 2019 +0300
+
+    Añadido snackBar para enviar email de verificación, cambio de nombre de actividades, cambio de icono
+
+[33mcommit 01744a739c53ee1faab1ed9019a9f3f3dd2232bb[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Tue Apr 9 22:08:35 2019 +0300
+
+    Añadiendo Toast para indicar al usuario fallos al introducir datos
+
+[33mcommit 784a0bc99e339864afa32cae1a5b32464eba46c0[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Tue Apr 9 21:42:39 2019 +0300
+
+    Realizadas algunas refactorizaciones, registro inicial correcto con Firebase, añadida seguridad con patrones de email y password ('segura'), indicando a usuario errores con TextUtils
+
+[33mcommit 1708d313c6902f8e86664ea5c00f9bacbf2e07ef[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Sat Apr 6 16:20:18 2019 +0300
+
+    Realizando registro inicial, probando insertar fotos, añadidos string
+
+[33mcommit 05de3d43a75db73bc5dc939103365c83273ba536[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Tue Apr 2 20:47:35 2019 +0300
+
+    Añadida actividad para elegir entre camara y galeria (fotos), corregido barra superior transparente (style21)
+
+[33mcommit 317cea548ba5a5a9f6821580fcf3ab5a2f3820d1[m
+Author: ismaelcg1 <ismael.casado@itponiente.com>
+Date:   Sat Mar 30 12:16:50 2019 +0200
+
+    Añadiendo numberPicker para peso y altura
+
+[33mcommit c90f582f874fa925249653dda6b41485ee8b620e[m
+Author: ismael_cg <ismaelcg5919>
+Date:   Sun Mar 24 22:35:09 2019 +0200
+
+    Proyecto Armario Virtual
+
+[33mcommit bc54d789033b81ca1fb10c027f7be3d1642652fe[m
+Author: ismaelcg1 <47919082+ismaelcg1@users.noreply.github.com>
+Date:   Mon Mar 25 00:12:01 2019 +0200
+
+    Initial commit

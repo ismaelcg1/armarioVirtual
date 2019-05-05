@@ -32,7 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class RegistroInicial extends AppCompatActivity implements View.OnClickListener, DialogPersonalizado.finalizarDialog {
+public class RegistroInicial extends AppCompatActivity implements View.OnClickListener, DialogPersonalizadoPesoAltura.finalizarDialog {
 
     private TextView mMostrarFecha, textViewSeleccionarPeso, textViewSeleccionarAltura;
     // 'Dialog' de fecha
@@ -271,11 +271,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    // Salir de la sesión
-    private void signOut() {
-        mAuth.signOut();
-        updateUI(null, false);
-    }
 
     private boolean validateForm(String nombreUser, String emailUser, String passwordUser, String passwordUserRepetida) {
         boolean valid = true;
@@ -393,11 +388,11 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.buttonSeleccionarAltura:
                 seleccion = "Altura";
-                new DialogPersonalizado(contexto, RegistroInicial.this, seleccion);
+                new DialogPersonalizadoPesoAltura(contexto, RegistroInicial.this, seleccion);
                 break;
             case R.id.buttonSeleccionarPeso:
                 seleccion = "Peso";
-                new DialogPersonalizado(contexto, RegistroInicial.this, seleccion);
+                new DialogPersonalizadoPesoAltura(contexto, RegistroInicial.this, seleccion);
                 break;
             case R.id.radioGroupGenero:
                 if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonMasculino) {
@@ -423,10 +418,10 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         // Dependiendo de la operación que hayamos seleccionado:
         if (seleccion.equalsIgnoreCase("Altura")) {
             altura = num;
-            textViewAltura.setText(""+num+" Cm"); // textViewSeleccionarAltura
+            textViewAltura.setText(""+num+" Cm");
         } else if (seleccion.equalsIgnoreCase("Peso")) {
             peso = num;
-            textViewPeso.setText(""+num+" Kg"); // textViewSeleccionarPeso
+            textViewPeso.setText(""+num+" Kg");
         }
     }
 }

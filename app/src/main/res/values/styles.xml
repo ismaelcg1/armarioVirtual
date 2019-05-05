@@ -66,6 +66,11 @@
     <style name="LoginActivityTextoNoCuenta" parent="LoginActivityTextos">
         <item name="android:layout_marginTop">12sp</item>
     </style>
+    <style name="LoginActivityestiloFotoEntrar">
+        <item name="android:layout_height">140sp</item>
+        <item name="android:layout_width">160sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
 
     <!-- REGISTRO INICIAL -->
     <style name="PrimerRegistroLayoutPrincipal">
@@ -124,6 +129,52 @@
     </style>
     <style name="layoutMainActivityDrawer">
         <item name="android:layout_margin">10sp</item>
+    </style>
+
+    <!-- MiCuenta-->
+    <style name="layoutSecundariosMiCuenta" >
+        <item name="android:layout_margin">15sp</item>
+    </style>
+    <style name="estiloBotonesInferioresMiCuenta" >
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="estiloBotonesSuperioresMiCuenta">
+        <item name="android:layout_marginLeft">7sp</item>
+        <item name="android:layout_marginRight">7sp</item>
+        <item name="android:layout_marginTop">15sp</item>
+        <item name="android:layout_width">110sp</item>
+        <item name="android:layout_height">50sp</item>
+    </style>
+    <style name="estiloTextosInferioresMiCuenta" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="estiloTextosSuperioresMiCuenta" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="estiloTextoEmailMiCuenta" >
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="estilolayoutInferioresMiCuenta" >
+        <item name="android:layout_marginTop">5sp</item>
+    </style>
+
+    <!-- ActividadFotos -->
+    <style name="layoutImageViewActividadFotos">
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="estiloImageViewActividadFotos">
+        <item name="android:layout_width">230sp</item>
+        <item name="android:layout_height">280sp</item>
+        <item name="android:layout_margin">10sp</item>
+    </style>
+    <style name="layoutScrollViewActividadFotos">
+        <item name="android:layout_marginLeft">4sp</item>
+        <item name="android:layout_marginRight">4sp</item>
+        <item name="android:layout_margin">5sp</item>
     </style>
 
 </resources>

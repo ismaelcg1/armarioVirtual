@@ -7,23 +7,23 @@
         <menu>
             <item
                 android:id="@+id/mi_armario"
-                android:icon="@drawable/ic_menu_gallery"
+                android:icon="@drawable/armario100"
                 android:title="@string/texto1MainActivityDrawer" />
             <item
                 android:id="@+id/add_elemento"
-                android:icon="@drawable/ic_menu_camera"
+                android:icon="@drawable/add96"
                 android:title="@string/texto2MainActivityDrawer" />
             <item
                 android:id="@+id/eliminar_elemento"
-                android:icon="@drawable/ic_menu_slideshow"
-                android:title="@string/texto3MainActivityDrawer" />
-            <item
-                android:id="@+id/consultar_elemento"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/eliminar96"
                 android:title="@string/texto4MainActivityDrawer" />
             <item
+                android:id="@+id/consultar_elemento"
+                android:icon="@drawable/busqueda480"
+                android:title="@string/texto3MainActivityDrawer" />
+            <item
                 android:id="@+id/intercambio"
-                android:icon="@drawable/ic_menu_share"
+                android:icon="@drawable/intercambiar100"
                 android:title="@string/texto5MainActivityDrawer" />
         </menu>
     </item>
@@ -32,11 +32,11 @@
         <menu>
             <item
                 android:id="@+id/configuracion_usuario"
-                android:icon="@drawable/ic_menu_manage"
+                android:icon="@drawable/ajustes96"
                 android:title="@string/texto6MainActivityDrawer" />
             <item
                 android:id="@+id/desarrollador"
-                android:icon="@drawable/ic_menu_send"
+                android:icon="@drawable/acerca_de96"
                 android:title="@string/texto7MainActivityDrawer" />
         </menu>
     </item>

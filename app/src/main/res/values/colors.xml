@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FF9800</color>
-    <color name="colorPrimaryDark">#c66900</color>
+    <color name="colorPrimary">#F39100</color>
+    <color name="colorPrimaryDark">#BB6401</color>
     <color name="colorAccent">#a98274</color> <!--  ffc947 -->
 
     <!-- Colores personalizados -->

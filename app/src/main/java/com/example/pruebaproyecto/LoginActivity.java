@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextView cambiarPassword;
     private CheckBox terminosCondiciones;
 
-    // Para autentificación con FireBase
+    // FireBase
     private FirebaseAuth mAuth = null;
 
     // Para ver si el usuario está registrado:

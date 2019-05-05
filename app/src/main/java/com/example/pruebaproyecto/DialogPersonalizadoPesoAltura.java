@@ -7,11 +7,9 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.NumberPicker;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class DialogPersonalizado {
+public class DialogPersonalizadoPesoAltura {
 
     private NumberPicker numberPickerPeso, numberPickerAltura;
     private LinearLayout linearLayoutNumberPickerAltura, linearLayoutNumberPickerPeso;
@@ -23,13 +21,13 @@ public class DialogPersonalizado {
 
     private finalizarDialog interfaz;
 
-    public DialogPersonalizado (Context contexto, finalizarDialog actividad, final String seleccion) {
+    public DialogPersonalizadoPesoAltura(Context contexto, finalizarDialog actividad, final String seleccion) {
 
         interfaz = actividad;
 
         final Dialog dialogo = new Dialog(contexto);
         dialogo.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialogo.setContentView(R.layout.number_picker_altura);
+        dialogo.setContentView(R.layout.number_picker_altura_peso);
 
         aceptarAltura = dialogo.findViewById(R.id.buttonAceptarAltura);
         cancelarAltura = dialogo.findViewById(R.id.buttonCancelarAltura);
