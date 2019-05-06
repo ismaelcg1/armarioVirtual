@@ -103,6 +103,13 @@
     <string name="eliminarTodoContenidoArmarioMiCuenta">Eliminar todo el contenido de Mi Armario</string>
     <string name="eliminarCuentaMiCuenta">Eliminar mi cuenta</string>
 
+    <string name="cerrarSesionTituloDialogMiCuenta">Cerrar sesión</string>
+    <string name="cerrarSesionDialogMiCuenta">¿Realmente desea cerrar la sesión?</string>
+
+
+    <string name="dialogTextoSiMiCuenta">Sí</string>
+    <string name="dialogTextoCancelarMiCuenta">Cancelar</string>
+
     <!-- TEXTOS ActividadInsertar -->
     <string name="nombreInicialActividadInsertar">Insertar prenda/accesorio</string>
     <string name="textoExplicativoFotoActividadInsertar">Pulse la imagen inferior para añadir una foto:</string>
@@ -128,6 +135,7 @@
     <string name="marcaNumberPickerString">Selecciona la marca de la prenda:</string>
     <string name="estiloNumberPickerString">Selecciona el estilo de la prenda:</string>
     <string name="materialNumberPickerString">Selecciona el material de la prenda:</string>
+
 
     <string name="tallaXS">XS</string>
     <string name="tallaS">S</string>

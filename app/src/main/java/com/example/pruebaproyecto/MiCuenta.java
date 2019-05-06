@@ -1,13 +1,9 @@
 package com.example.pruebaproyecto;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -19,7 +15,6 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
 
     private Toolbar appToolbar;
     private Button cerrarSesion;
-    private static boolean confirmacionCerrarSesion;
     // FireBase
     private FirebaseAuth mAuth = null;
 
@@ -29,13 +24,14 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
         setContentView(R.layout.mi_cuenta);
 
         conectarVariablesConVista();
-        confirmacionCerrarSesion = false;
         onClickListener();
         inicializarToolbar();
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intentActivityDrawer = new Intent(getApplicationContext(), MainActivityDrawer.class);
+                startActivity(intentActivityDrawer);
                 finish();
             }
         });
@@ -52,10 +48,15 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
     private void updateUI(int id) {
         switch (id) {
             case 1:
-                // Inicializamos la actividad principal si todo es correcto:
+                // Borramos todas las actividades y abrimos la primera
                 Intent intentLoginActivity = new Intent(getApplicationContext(), LoginActivity.class);
-                intentLoginActivity.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intentLoginActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                MainActivityDrawer pantallaDrawer = new MainActivityDrawer();
+                pantallaDrawer.finish();
+                finish();
                 startActivity(intentLoginActivity);
+
+
                 break;
 
             default:
@@ -81,7 +82,7 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
         mAuth.signOut();
         updateUI(id);
     }
-
+/*
     private void snackBarVerificacion() {
         // Cogemos la vista con getWindow().getDecorView().getRootView()
         Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_LONG)
@@ -95,15 +96,45 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
                 })
                 .show();
     }
+*/
+
+    public void crearDialog(String mensaje, String titulo, final int opcion) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        // Ponemos el mensaje y el título:
+        builder.setMessage(mensaje)
+                .setTitle(titulo);
+
+
+        builder.setPositiveButton(R.string.dialogTextoSiMiCuenta, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+                if (opcion == 1) {
+                    signOut(opcion);
+                }
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(R.string.dialogTextoCancelarMiCuenta, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        builder.show();
+    }
 
     @Override
     public void onClick(View v) {
+        int opcion;
 
         switch (v.getId()) {
             case R.id.btnCerrarSesion:
-                snackBarVerificacion();
-
+                opcion = 1;
+                crearDialog(getResources().getString(R.string.cerrarSesionDialogMiCuenta),
+                        getResources().getString(R.string.cerrarSesionTituloDialogMiCuenta),opcion);
                 break;
+                
         }
 
     }

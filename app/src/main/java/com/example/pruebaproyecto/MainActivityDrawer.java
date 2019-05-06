@@ -117,7 +117,6 @@ public class MainActivityDrawer extends AppCompatActivity
 
         if (id == R.id.mi_armario) {
         } else if (id == R.id.add_elemento) {
-            // Para probar fotos
             Intent intent = new Intent(this, ActividadFotos.class);
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento) {
@@ -127,7 +126,7 @@ public class MainActivityDrawer extends AppCompatActivity
         } else if (id == R.id.intercambio) {
 
         } else if (id == R.id.configuracion_usuario) {
-            // Para probar fotos
+            finish();
             Intent intent = new Intent(this, MiCuenta.class);
             startActivity(intent);
         } else if (id == R.id.desarrollador) {
