@@ -106,8 +106,16 @@
     <string name="cerrarSesionTituloDialogMiCuenta">Cerrar sesión</string>
     <string name="cerrarSesionDialogMiCuenta">¿Realmente desea cerrar la sesión?</string>
 
+    <string name="cambiarPasswordTituloDialogMiCuenta">Cambio de contraseña</string>
+    <string name="cambiarPasswordDialogMiCuenta">¿Quieres recibir un correo a <u>%1$s</u> para restablecer tu contraseña?</string>
 
-    <string name="dialogTextoSiMiCuenta">Sí</string>
+    <string name="eliminarArmarioTituloDialogMiCuenta">Eliminar mi Armario</string>
+    <string name="eliminarArmarioDialogMiCuenta">¿Desea borrar todo el contenido de Mi Armario?</string>
+
+    <string name="eliminarCuentaTituloDialogMiCuenta">Eliminar mi Cuenta</string>
+    <string name="eliminarCuentaDialogMiCuenta">¿Quires eliminar toda la información relacionada con la cuenta <u>%1$s</u> ?</string>
+
+    <string name="dialogTextoSiMiCuenta">Sí, claro</string>
     <string name="dialogTextoCancelarMiCuenta">Cancelar</string>
 
     <!-- TEXTOS ActividadInsertar -->
@@ -126,6 +134,10 @@
     <string name="pictureDialogTituloActividadInsertar">Seleccione una acción:</string>
     <string name="pictureDialogGaleriaActividadInsertar">Seleccionar foto de Galería</string>
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
+
+    <!-- DialogPersonalizados -->
+    <string name="textoDialogColor">Seleccione el color principal de su prenda:</string>
+    <string name="textoDialogEstacion">Seleccione la estación del año en la que se pondría dicha prenda:</string>
 
     <!-- NumberPickerString -->
 
@@ -152,6 +164,7 @@
         <item>@string/tallaXL</item>
         <item>@string/tallaXXL</item>
     </string-array>
+
 
 
 </resources>

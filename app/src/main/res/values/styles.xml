@@ -177,4 +177,41 @@
         <item name="android:layout_margin">5sp</item>
     </style>
 
+    <!-- ESTILO LAYOUT DIALOG PERSONALIZADOS -->
+    <style name="estiloBotonesSelectoresColor">
+        <item name="android:padding">5dp</item>
+        <item name="android:layout_margin">6dp</item>
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:background">@drawable/boton_redondeado_selector_color</item>
+    </style>
+
+    <style name="estiloLayoutBotonesSelectoresColor">
+        <item name="android:layout_margin">10dp</item>
+    </style>
+
+    <style name="estiloLayoutSelectorEstacion" parent="estiloLayoutBotonesSelectoresColor">
+        <item name="android:padding">6dp</item>
+    </style>
+
+    <style name="estiloLayoutPrincipalEstacion">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="estilotextoEstacion">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">25dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <style name="estilotextoColor">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">2dp</item>
+    </style>
 </resources>

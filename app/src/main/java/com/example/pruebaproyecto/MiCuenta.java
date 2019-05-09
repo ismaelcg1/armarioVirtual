@@ -14,7 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MiCuenta extends AppCompatActivity implements View.OnClickListener {
 
     private Toolbar appToolbar;
-    private Button cerrarSesion;
+    private Button bCerrarSesion, bCambiarPassword, bEliminarArmario, bEliminarCuenta;
     // FireBase
     private FirebaseAuth mAuth = null;
 
@@ -67,12 +67,18 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
 
 
     protected void conectarVariablesConVista() {
-        cerrarSesion = findViewById(R.id.btnCerrarSesion);
+        bCerrarSesion = findViewById(R.id.btnCerrarSesion);
         appToolbar = findViewById(R.id.appToolbar);
+        bCambiarPassword = findViewById(R.id.btnCambiarPassword);
+        bEliminarArmario = findViewById(R.id.btnEliminarArmario);
+        bEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
     }
 
     protected void onClickListener() {
-        cerrarSesion.setOnClickListener(this);
+        bCerrarSesion.setOnClickListener(this);
+        bCambiarPassword.setOnClickListener(this);
+        bEliminarArmario.setOnClickListener(this);
+        bEliminarCuenta.setOnClickListener(this);
     }
 
     // Salir de la sesión
@@ -98,7 +104,7 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
     }
 */
 
-    public void crearDialog(String mensaje, String titulo, final int opcion) {
+    public void crearDialog(String titulo, String mensaje, final int opcion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Ponemos el mensaje y el título:
         builder.setMessage(mensaje)
@@ -110,6 +116,14 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
 
                 if (opcion == 1) {
                     signOut(opcion);
+                } else if (opcion == 2) {
+
+                } else if (opcion == 3) {
+
+                } else if (opcion == 4){
+
+                } else {
+
                 }
                 dialog.dismiss();
             }
@@ -131,10 +145,27 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener 
         switch (v.getId()) {
             case R.id.btnCerrarSesion:
                 opcion = 1;
-                crearDialog(getResources().getString(R.string.cerrarSesionDialogMiCuenta),
-                        getResources().getString(R.string.cerrarSesionTituloDialogMiCuenta),opcion);
+                crearDialog(getResources().getString(R.string.cerrarSesionTituloDialogMiCuenta),
+                        getResources().getString(R.string.cerrarSesionDialogMiCuenta),opcion);
                 break;
-                
+
+            case R.id.btnCambiarPassword:
+                opcion = 2;
+                crearDialog(getResources().getString(R.string.cambiarPasswordTituloDialogMiCuenta),
+                        getResources().getString(R.string.cambiarPasswordDialogMiCuenta),opcion);
+                break;
+
+            case R.id.btnEliminarArmario:
+                opcion = 3;
+                crearDialog(getResources().getString(R.string.eliminarArmarioTituloDialogMiCuenta),
+                        getResources().getString(R.string.eliminarArmarioDialogMiCuenta),opcion);
+                break;
+
+            case R.id.btnEliminarCuenta:
+                opcion = 4;
+                crearDialog(getResources().getString(R.string.eliminarCuentaTituloDialogMiCuenta),
+                        getResources().getString(R.string.eliminarCuentaDialogMiCuenta),opcion);
+                break;
         }
 
     }

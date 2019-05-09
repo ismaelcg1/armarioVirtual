@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#F39100</color>
     <color name="colorPrimaryDark">#BB6401</color>
-    <color name="colorAccent">#a98274</color> <!--  ffc947 -->
+    <color name="colorAccent">#A98274</color> <!--  ffc947 -->
 
     <!-- Colores personalizados -->
     <color name="colorNegro">#BE000000</color>

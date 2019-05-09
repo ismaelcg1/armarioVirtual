@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -32,6 +34,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -46,13 +49,14 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
     private TextInputLayout textoTalla, textoEpoca, textoColor, textoMarca, textoEstilo, textoMaterial;
     private String seleccion, talla, epoca;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_insertar);
 
-        conectarVariablesConVista();
-        btnTalla.setOnClickListener(this);
+        definicionDeVariables();
+        onClickListener();
 
         // Pongo el titulo en la toolbar
         appToolbar.setTitle(R.string.nombreInicialActividadInsertar);
@@ -86,6 +90,15 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
 
     }
 
+
+    private void onClickListener() {
+        btnTalla.setOnClickListener(this);
+        btnColor.setOnClickListener(this);
+        btnEpoca.setOnClickListener(this);
+
+    }
+
+
     private void showPictureDialog(){
         AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle(getResources().getString(R.string.pictureDialogTituloActividadInsertar));
@@ -109,7 +122,7 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         pictureDialog.show();
     }
 
-    protected void conectarVariablesConVista() {
+    protected void definicionDeVariables() {
         appToolbar = findViewById(R.id.appToolbar);
         subirPrenda = findViewById(R.id.bSubirPrenda);
         btnTalla = findViewById(R.id.bTalla);
@@ -243,7 +256,6 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
     @Override
     public void cogerParametro(String seleccionado) {
 
-
         switch (seleccion) {
             case "Talla":
                 talla = seleccionado;
@@ -260,17 +272,33 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
 
     }
 
+    public void mostrarColorPicker() {
+
+
+    }
+
     @Override
     public void onClick(View v) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.bTalla:
                 seleccion = "Talla";
                 new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
                 break;
             case R.id.bEpoca:
-                seleccion = "Epoca";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                DialogoSelectorEstacionPersonalizado dialogo1 = new DialogoSelectorEstacionPersonalizado();
+                dialogo1.show(fragmentManager, "tagDialogSelectorEstacion");
                 break;
+            case R.id.bColor:
+                DialogoSelectorColorPersonalizado dialogo2 = new DialogoSelectorColorPersonalizado();
+                dialogo2.show(fragmentManager, "tagDialogSelectorColor");
+
+                // ColorPicker
+
+                break;
+
+
+                // DialogoSelectorEstacionPersonalizado
         }
     }
 }
