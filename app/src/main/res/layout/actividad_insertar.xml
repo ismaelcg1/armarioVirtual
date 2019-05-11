@@ -115,7 +115,7 @@
                         android:orientation="vertical">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/epocaPrenda"
+                            android:id="@+id/estiloPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -124,11 +124,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
-                                android:hint="@string/epocaActividadInsertar" />
+                                android:hint="@string/estiloActividadInsertar" />
                         </android.support.design.widget.TextInputLayout>
 
                         <Button
-                            android:id="@+id/bEpoca"
+                            android:id="@+id/bEstilo"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -186,7 +186,7 @@
                         android:orientation="vertical">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/marcaPrenda"
+                            android:id="@+id/epocaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -195,11 +195,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
-                                android:hint="@string/marcaActividadInsertar" />
+                                android:hint="@string/epocaActividadInsertar" />
                         </android.support.design.widget.TextInputLayout>
 
                         <Button
-                            android:id="@+id/bMarca"
+                            android:id="@+id/bEpoca"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -221,7 +221,7 @@
                         android:orientation="vertical">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/estiloPrenda"
+                            android:id="@+id/categoriaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -230,11 +230,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
-                                android:hint="@string/estiloActividadInsertar" />
+                                android:hint="@string/categoriaActividadInsertar" />
                         </android.support.design.widget.TextInputLayout>
 
                         <Button
-                            android:id="@+id/bEstilo"
+                            android:id="@+id/bCategoria"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
@@ -249,7 +249,7 @@
                         android:orientation="vertical">
 
                         <android.support.design.widget.TextInputLayout
-                            android:id="@+id/materialPrenda"
+                            android:id="@+id/subcategoriaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
@@ -258,11 +258,11 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
-                                android:hint="@string/materialActividadInsertar" />
+                                android:hint="@string/subcategoriaActividadInsertar" />
                         </android.support.design.widget.TextInputLayout>
 
                         <Button
-                            android:id="@+id/bMaterial"
+                            android:id="@+id/bSubcategoria"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1"

@@ -5,7 +5,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -34,21 +33,20 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class ActividadFotos extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener {
+public class ActividadFotos extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener,
+        DialogoSeleccionarEstacionPersonalizado.finalizarDialog, DialogoSeleccionarColorPersonalizado.finalizarDialogColores {
 
     private ImageView botonInsertarImagen;
     private static final String IMAGE_DIRECTORY = "/imagenes_Armario_Virtual";
     private int GALLERY = 1, CAMERA = 2;
     private Toolbar appToolbar;
 
-    private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnMarca, btnEstilo, btnMaterial;
-    private TextInputLayout textoTalla, textoEpoca, textoColor, textoMarca, textoEstilo, textoMaterial;
-    private String seleccion, talla, epoca;
-
+    private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnCategoria, btnEstilo, btnSubcategoria;
+    private TextInputLayout textoTalla, textoEpoca, textoColor, textoCategoria, textoEstilo, textoSubcategoria;
+    private String seleccion, talla, estacion, color, estilo , categoria, subcategoria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,17 +126,22 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         btnTalla = findViewById(R.id.bTalla);
         btnEpoca = findViewById(R.id.bEpoca);
         btnColor = findViewById(R.id.bColor);
-        btnMarca = findViewById(R.id.bMarca);
+        btnCategoria = findViewById(R.id.bCategoria);
         btnEstilo = findViewById(R.id.bEstilo);
-        btnMaterial = findViewById(R.id.bMaterial);
+        btnSubcategoria = findViewById(R.id.bSubcategoria);
 
         textoTalla = findViewById(R.id.tallaPrenda);
         textoEpoca = findViewById(R.id.epocaPrenda);
         textoColor = findViewById(R.id.colorPrenda);
-        textoMarca = findViewById(R.id.marcaPrenda);
+        textoCategoria = findViewById(R.id.categoriaPrenda);
         textoEstilo = findViewById(R.id.estiloPrenda);
-        textoMaterial = findViewById(R.id.materialPrenda);
+        textoSubcategoria = findViewById(R.id.subcategoriaPrenda);
 
+        estacion = "";
+        color = "";
+        estilo = "";
+        categoria = "";
+        subcategoria = "";
     }
 
     public void choosePhotoFromGallary() {
@@ -254,6 +257,35 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
     }
 
     @Override
+    public void onClick(View v) {
+        seleccion = "";
+        switch (v.getId()) {
+            case R.id.bTalla:
+                seleccion = "Talla";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+            case R.id.bEpoca:
+                new DialogoSeleccionarEstacionPersonalizado(ActividadFotos.this, ActividadFotos.this);
+                break;
+            case R.id.bColor:
+                new DialogoSeleccionarColorPersonalizado(ActividadFotos.this, ActividadFotos.this);
+                break;
+            case R.id.bEstilo:
+                seleccion = "Estilo";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+            case R.id.bCategoria:
+                seleccion = "Categoria";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+            case R.id.bSubcategoria:
+                seleccion = "Subcategoria";
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                break;
+        }
+    }
+
+    @Override
     public void cogerParametro(String seleccionado) {
 
         switch (seleccion) {
@@ -261,44 +293,33 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
                 talla = seleccionado;
                 textoTalla.getEditText().setText(talla);
                 break;
-            case "Epoca":
-                epoca = seleccionado;
-                textoEpoca.getEditText().setText(epoca);
+            case "Estilo":
+                estilo = seleccionado;
+                textoEstilo.getEditText().setText(estilo);
                 break;
-                default:
-
-                    break;
+            case "Categoria":
+                categoria = seleccionado;
+                textoCategoria.getEditText().setText(categoria);
+                break;
+            case "Subcategoria":
+                subcategoria = seleccionado;
+                textoSubcategoria.getEditText().setText(subcategoria);
+                break;
+            default:
+                // Por defecto
+                break;
         }
-
-    }
-
-    public void mostrarColorPicker() {
-
-
     }
 
     @Override
-    public void onClick(View v) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        switch (v.getId()) {
-            case R.id.bTalla:
-                seleccion = "Talla";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
-                break;
-            case R.id.bEpoca:
-                DialogoSelectorEstacionPersonalizado dialogo1 = new DialogoSelectorEstacionPersonalizado();
-                dialogo1.show(fragmentManager, "tagDialogSelectorEstacion");
-                break;
-            case R.id.bColor:
-                DialogoSelectorColorPersonalizado dialogo2 = new DialogoSelectorColorPersonalizado();
-                dialogo2.show(fragmentManager, "tagDialogSelectorColor");
+    public void cogerString(String seleccion) {
+        estacion = seleccion;
+        textoEpoca.getEditText().setText(estacion);
+    }
 
-                // ColorPicker
-
-                break;
-
-
-                // DialogoSelectorEstacionPersonalizado
-        }
+    @Override
+    public void cogerColor(String seleccion) {
+        color = seleccion;
+        textoColor.getEditText().setText(color);
     }
 }

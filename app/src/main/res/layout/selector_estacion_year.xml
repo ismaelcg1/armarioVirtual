@@ -106,4 +106,35 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bCancelarSelectorEstacion"
+                style="@style/estiloBotonesDialogEstacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/cancelarNumberPickerRegistroInicial" />
+
+            <Button
+                android:id="@+id/bAceptarSelectorEstacion"
+                style="@style/estiloBotonesDialogEstacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/boton_redondeado_number_picker"
+                android:text="@string/aceptarNumberPickerRegistroInicial" />
+        </LinearLayout>
+    </LinearLayout>
+
 </LinearLayout>

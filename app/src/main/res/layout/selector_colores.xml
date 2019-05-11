@@ -9,8 +9,7 @@
     <LinearLayout
         style="@style/estiloLayoutBotonesSelectoresColor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <LinearLayout
@@ -335,6 +334,38 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/bCancelarSelectorColor"
+                    style="@style/estiloBotonesDialogEstacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado_number_picker"
+                    android:text="@string/cancelarNumberPickerRegistroInicial" />
+
+                <Button
+                    android:id="@+id/bAceptarSelectorColor"
+                    style="@style/estiloBotonesDialogEstacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/boton_redondeado_number_picker"
+                    android:text="@string/aceptarNumberPickerRegistroInicial" />
+            </LinearLayout>
+        </LinearLayout>
+
 
     </LinearLayout>
 

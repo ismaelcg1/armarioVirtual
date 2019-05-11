@@ -126,9 +126,9 @@
     <string name="tallaActividadInsertar">Talla por defecto: </string>
     <string name="epocaActividadInsertar">Época: </string>
     <string name="colorActividadInsertar">Color: </string>
-    <string name="marcaActividadInsertar">Marca: </string>
     <string name="estiloActividadInsertar">Estilo: </string>
-    <string name="materialActividadInsertar">Material: </string>
+    <string name="categoriaActividadInsertar">Categoría: </string>
+    <string name="subcategoriaActividadInsertar">Subcategoría: </string>
 
     <string name="permisosAceptadosActividadInsertar">Permisos aceptados por el usuario</string>
     <string name="pictureDialogTituloActividadInsertar">Seleccione una acción:</string>
@@ -164,6 +164,234 @@
         <item>@string/tallaXL</item>
         <item>@string/tallaXXL</item>
     </string-array>
+
+    <!-- STRING COLORES -->
+    <string name="color0">Rojo</string>
+    <string name="color1">Rosa</string>
+    <string name="color2">Morado</string>
+    <string name="color3">Morado oscuro</string>
+    <string name="color4">Indigo</string>
+    <string name="color5">Azul</string>
+    <string name="color6">Azul claro</string>
+    <string name="color7">Cian</string>
+    <string name="color8">Verde azulado</string>
+    <string name="color9">Verde</string>
+    <string name="color10">Lima</string>
+    <string name="color11">Amarillo</string>
+    <string name="color12">Ambar</string>
+    <string name="color13">Naranja</string>
+    <string name="color14">Naranja oscuro</string>
+    <string name="color15">Marrón</string>
+    <string name="color16">Gris</string>
+    <string name="color17">Gris azulado</string>
+    <string name="color18">Blanco</string>
+    <string name="color19">Negro</string>
+
+    <string-array name="arrayColores">
+        <item>@string/color0</item>
+        <item>@string/color1</item>
+        <item>@string/color2</item>
+        <item>@string/color3</item>
+        <item>@string/color4</item>
+        <item>@string/color5</item>
+        <item>@string/color6</item>
+        <item>@string/color7</item>
+        <item>@string/color8</item>
+        <item>@string/color9</item>
+        <item>@string/color10</item>
+        <item>@string/color11</item>
+        <item>@string/color12</item>
+        <item>@string/color13</item>
+        <item>@string/color14</item>
+        <item>@string/color15</item>
+        <item>@string/color16</item>
+        <item>@string/color17</item>
+        <item>@string/color18</item>
+        <item>@string/color19</item>
+    </string-array>
+
+
+
+
+
+
+
+    <!-- ESTILO -->
+    <string name="diario">Diario</string>
+    <string name="formal">Formal</string>
+    <string name="deportivo">Deportivo</string>
+    <string name="fiesta">Fiesta</string>
+
+    <string-array name="arrayEstilos">
+        <item>@string/diario</item>
+        <item>@string/formal</item>
+        <item>@string/deportivo</item>
+        <item>@string/fiesta</item>
+    </string-array>
+
+
+
+    <!-- ESTACIONES -->
+    <string name="primavera">Primavera</string>
+    <string name="verano">Verano</string>
+    <string name="otono">Otoño</string>
+    <string name="invierno">Invierno</string>
+
+
+    <string-array name="arrayEstaciones">
+        <item>@string/primavera</item>
+        <item>@string/verano</item>
+        <item>@string/otono</item>
+        <item>@string/invierno</item>
+    </string-array>
+
+
+
+    <!-- CATEGORÍAS -->
+    <string name="ropaSuperior">Ropa superior</string>
+    <string name="ropaInferior">Ropa inferior</string>
+    <string name="ropaInterior">Ropa interior</string>
+    <string name="calzado">Calzado</string>
+    <string name="complementos">Complementos</string>
+
+    <string-array name="arrayCategorias">
+        <item>@string/ropaSuperior</item>
+        <item>@string/ropaInferior</item>
+        <item>@string/ropaInterior</item>
+        <item>@string/calzado</item>
+        <item>@string/complementos</item>
+    </string-array>
+
+
+
+    <!-- SUBCATEGORÍAS -->
+
+    <!-- HOMBRES/MUJERES ROPA SUPERIOR-->
+    <string name="camisetaCorta">Camiseta manga corta</string>
+    <string name="camisetaLarga">Camiseta manga larga</string>
+    <string name="camisetaSinMangas">Camiseta sin mangas</string>
+    <string name="camisa">Camisa</string>
+    <string name="polo">Polo</string>
+    <string name="sudadera">Sudadera</string>
+    <string name="americana">Americana</string>
+    <string name="chaqueta">Chaqueta</string>
+    <string name="rebeca">Rebeca</string>
+    <string name="abrigo">Abrigo</string>
+    <!-- MUJERES ROPA SUPERIOR-->
+    <string name="top">Top</string>
+    <string name="bodie">Bodie</string>
+    <string name="blusa">Blusa</string>
+
+    <!-- HOMBRES/MUEJRES ROPA INFERIOR     OJO, NO PONER DEPORTIVO NI NADA, ESO SE INDICA EN EL ESTILO DE LA PRENDA-->
+    <string name="pantalon">Pantalón largo</string>
+    <string name="pantalonVaquero">Pantalón vaquero</string>
+    <string name="bermudas">Bermudas</string>
+    <string name="shortPantalon">Short</string>
+    <string name="chandal">Chándal</string>
+    <string name="banador">Bañador</string>
+    <!-- MUJERES ROPA INFERIOR -->
+    <string name="falda">Falda</string>
+    <string name="leggins">Leggins</string>
+    <string name="bikini">Bikini</string>
+
+    <!-- HOMBRES ROPA INTERIOR -->
+    <string name="calzoncillos">Calzoncillos</string>
+    <string name="boxer">Boxér</string>
+    <!-- MUEJRES ROPA INTERIOR -->
+    <string name="bragas">Bragas</string>
+    <string name="tanga">Tanga</string>
+    <string name="sujetador">Sujetador</string>
+
+
+    <!-- HOMBRES/MUEJRES CALZADO -->
+    <string name="zapatos">Zapatos</string>
+    <string name="zapatillas">Zapatillas</string>
+    <string name="botas">Botas</string>
+    <string name="sandalias">Sandalias</string>
+    <string name="chanclas">Chanclas</string>
+    <!-- MUEJRES CALZADO -->
+    <string name="tacones">Tacones</string>
+
+    <!-- HOMBRES/MUEJRES COMPLEMENTOS -->  <!-- QUITAR ACCESORIOS Y PONER COMPLEMENTOS (GLOBAL Y MEJOR) -->
+    <string name="calcetines">Calcetines</string>
+    <string name="gorro">Gorro</string>
+    <string name="gorra">Gorra</string>
+    <string name="corbata">Corbata</string>
+    <string name="pajarita">Pajarita</string>
+    <string name="reloj">Reloj</string>
+    <string name="bufanda">Bufanda</string>
+    <string name="anillo">Anillo</string>
+    <string name="colgante">Colgante</string>
+    <string name="pulsera">Pulsera</string>
+    <string name="pendientes">Pendientes</string>
+    <string name="sombrero">Sombrero</string>
+    <string name="gafas">Gafas</string>
+    <string name="bolso">Bolso</string>
+    <string name="cartera">Cartera</string>
+
+    <!-- ************************************  -->
+
+    <string-array name="arrayRopaParteSuperior">
+        <item>@string/camisetaCorta</item>
+        <item>@string/camisetaLarga</item>
+        <item>@string/camisetaSinMangas</item>
+        <item>@string/camisa</item>
+        <item>@string/polo</item>
+        <item>@string/sudadera</item>
+        <item>@string/americana</item>
+        <item>@string/chaqueta</item>
+        <item>@string/rebeca</item>
+        <item>@string/abrigo</item>
+    </string-array>
+
+    <string-array name="arrayRopaParteInferior">
+        <item>@string/pantalon</item>
+        <item>@string/pantalonVaquero</item>
+        <item>@string/bermudas</item>
+        <item>@string/shortPantalon</item>
+        <item>@string/chandal</item>
+        <item>@string/banador</item>
+    </string-array>
+
+    <string-array name="arrayRopaParteInteriorHombre">
+        <item>@string/calzoncillos</item>
+        <item>@string/boxer</item>
+    </string-array>
+
+    <string-array name="arrayRopaParteInteriorMujer">
+        <item>@string/bragas</item>
+        <item>@string/tanga</item>
+        <item>@string/sujetador</item>
+    </string-array>
+
+    <string-array name="arrayCalzado">
+        <item>@string/zapatos</item>
+        <item>@string/zapatillas</item>
+        <item>@string/botas</item>
+        <item>@string/sandalias</item>
+        <item>@string/chanclas</item>
+        <item>@string/tacones</item>
+    </string-array>
+
+    <string-array name="arrayComplementos">
+        <item>@string/calcetines</item>
+        <item>@string/gorro</item>
+        <item>@string/gorra</item>
+        <item>@string/corbata</item>
+        <item>@string/pajarita</item>
+        <item>@string/reloj</item>
+        <item>@string/bufanda</item>
+        <item>@string/anillo</item>
+        <item>@string/colgante</item>
+        <item>@string/pulsera</item>
+        <item>@string/pendientes</item>
+        <item>@string/sombrero</item>
+        <item>@string/gafas</item>
+        <item>@string/bolso</item>
+        <item>@string/cartera</item>
+    </string-array>
+
+
 
 
 
