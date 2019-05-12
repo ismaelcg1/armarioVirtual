@@ -5,18 +5,14 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,12 +24,7 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
 public class ActividadFotos extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener,
@@ -47,6 +38,8 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
     private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnCategoria, btnEstilo, btnSubcategoria;
     private TextInputLayout textoTalla, textoEpoca, textoColor, textoCategoria, textoEstilo, textoSubcategoria;
     private String seleccion, talla, estacion, color, estilo , categoria, subcategoria;
+    // Para almacenar la foto de la prenda
+    private Bitmap imagenFoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,9 +84,11 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
 
     private void onClickListener() {
         btnTalla.setOnClickListener(this);
+        btnEstilo.setOnClickListener(this);
         btnColor.setOnClickListener(this);
         btnEpoca.setOnClickListener(this);
-
+        btnCategoria.setOnClickListener(this);
+        btnSubcategoria.setOnClickListener(this);
     }
 
 
@@ -168,12 +163,11 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
             if (data != null) {
                 Uri contentURI = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-                    bitmap = Bitmap.createScaledBitmap(bitmap, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
+                    imagenFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
+                    Bitmap bitmapaux = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
 
-                    String path = saveImage(bitmap);
                     Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    botonInsertarImagen.setImageBitmap(bitmap);
+                    botonInsertarImagen.setImageBitmap(bitmapaux);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -185,11 +179,15 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
             Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
             Bitmap bitmap = Bitmap.createScaledBitmap(thumbnail, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
             botonInsertarImagen.setImageBitmap(bitmap);
-            saveImage(bitmap);
+
             Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
+
+        // TODO guardar Imagen
+
     }
 
+    /* PARA GUARDAR LA IMAGEN EN EL DISPOSITIVO
     public String saveImage(Bitmap myBitmap) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
@@ -219,6 +217,7 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         return "";
     }
 
+*/
     private void  requestMultiplePermissions(){
         Dexter.withActivity(this)
                 .withPermissions(
@@ -262,7 +261,7 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         switch (v.getId()) {
             case R.id.bTalla:
                 seleccion = "Talla";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
                 break;
             case R.id.bEpoca:
                 new DialogoSeleccionarEstacionPersonalizado(ActividadFotos.this, ActividadFotos.this);
@@ -272,18 +271,25 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
                 break;
             case R.id.bEstilo:
                 seleccion = "Estilo";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
                 break;
             case R.id.bCategoria:
                 seleccion = "Categoria";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
+                textoSubcategoria.getEditText().setText("");
                 break;
             case R.id.bSubcategoria:
-                seleccion = "Subcategoria";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion);
+                if (categoria.isEmpty()) {
+                    Toast.makeText(ActividadFotos.this, getResources().getString(R.string.subcategoriaErrorActividadInsertar), Toast.LENGTH_LONG).show();
+                } else {
+                    seleccion = "Subcategoria";
+                    // Dependiendo de la Categoría elegida, mostrar unas opciones u otra de subcategoría
+                    new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, categoria);
+                }
                 break;
         }
     }
+
 
     @Override
     public void cogerParametro(String seleccionado) {

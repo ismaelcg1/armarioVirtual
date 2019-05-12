@@ -28,6 +28,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
     private TextView cambiarPassword;
     private CheckBox terminosCondiciones;
+    // TODO crear clase para guardar datos usuario de BBDD
+    //static Usuario miUsuario;
+    //LoginActivity.miUsuario
 
     // FireBase
     private FirebaseAuth mAuth = null;
@@ -90,6 +93,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             email.getEditText().setText(""+currentUser.getEmail());
+
+            // TODO asignar cosas a la clase
+            // hacer consulta a bd para rellenar clase usuario
+            // nombre, edad, sexo......
+            // miUsuario = new Usuario("nombre", edad, sexo, ...);
+
         }
         updateUI(currentUser);
     }
@@ -98,7 +107,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user) {
         if (user != null) {
             if (user.isEmailVerified()) {
-                // Inicializamos la actividad principal si todo es correcto:
+                // Inicializamos la actividad principal si tod@ es correcto:
                 Intent intent2 = new Intent(getApplicationContext(), MainActivityDrawer.class);
                 startActivity(intent2);
                 finish();
@@ -107,7 +116,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 snackBarVerificacion();
             }
         }
-        // else ¿?
     }
 
     private void snackBarVerificacion() {

@@ -7,6 +7,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.NumberPicker;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class DialogPropiedadesPrenda {
     private NumberPicker numberPickerString;
@@ -23,17 +29,62 @@ public class DialogPropiedadesPrenda {
     private String [] categorias;
     private String [] subcategorias;
 
-    public DialogPropiedadesPrenda (Context contexto, acabarDialog actividadDialog, final String opcion) {
+
+    public DialogPropiedadesPrenda (Context contexto, acabarDialog actividadDialog, final String opcion, String categoriaSeleccionada) {
 
         interfazDialogString = actividadDialog;
         tallas = contexto.getResources().getStringArray(R.array.arrayTallas);
         estilos = contexto.getResources().getStringArray(R.array.arrayEstilos);
         categorias = contexto.getResources().getStringArray(R.array.arrayCategorias);
         // La subcategoría dependerá de la categoría seleccionada
-        subcategorias = contexto.getResources().getStringArray(R.array.arrayTallas);
+        if (categoriaSeleccionada!=null) {
+            Map<String, List<String>> subcategoriasList = crearArraysSubcategorias(contexto);
+            subcategorias = (String []) subcategoriasList.get(categoriaSeleccionada).toArray();
+        }
+
         conectarVariablesConVista(contexto);
         inicializarStringPicker(opcion);
         asignarOpcion(opcion);
+    }
+
+    private Map<String, List<String>> crearArraysSubcategorias(Context contexto) {
+
+        String [] ropaParteSuperior = contexto.getResources().getStringArray(R.array.arrayRopaParteSuperior);
+
+        String [] ropaParteInferior = contexto.getResources().getStringArray(R.array.arrayRopaParteInferior);
+        String [] ropaParteInteriorHombre = contexto.getResources().getStringArray(R.array.arrayRopaParteInteriorHombre);
+        String [] ropaParteInteriorMujer = contexto.getResources().getStringArray(R.array.arrayRopaParteInteriorMujer);
+        String [] complementos = contexto.getResources().getStringArray(R.array.arrayComplementos);
+        String [] calzadoArray = contexto.getResources().getStringArray(R.array.arrayCalzado);
+
+
+        Map<String, List<String>> subcategorias = new HashMap<String, List<String>>();
+
+        List<String> ropaSuperior = Arrays.asList(ropaParteSuperior);
+        List<String> ropaInferior = Arrays.asList(ropaParteInferior);
+        List<String> ropaInteriorHombre = Arrays.asList(ropaParteInteriorHombre);
+        List<String> ropaInferiorMujer = Arrays.asList(ropaParteInteriorMujer);
+        List<String> complementosRopa = Arrays.asList(complementos);
+        List<String> calzado = Arrays.asList(calzadoArray);
+
+
+        // Añadimos los elementos al Map:
+        subcategorias.put("Ropa superior", (ropaSuperior));
+        subcategorias.put("Ropa inferior", (ropaInferior));
+
+        // TODO para saber sexo, para subcategorias de ropa interior
+        /*
+        if (LoginActivity.miUsuario.getSexo() == Sexo.Masculino) {
+            subcategorias.put("Ropa interior", (ropaInteriorHombre));
+        } else {
+            subcategorias.put("Ropa interior", (ropaInferiorMujer));
+        }
+        */
+        subcategorias.put("Complementos", (complementosRopa));
+        subcategorias.put("Calzado", (calzado));
+
+        return subcategorias;
+
     }
 
     private void conectarVariablesConVista(Context context) {
@@ -92,12 +143,13 @@ public class DialogPropiedadesPrenda {
 
     }
 
-    private void asignarOpcion(final String opcionSeleccionada) { // opcionSeleccionada
+    private void asignarOpcion(String opcionSeleccionada) {
 
+        final String op = opcionSeleccionada;
         bAceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                verOpcion(opcionSeleccionada); //
+                verOpcion(op);
                 dialogSeleccion.dismiss();
             }
         });

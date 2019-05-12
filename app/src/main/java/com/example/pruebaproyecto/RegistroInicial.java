@@ -131,10 +131,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         textViewPeso = findViewById(R.id.textViewSeleccionaPeso);
         botonRegistrarme = findViewById(R.id.btnRegistrarme);
         layout_registro_inicial = findViewById(R.id.linearLayoutRegistroInicial);
-        layout_progress_bar = findViewById(R.id.linearLayoutProgessBar);
-        // Para progressBar
-        mProgressBar = findViewById(R.id.progressbar);
-        mLoadingText = findViewById(R.id.loadingCompleteTextView);
     }
 
     @Override
@@ -198,22 +194,14 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         String passwordUser = password.getText().toString();
         String passwordUserRepetida = passwordRepetida.getText().toString();
 
+        // TODO cambiar orden if, para quitar este return
         if (!validateForm(nombreUser, emailUser, passwordUser, passwordUserRepetida)) {
             return; // Paramos la ejecución
         } else if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
             Toast.makeText(this, getResources().getString(R.string.toastPasswordNoCoincidenRegistroIncial), Toast.LENGTH_LONG).show();
         } else { // Si no hay ningún campo sin completar, registramos desde 0...
 
-
-
-
             Toast.makeText(this, "Pulsado botón Registrame", Toast.LENGTH_SHORT).show();
-
-
-            /*
-            * EL PROBLEMA ES QUE NO PUEDE ACCEDER AL PULSAR EL BOTON A TASK, QUIZÁS SEA POR ALGO DEL CONTEXTO DE LA ACTIVITY
-            * */
-
 
 
             mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
@@ -225,37 +213,20 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
                                 Toast.makeText(RegistroInicial.this,
                                         getResources().getString(R.string.toastRegistroCorrectoActividadLogin)+" "+email.getText().toString(), Toast.LENGTH_LONG).show();
-
-                                // Si todo ha salido bien mostramos layoutProgressBar
-                                layout_registro_inicial.setVisibility(View.GONE);
-                                layout_progress_bar.setVisibility(View.VISIBLE);
-
-                                // Indicamos al usuario que la acción del registro se está llevando a cabo, con un progressBar
-                                Runnable r = new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        while (mProgressStatus < 100){
-                                            mProgressStatus++;
-                                            android.os.SystemClock.sleep(500); // 100
-                                            mHandler.post(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    mProgressBar.setProgress(mProgressStatus);
-                                                }
-                                            });
-                                        }
-                                        mHandler.post(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                mLoadingText.setVisibility(View.VISIBLE);
-                                            }
-                                        });
-                                    }
-                                };
-                                // Hacemos que dicho hilo se ejecute
-                                new Thread(r).start();
-
                                 boolean correcto = true;
+
+                                //TODO insertar en bd de campos usuario
+                                /*
+                                Sexo sexo;
+                                if (buttonFemenino.isSelected())
+                                    sexo = Sexo.Femenino;
+                                else
+                                    sexo = Sexo.Masculino;
+                                usuarioRegistrado = new (editTextNombre.getString(), editetTExApellidos.getString(), sexo);
+                                usuarioRegistrado.guardaUSuario();
+
+                                */
+
                                 updateUI(user, correcto);
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -333,24 +304,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         return valid;
     }
 
-    /*
-    private void updateUI(FirebaseUser user) {
-        hideProgressDialog();
-        if (user != null) {
-            mStatusTextView.setText(getString(R.string.google_status_fmt, user.getEmail()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
 
-            findViewById(R.id.sign_in_button).setVisibility(View.GONE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.VISIBLE);
-        } else {
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-            findViewById(R.id.sign_out_and_disconnect).setVisibility(View.GONE);
-        }
-    }
-*/
     private void updateUI(FirebaseUser user, boolean correcto) {
         // hideProgressDialog();
         if (user != null && correcto) {
@@ -358,27 +312,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
-
-            /*
-            mStatusTextView.setText(getString(R.string.emailpassword_status_fmt,
-                    user.getEmail(), user.isEmailVerified()));
-            mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-            findViewById(R.id.emailPasswordButtons).setVisibility(View.GONE);
-            findViewById(R.id.emailPasswordFields).setVisibility(View.GONE);
-            findViewById(R.id.signedInButtons).setVisibility(View.VISIBLE);
-
-            findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
-            */
-        } else {
-            /*
-            mStatusTextView.setText(R.string.signed_out);
-            mDetailTextView.setText(null);
-
-            findViewById(R.id.emailPasswordButtons).setVisibility(View.VISIBLE);
-            findViewById(R.id.emailPasswordFields).setVisibility(View.VISIBLE);
-            findViewById(R.id.signedInButtons).setVisibility(View.GONE);
-            */
         }
     }
 

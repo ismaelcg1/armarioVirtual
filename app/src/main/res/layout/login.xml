@@ -127,7 +127,7 @@
                     style="@style/LoginActivityMargenInferior"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:boxBackgroundColor="@color/colorPruebas"
+                    app:boxBackgroundColor="@color/colorRojoOscuro"
                     app:boxStrokeColor="@color/colorNegro"
                     app:hintAnimationEnabled="true"
                     app:passwordToggleEnabled="false">

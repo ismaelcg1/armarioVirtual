@@ -55,6 +55,8 @@ public class MainActivityDrawer extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // TODO para obtener el sexo de la persona y poner una imagen u otra
+        // LoginActivity.miUsuario.getSexo() == Sexo.Femenino
 
     }
 
@@ -65,33 +67,10 @@ public class MainActivityDrawer extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+            finish();
         }
     }
 
-
-
-    /*
-        Este método actualizará la vista de la pantalla, es decir, se encargará de mostrar
-        los elementos en los casos de que el usuario esté o no registrado.
-     */
-    public void updateUI() {
-        /*
-        SharedPreferences prefs = objeto.obtenerPreferencias();
-        // Comprobamos las preferencias para ver que pantalla ponemos al inicio
-        if (prefs.getString("user","").isEmpty() ||
-                prefs.getString("pass","").isEmpty() ||
-                prefs.getString("tok","").isEmpty() ) {
-            // Abrimos la pantalla de mensaje
-            layoutRegistro.setVisibility(View.VISIBLE);
-            layoutMensaje.setVisibility(View.GONE);
-        } else {
-            // Abrimos la pantalla de registro
-            layoutRegistro.setVisibility(View.GONE);
-            layoutMensaje.setVisibility(View.VISIBLE);
-        }
-        usuarioConectado.setText(prefs.getString("user","No registrado"));
-        */
-    }
 
     @SuppressLint("StringFormatMatches")
     private void inicializarTextos () {
@@ -126,7 +105,6 @@ public class MainActivityDrawer extends AppCompatActivity
         } else if (id == R.id.intercambio) {
 
         } else if (id == R.id.configuracion_usuario) {
-            finish();
             Intent intent = new Intent(this, MiCuenta.class);
             startActivity(intent);
         } else if (id == R.id.desarrollador) {
