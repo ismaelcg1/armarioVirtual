@@ -264,4 +264,47 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginBottom">-4dp</item>
     </style>
+
+    <!-- Informacion -->
+
+    <style name="estiloLayoutInformacion">
+        <item name="android:layout_margin">10sp</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
+    <style name="estiloMiFotoInformacion">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:padding">10sp</item>
+        <item name="android:layout_marginTop">3sp</item>
+    </style>
+
+    <style name="estiloLayoutInferiorInformacion">
+        <item name="android:layout_marginTop">20sp</item>
+    </style>
+
+    <style name="estiloFotoPonienteInformacion">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_height">200sp</item>
+        <item name="android:layout_width">380sp</item>
+        <item name="android:padding">10sp</item>
+    </style>
+
+    <style name="estiloTextoIntroInformacion">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+
+    <style name="estiloTextosInformacion" parent="estiloTextoIntroInformacion">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="estiloTextoDesarrolladorInformacion" parent="estiloTextosInformacion">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
 </resources>

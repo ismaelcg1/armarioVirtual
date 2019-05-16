@@ -69,7 +69,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/textoStringPicker"
             style="@style/estiloTextosNumberPicker"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

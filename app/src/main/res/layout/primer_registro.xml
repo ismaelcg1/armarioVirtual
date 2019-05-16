@@ -66,11 +66,11 @@
                             android:text="@string/textoInformacionRegistroInicial" />
 
                         <EditText
-                            android:id="@+id/editTextNombre"
+                            android:id="@+id/editTextAlias"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="10"
-                            android:hint="@string/nombreUsuarioActividadLogin"
+                            android:hint="@string/aliasUsuarioActividadLogin"
                             android:inputType="textEmailAddress"
                             android:textSize="17sp" />
 
@@ -170,7 +170,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
-                                android:layout_weight="3"
+                                android:layout_weight="1"
                                 android:hint="@string/seleccionarFechaRegistroInicial"
                                 android:paddingLeft="2sp"
                                 android:textAppearance="@style/TextAppearance.AppCompat.Button"

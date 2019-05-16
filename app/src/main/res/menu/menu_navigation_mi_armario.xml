@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/ropa_superior"
+        android:icon="@drawable/sueter_r100"
+        android:title="@string/ropaSuperior" />
+
+    <item android:id="@+id/ropa_inferior"
+        android:icon="@drawable/pantalones_r100"
+        android:title="@string/ropaInferior" />
+
+    <item android:id="@+id/calzado"
+        android:icon="@drawable/zapatillas_r100"
+        android:title="@string/calzado" />
+
+    <item android:id="@+id/ropa_interior"
+        android:icon="@drawable/calzoncillos_r100"
+        android:title="@string/ropaInterior" />
+
+    <item android:id="@+id/ropa_complementos"
+        android:icon="@drawable/reloj_r100"
+        android:title="@string/complementos" />
+
+</menu>

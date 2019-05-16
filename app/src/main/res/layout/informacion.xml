@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/appToolbar"
+            layout="@layout/clase_toolbar" />
+    </LinearLayout>
+
+    <LinearLayout
+        style="@style/estiloLayoutInformacion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView16"
+                style="@style/estiloTextoIntroInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/desarrolladorActividadInformacion" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                style="@style/estiloMiFotoInformacion"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/ismael_graduacion" />
+
+            <TextView
+                android:id="@+id/textView27"
+                style="@style/estiloTextoDesarrolladorInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nombreDesarrolladorInformacion" />
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/estiloTextosInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/copyRightInformacion" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/estiloLayoutInferiorInformacion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView25"
+                style="@style/estiloTextoIntroInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/agradecimientosInformacion" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                style="@style/estiloFotoPonienteInformacion"
+                app:srcCompat="@drawable/it_poniente" />
+
+            <TextView
+                android:id="@+id/textView26"
+                style="@style/estiloTextosInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/agradecimientosInfoInformacion" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

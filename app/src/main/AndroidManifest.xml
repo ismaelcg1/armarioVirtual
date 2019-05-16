@@ -34,10 +34,16 @@
             android:name=".RegistroInicial"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name=".MiArmario"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".ActividadFotos"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MiCuenta"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Informacion"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 

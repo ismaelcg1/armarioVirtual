@@ -37,8 +37,8 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         contexto = this;
         conectarVariablesConVista();
         onClickListener();
-        inicializarToolbar();
         ponerEmailUsuario();
+        inicializarToolbar();
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +52,7 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
     private void inicializarToolbar() {
         appToolbar.setTitle(R.string.nombreActividadMiCuenta);
         // Asigno la flecha atras
-        appToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
+        appToolbar.setNavigationIcon(R.drawable.atras_34dp);
     }
 
     private void updateUI(int id) {
@@ -113,6 +113,10 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         mAuth = FirebaseAuth.getInstance();
         mAuth.signOut();
         updateUI(id);
+
+        // TODO Eliminar intent de MainDrawerActivity
+        MainActivityDrawer ob = new MainActivityDrawer();
+        ob.finish();
     }
 
     private void sendEmailVerification() {

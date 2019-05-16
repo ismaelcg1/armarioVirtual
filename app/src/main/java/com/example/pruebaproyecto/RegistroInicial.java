@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,16 +47,11 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     // Para los layout a mostrar:
     private LinearLayout layout_registro_inicial, layout_progress_bar;
     //
-    private EditText nombreUsuario, email, password, passwordRepetida;
+    private EditText aliasUsuario, email, password, passwordRepetida;
     private RadioGroup radioGroup;
     private boolean generoMasculinoSeleccionado;
     private int peso, altura;
     private TextView textViewPeso, textViewAltura;
-    // Para ProgressBar
-    private ProgressBar mProgressBar;
-    private TextView mLoadingText;
-    private int mProgressStatus = 0;
-    private Handler mHandler = new Handler();
 
 
     @Override
@@ -122,7 +115,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         textViewSeleccionarAltura = findViewById(R.id.textViewSeleccionaAltura);
         botonSeleccionarAltura = findViewById(R.id.buttonSeleccionarAltura);
         botonSeleccionarPeso = findViewById(R.id.buttonSeleccionarPeso);
-        nombreUsuario = findViewById(R.id.editTextNombre);
+        aliasUsuario = findViewById(R.id.editTextAlias);
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
         passwordRepetida = findViewById(R.id.editTextPasswordRepetida);
@@ -189,7 +182,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
     private void registrarNuevoUsuario() {
         // Cogemos los datos :
-        String nombreUser = nombreUsuario.getText().toString();
+        String nombreUser = aliasUsuario.getText().toString();
         String emailUser = email.getText().toString();
         String passwordUser = password.getText().toString();
         String passwordUserRepetida = passwordRepetida.getText().toString();
@@ -236,14 +229,13 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                 layout_progress_bar.setVisibility(View.GONE);
                                 updateUI(null, false);
                             }
-                            // ...
                         }
                     });
         }
     }
 
 
-    private boolean validateForm(String nombreUser, String emailUser, String passwordUser, String passwordUserRepetida) {
+    private boolean validateForm(String aliasUser, String emailUser, String passwordUser, String passwordUserRepetida) {
         boolean valid = true;
 
         if (TextUtils.isEmpty(emailUser)) {
@@ -255,14 +247,14 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             email.setError(getResources().getString(R.string.formatoEmailIncorrectoRegistroInicial));
         }
 
-        if (TextUtils.isEmpty(nombreUser) ) {
-            nombreUsuario.setError(getResources().getString(R.string.requerirNombreRegistroInicial));
+        if (TextUtils.isEmpty(aliasUser) ) {
+            aliasUsuario.setError(getResources().getString(R.string.requerirAliasRegistroInicial));
             valid = false;
-        } else if (nombreUser.length() > 20) {
-            nombreUsuario.setError(getResources().getString(R.string.nombreNoCorrectoRegistroInicial));
+        } else if (aliasUser.length() > 20) {
+            aliasUsuario.setError(getResources().getString(R.string.aliasNoCorrectoRegistroInicial));
         } else {
-            nombreUsuario.setError(null);
-            //interfaz.cogerNombre(nombreUsuario.getText().toString());
+            aliasUsuario.setError(null);
+            //interfaz.cogerNombre(aliasUsuario.getText().toString());
         }
 
         if (TextUtils.isEmpty(passwordUser)) {

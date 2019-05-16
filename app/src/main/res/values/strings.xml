@@ -10,7 +10,7 @@
     <!-- TEXTOS LOGIN -->
     <string name="nombreActividadLogin">Identificación</string>
     <string name="textoInicialActividadLogin">Armario Virtual</string>
-    <string name="nombreUsuarioActividadLogin">Introduzca su nombre</string>
+    <string name="aliasUsuarioActividadLogin">Introduzca su alias para identificarle</string>
     <string name="emailActividadLogin">Introduzca su email</string>
     <string name="passwordActividadLogin">Introduzca su contraseña</string>
     <string name="textoBotonActividadLogin">Iniciar sesión</string>
@@ -42,7 +42,7 @@
     <string name="generoMasculinoRegistroInicial">Masculino</string>
     <string name="generoFemeninoRegistroInicial">Femenino</string>
     <string name="fechaDeNacimientoRegistroInicial">Fecha de nacimiento:</string>
-    <string name="seleccionarFechaRegistroInicial">Seleccionar fecha</string>
+    <string name="seleccionarFechaRegistroInicial">Pulsa y selecciona fecha</string>
     <string name="alturaRegistroInicial">Introduzca su altura:</string>
     <string name="pesoRegistroInicial">Introduzca su peso:</string>
     <string name="textViewAlturaRegistroInicial">Pulsar icono</string>
@@ -54,8 +54,8 @@
     <string name="textoNumberPickerAlturaRegistroInicial">Introduzca su altura en cm:</string>
 
     <string name="botonRegistrarmeRegistroInicial">Regístrame</string>
-    <string name="requerirNombreRegistroInicial">Nombre requerido</string>
-    <string name="nombreNoCorrectoRegistroInicial">El nombre no puede tener más de 20 carácteres</string>
+    <string name="requerirAliasRegistroInicial">Alias requerido</string>
+    <string name="aliasNoCorrectoRegistroInicial">El alias no puede tener más de 20 carácteres</string>
     <string name="requerirEmailRegistroInicial">Email requerido</string>
     <string name="requerirPasswordRegistroInicial">Contraseña requerida</string>
     <string name="requerirPasswordRepetidaRegistroInicial">Repetir contraseña para validar</string>
@@ -89,7 +89,7 @@
     <string name="texto4MainActivityDrawer">Eliminar</string>
     <string name="texto5MainActivityDrawer">Intercambio</string>
     <string name="texto6MainActivityDrawer">Mi cuenta</string>
-    <string name="texto7MainActivityDrawer">Desarrollador</string>
+    <string name="texto7MainActivityDrawer">Información</string>
     <string name="configuracionMainActivityDrawer">Configuración</string>
     <string name="appMainActivityDrawer">Operaciones</string>
 
@@ -139,19 +139,26 @@
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
     <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoria, por favor, elija primero una categoría</string>
 
+    <!-- TEXTOS Informacion -->
+    <string name="nombreInicialActividadInformacion">Información</string>
+    <string name="desarrolladorActividadInformacion">Desarrollador:</string>
+    <string name="nombreDesarrolladorInformacion">Ismael C. G.</string>
+    <string name="copyRightInformacion">© 2019</string>
+    <string name="agradecimientosInformacion">Agradecimientos:</string>
+    <string name="agradecimientosInfoInformacion">Al director y a todo el equipo de IT Poniente</string>
+
     <!-- DialogPersonalizados -->
-    <string name="textoDialogColor">Seleccione el color principal de su prenda:</string>
-    <string name="textoDialogEstacion">Seleccione la estación del año en la que se pondría dicha prenda:</string>
+    <string name="textoDialogColor">Selecciona el color principal de su prenda:</string>
+    <string name="textoDialogEstacion">Selecciona la época del año en la que te pondrías dicha prenda:</string>
 
     <!-- NumberPickerString -->
 
-    <string name="tallaNumberPickerString">Selecciona tu talla:</string>
+    <string name="tallaNumberPickerString">Selecciona la talla de la prenda:</string>
     <string name="epocaNumberPickerString">Selecciona estación del año para ponerte la prenda:</string>
     <string name="colorNumberPickerString">Selecciona el color principal de la prenda:</string>
-    <string name="marcaNumberPickerString">Selecciona la marca de la prenda:</string>
-    <string name="estiloNumberPickerString">Selecciona el estilo de la prenda:</string>
-    <string name="materialNumberPickerString">Selecciona el material de la prenda:</string>
-
+    <string name="estiloNumberPickerString">Elige el estilo de la prenda:</string>
+    <string name="categoriaNumberPickerString">Elige la categoría de la prenda:</string>
+    <string name="subcategoriaNumberPickerString">Elige la subtegoría de la prenda:</string>
 
     <string name="tallaXS">XS</string>
     <string name="tallaS">S</string>
@@ -214,12 +221,6 @@
         <item>@string/color19</item>
     </string-array>
 
-
-
-
-
-
-
     <!-- ESTILO -->
     <string name="diario">Diario</string>
     <string name="formal">Formal</string>
@@ -233,14 +234,11 @@
         <item>@string/fiesta</item>
     </string-array>
 
-
-
     <!-- ESTACIONES -->
     <string name="primavera">Primavera</string>
     <string name="verano">Verano</string>
     <string name="otono">Otoño</string>
     <string name="invierno">Invierno</string>
-
 
     <string-array name="arrayEstaciones">
         <item>@string/primavera</item>
@@ -248,8 +246,6 @@
         <item>@string/otono</item>
         <item>@string/invierno</item>
     </string-array>
-
-
 
     <!-- CATEGORÍAS -->
     <string name="ropaSuperior">Ropa superior</string>
@@ -266,10 +262,7 @@
         <item>@string/complementos</item>
     </string-array>
 
-
-
     <!-- SUBCATEGORÍAS -->
-
     <!-- HOMBRES/MUJERES ROPA SUPERIOR-->
     <string name="camisetaCorta">Camiseta manga corta</string>
     <string name="camisetaLarga">Camiseta manga larga</string>

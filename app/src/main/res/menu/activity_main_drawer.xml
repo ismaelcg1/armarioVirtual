@@ -35,7 +35,7 @@
                 android:icon="@drawable/ajustes96"
                 android:title="@string/texto6MainActivityDrawer" />
             <item
-                android:id="@+id/desarrollador"
+                android:id="@+id/informacion"
                 android:icon="@drawable/acerca_de96"
                 android:title="@string/texto7MainActivityDrawer" />
         </menu>

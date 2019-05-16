@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +20,8 @@ public class DialogPropiedadesPrenda {
     private Button bAceptar, bCancelar;
     // Para mostrar Dialog y pasar parámetros:
     private Dialog dialogSeleccion;
+    // Para cambiar el texto de 'StringPicker'
+    private TextView cabeceraStringPicker;
     public interface acabarDialog {
         void cogerParametro(String seleccion);
     }
@@ -95,6 +98,7 @@ public class DialogPropiedadesPrenda {
         numberPickerString = dialogSeleccion.findViewById(R.id.npString);
         bAceptar = dialogSeleccion.findViewById(R.id.bAceptarStringPicker);
         bCancelar = dialogSeleccion.findViewById(R.id.bCancelarStringPicker);
+        cabeceraStringPicker = dialogSeleccion.findViewById(R.id.textoStringPicker);
     }
 
     private void inicializarStringPicker(String op) {
@@ -103,18 +107,22 @@ public class DialogPropiedadesPrenda {
         // Debemos ver la opción a coger y devolver el array:
         switch (op) {
             case "Talla":
+                cabeceraStringPicker.setText(R.string.tallaNumberPickerString);
                 numberPickerString.setMaxValue(tallas.length-1);
                 numberPickerString.setDisplayedValues(tallas);
                 break;
             case "Estilo":
+                cabeceraStringPicker.setText(R.string.estiloNumberPickerString);
                 numberPickerString.setMaxValue(estilos.length-1);
                 numberPickerString.setDisplayedValues(estilos);
                 break;
             case "Categoria":
+                cabeceraStringPicker.setText(R.string.categoriaNumberPickerString);
                 numberPickerString.setMaxValue(categorias.length-1);
                 numberPickerString.setDisplayedValues(categorias);
                 break;
             case "Subcategoria":
+                cabeceraStringPicker.setText(R.string.subcategoriaNumberPickerString);
                 numberPickerString.setMaxValue(subcategorias.length-1);
                 numberPickerString.setDisplayedValues(subcategorias);
                 break;

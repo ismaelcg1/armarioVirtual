@@ -1,23 +1,16 @@
 package com.example.pruebaproyecto;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Ciclo formativo: Desarrollo de Aplicaciones Multiplataforma
@@ -34,6 +27,9 @@ public class MainActivityDrawer extends AppCompatActivity
     private TextView nombreUser, prendasAdd, accesoriossAdd;
     // Para mostrar las prendas y accesorios añadidos
     private int prendas, accesorios;
+    // Creamos el intent de la nueva actividad
+    private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,8 +91,10 @@ public class MainActivityDrawer extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.mi_armario) {
+            intent = new Intent(this, MiArmario.class);
+            startActivity(intent);
         } else if (id == R.id.add_elemento) {
-            Intent intent = new Intent(this, ActividadFotos.class);
+            intent = new Intent(this, ActividadFotos.class);
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento) {
 
@@ -105,10 +103,11 @@ public class MainActivityDrawer extends AppCompatActivity
         } else if (id == R.id.intercambio) {
 
         } else if (id == R.id.configuracion_usuario) {
-            Intent intent = new Intent(this, MiCuenta.class);
+            intent = new Intent(this, MiCuenta.class);
             startActivity(intent);
-        } else if (id == R.id.desarrollador) {
-
+        } else if (id == R.id.informacion) {
+            intent = new Intent(this, Informacion.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

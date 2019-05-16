@@ -45,14 +45,13 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_insertar);
-
         definicionDeVariables();
         onClickListener();
 
         // Pongo el titulo en la toolbar
         appToolbar.setTitle(R.string.nombreInicialActividadInsertar);
         // Asigno la flecha de atras a la toolbar
-        appToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_material);
+        appToolbar.setNavigationIcon(R.drawable.atras_34dp);
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
