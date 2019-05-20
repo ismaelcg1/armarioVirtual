@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 public class Usuario {
 

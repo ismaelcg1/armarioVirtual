@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;

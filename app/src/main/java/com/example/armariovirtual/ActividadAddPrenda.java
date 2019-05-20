@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 import android.Manifest;
 import android.app.AlertDialog;

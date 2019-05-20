@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 import android.app.DatePickerDialog;
 import android.content.Context;

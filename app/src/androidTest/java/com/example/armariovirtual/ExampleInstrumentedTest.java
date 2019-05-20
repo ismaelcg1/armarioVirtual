@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

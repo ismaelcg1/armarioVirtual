@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

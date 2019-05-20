@@ -1,4 +1,4 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
 
 import android.os.Bundle;
@@ -11,10 +11,10 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MiArmarioComplementos extends Fragment {
+public class MiArmarioRopaInterior extends Fragment {
 
 
-    public MiArmarioComplementos() {
+    public MiArmarioRopaInterior() {
         // Required empty public constructor
     }
 
@@ -23,7 +23,7 @@ public class MiArmarioComplementos extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_complementos, container, false);
+        return inflater.inflate(R.layout.fragment_ropa_interior, container, false);
     }
 
 }

@@ -1,12 +1,8 @@
-package com.example.pruebaproyecto;
+package com.example.armariovirtual;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ServidorPHP {
 
