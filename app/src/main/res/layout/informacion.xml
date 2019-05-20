@@ -47,20 +47,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/nombreDesarrolladorInformacion" />
 
-            <TextView
-                android:id="@+id/textView28"
-                style="@style/estiloTextosInformacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/copyRightInformacion" />
-
         </LinearLayout>
 
         <LinearLayout
             style="@style/estiloLayoutInferiorInformacion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="10"
             android:orientation="vertical">
 
             <TextView
@@ -81,6 +73,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/agradecimientosInfoInformacion" />
+
+            <TextView
+                android:id="@+id/textView28"
+                style="@style/estiloTextosInformacion"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/copyRightInformacion" />
 
         </LinearLayout>
 

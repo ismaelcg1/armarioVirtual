@@ -27,7 +27,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.io.IOException;
 import java.util.List;
 
-public class ActividadFotos extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener,
+public class ActividadAddPrenda extends AppCompatActivity implements DialogPropiedadesPrenda.acabarDialog, View.OnClickListener,
         DialogoSeleccionarEstacionPersonalizado.finalizarDialog, DialogoSeleccionarColorPersonalizado.finalizarDialogColores {
 
     private ImageView botonInsertarImagen;
@@ -64,14 +64,8 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         botonInsertarImagen = findViewById(R.id.imageViewInsertarImagen);
         subirPrenda = findViewById(R.id.bSubirPrenda);
 
-        botonInsertarImagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPictureDialog();
-            }
-        });
 
-        subirPrenda.setOnClickListener(new View.OnClickListener() {
+        botonInsertarImagen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPictureDialog();
@@ -165,12 +159,12 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
                     imagenFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     Bitmap bitmapaux = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
 
-                    Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     botonInsertarImagen.setImageBitmap(bitmapaux);
 
                 } catch (IOException e) {
                     e.printStackTrace();
-                    Toast.makeText(ActividadFotos.this, "Failed!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ActividadAddPrenda.this, "Failed!", Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -179,7 +173,7 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
             Bitmap bitmap = Bitmap.createScaledBitmap(thumbnail, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
             botonInsertarImagen.setImageBitmap(bitmap);
 
-            Toast.makeText(ActividadFotos.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
 
         // TODO guardar Imagen
@@ -260,31 +254,35 @@ public class ActividadFotos extends AppCompatActivity implements DialogPropiedad
         switch (v.getId()) {
             case R.id.bTalla:
                 seleccion = "Talla";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
+                new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, null);
                 break;
             case R.id.bEpoca:
-                new DialogoSeleccionarEstacionPersonalizado(ActividadFotos.this, ActividadFotos.this);
+                new DialogoSeleccionarEstacionPersonalizado(ActividadAddPrenda.this, ActividadAddPrenda.this);
                 break;
             case R.id.bColor:
-                new DialogoSeleccionarColorPersonalizado(ActividadFotos.this, ActividadFotos.this);
+                new DialogoSeleccionarColorPersonalizado(ActividadAddPrenda.this, ActividadAddPrenda.this);
                 break;
             case R.id.bEstilo:
                 seleccion = "Estilo";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
+                new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, null);
                 break;
             case R.id.bCategoria:
                 seleccion = "Categoria";
-                new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, null);
+                new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, null);
                 textoSubcategoria.getEditText().setText("");
                 break;
             case R.id.bSubcategoria:
                 if (categoria.isEmpty()) {
-                    Toast.makeText(ActividadFotos.this, getResources().getString(R.string.subcategoriaErrorActividadInsertar), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ActividadAddPrenda.this, getResources().getString(R.string.subcategoriaErrorActividadInsertar), Toast.LENGTH_LONG).show();
                 } else {
                     seleccion = "Subcategoria";
                     // Dependiendo de la Categoría elegida, mostrar unas opciones u otra de subcategoría
-                    new DialogPropiedadesPrenda(ActividadFotos.this, ActividadFotos.this, seleccion, categoria);
+                    new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, categoria);
                 }
+                break;
+            case R.id.bSubirPrenda:
+                // TODO porque no van los errores?
+                textoTalla.setError("Talla requerida");
                 break;
         }
     }

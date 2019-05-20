@@ -37,7 +37,7 @@
             android:name=".MiArmario"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
-            android:name=".ActividadFotos"
+            android:name=".ActividadAddPrenda"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".MiCuenta"

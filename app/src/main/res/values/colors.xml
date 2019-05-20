@@ -6,6 +6,7 @@
 
     <!-- Colores personalizados -->
     <color name="colorNegro">#BE000000</color>
+    <color name="colorGris">#73000000</color>
     <color name="colorBlanco">#FFFFFF</color>
 
     <!-- Color pruebas -->

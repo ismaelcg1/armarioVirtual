@@ -10,18 +10,19 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 /**
  * Ciclo formativo: Desarrollo de Aplicaciones Multiplataforma
- * Módulo profesional: Programación Multimedia y Dispositivos Móviles
- * Proyecto final 2º DAM
+ * Proyecto final DAM
  * Alumno: Ismael Casado González
  * Curso académico: 2018-2019
  * Instituto Tecnológico Poniente
  */
 public class MainActivityDrawer extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private String nombreUsuarioString;
     private TextView nombreUser, prendasAdd, accesoriossAdd;
@@ -30,6 +31,7 @@ public class MainActivityDrawer extends AppCompatActivity
     // Creamos el intent de la nueva actividad
     private Intent intent;
 
+    private Button btnVerArmario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +41,8 @@ public class MainActivityDrawer extends AppCompatActivity
 
         setSupportActionBar(toolbar);
         conectarVariablesConVista();
-
         inicializarTextos();
+        btnVerArmario.setOnClickListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -82,6 +84,7 @@ public class MainActivityDrawer extends AppCompatActivity
         nombreUser = findViewById(R.id.nombreUsuario);
         prendasAdd = findViewById(R.id.prendasAdd);
         accesoriossAdd = findViewById(R.id.accesoriosAdd);
+        btnVerArmario = findViewById(R.id.bVerArmario);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -94,7 +97,7 @@ public class MainActivityDrawer extends AppCompatActivity
             intent = new Intent(this, MiArmario.class);
             startActivity(intent);
         } else if (id == R.id.add_elemento) {
-            intent = new Intent(this, ActividadFotos.class);
+            intent = new Intent(this, ActividadAddPrenda.class);
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento) {
 
@@ -115,4 +118,12 @@ public class MainActivityDrawer extends AppCompatActivity
         return true;
     }
 
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if(id == R.id.bVerArmario) {
+            intent = new Intent(this, MiArmario.class);
+            startActivity(intent);
+        }
+    }
 }

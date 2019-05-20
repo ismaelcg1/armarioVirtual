@@ -9,46 +9,77 @@
     tools:context=".MainActivityDrawer"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView5"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/wardrobe_icon" />
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        style="@style/layoutMainActivityDrawer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:orientation="vertical">
+            <LinearLayout
+                style="@style/layoutSuperiorContentMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nombreUsuario"
-            style="@style/saludoMainActivityDrawer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/saludoMainActivityDrawer" />
+                <TextView
+                    android:id="@+id/nombreUsuario"
+                    style="@style/saludoContentMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/saludoMainActivityDrawer" />
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/prendasAdd"
-            style="@style/prendasAddMainActivityDrawer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prendasAnadidasMainActivityDrawer" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/accesoriosAdd"
-            style="@style/prendasAddMainActivityDrawer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/prendasAnadidasMainActivityDrawer" />
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="match_parent"
+                    android:layout_height="440sp"
+                    app:srcCompat="@drawable/wardrobe_icon" />
+            </LinearLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                style="@style/layoutTextoInformativoContentMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/prendasAdd"
+                    style="@style/prendasAddContentMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/prendasAnadidasMainActivityDrawer" />
+
+                <TextView
+                    android:id="@+id/accesoriosAdd"
+                    style="@style/prendasAddContentMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accesoriosAnadidosMainActivityDrawer" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutInfeiorBotonContentMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/bVerArmario"
+                    style="@style/estiloBotonContentMain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verMiArmarioMainActivityDrawer" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

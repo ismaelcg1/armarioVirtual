@@ -28,7 +28,7 @@ public class Informacion extends AppCompatActivity {
 
     private void inicializarToolbar() {
         appToolbar = findViewById(R.id.appToolbar);
-        appToolbar.setTitle(R.string.nombreActividadMiCuenta);
+        appToolbar.setTitle(R.string.nombreInicialActividadInformacion);
         // Asigno la flecha atras
         appToolbar.setNavigationIcon(R.drawable.atras_34dp);
     }

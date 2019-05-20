@@ -1,11 +1,8 @@
 <resources>
-    <string name="app_name">ArmarioVirtual</string>
+    <string name="app_name">Armario Virtual</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <!-- TEXTOS LOGIN -->
     <string name="nombreActividadLogin">Identificación</string>
@@ -82,6 +79,7 @@
     <string name="saludoMainActivityDrawer">Hola %1$s</string>
     <string name="prendasAnadidasMainActivityDrawer">Has añadido un total de %1$d prendas </string>
     <string name="accesoriosAnadidosMainActivityDrawer">Y un total de %1$d accesorios </string>
+    <string name="verMiArmarioMainActivityDrawer">Ver mi armario</string>
 
     <string name="texto1MainActivityDrawer">Mi Armario</string>
     <string name="texto2MainActivityDrawer">Añadir</string>
@@ -124,14 +122,18 @@
     <!-- TEXTOS ActividadInsertar -->
     <string name="nombreInicialActividadInsertar">Insertar prenda/accesorio</string>
     <string name="textoExplicativoFotoActividadInsertar">Pulse la imagen inferior para añadir una foto:</string>
-    <string name="textoExplicativoActividadInsertar">Introduzca los datos siguientes para subir la prenda:</string>
-    <string name="nombreActividadInsertar">Nombre: </string>
+    <string name="textoExplicativoActividadInsertar">Introduzca los siguientes datos para registrar su prenda correctamente:</string>
+    <string name="nombreActividadInsertar">Nombre identificativo de la prenda</string>
     <string name="tallaActividadInsertar">Talla por defecto: </string>
     <string name="epocaActividadInsertar">Época: </string>
     <string name="colorActividadInsertar">Color: </string>
     <string name="estiloActividadInsertar">Estilo: </string>
     <string name="categoriaActividadInsertar">Categoría: </string>
     <string name="subcategoriaActividadInsertar">Subcategoría: </string>
+
+    <string name="cambiarActividadInsertar">Cambiar</string>
+    <string name="seleccionarActividadInsertar">Seleccionar</string>
+    <string name="registrarPrendaActividadInsertar">Registrar prenda</string>
 
     <string name="permisosAceptadosActividadInsertar">Permisos aceptados por el usuario</string>
     <string name="pictureDialogTituloActividadInsertar">Seleccione una acción:</string>
@@ -145,7 +147,7 @@
     <string name="nombreDesarrolladorInformacion">Ismael C. G.</string>
     <string name="copyRightInformacion">© 2019</string>
     <string name="agradecimientosInformacion">Agradecimientos:</string>
-    <string name="agradecimientosInfoInformacion">Al director y a todo el equipo de IT Poniente</string>
+    <string name="agradecimientosInfoInformacion">Al director, mis compañeros y profesores de IT Poniente</string>
 
     <!-- DialogPersonalizados -->
     <string name="textoDialogColor">Selecciona el color principal de su prenda:</string>

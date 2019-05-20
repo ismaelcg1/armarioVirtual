@@ -22,7 +22,10 @@
 
     <!-- LOGIN -->
     <style name="LoginActivityLayoutPrincipal">
-        <item name="android:layout_margin">5sp</item>
+        <item name="android:layout_margin">8sp</item>
+    </style>
+    <style name="LoginActivityLayoutSuperior">
+        <item name="android:layout_marginBottom">-25sp</item>
     </style>
     <style name="LoginActivityImagenLogin">
         <item name="android:gravity">center|right</item>
@@ -48,24 +51,39 @@
         <item name="android:layout_marginTop">14sp</item>
     </style>
     <style name="LoginActivityMargenSuperiorTerminosBotonEntrar">
-        <item name="android:layout_marginTop">5sp</item>
-    </style>
-    <style name="LoginActivityMargenSuperiorBotones" parent="Widget.AppCompat.Button.Colored">
         <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+    <style name="LoginActivityEstiloBotonesInferiores" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_marginTop">20sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:textSize">15sp</item>
         <item name="android:background">@drawable/boton_redondeado1</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:layout_width">150sp</item>
     </style>
+
+    <style name="LoginActivityLayoutInferior">
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+
     <style name="LoginActivityTextos">
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/colorNegro</item>
         <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">8sp</item>
     </style>
 
     <style name="LoginActivityTextoNoCuenta" parent="LoginActivityTextos">
         <item name="android:layout_marginTop">12sp</item>
     </style>
+
+    <style name="LoginActivityCheckBox" parent="LoginActivityTextos">
+        <item name="android:layout_marginLeft">3sp</item>
+    </style>
+
     <style name="LoginActivityestiloFotoEntrar">
         <item name="android:layout_height">140sp</item>
         <item name="android:layout_width">160sp</item>
@@ -118,18 +136,49 @@
         <item name="android:layout_marginTop">5sp</item>
     </style>
 
-    <!-- MainActivityDrawer-->
-    <style name="saludoMainActivityDrawer" >
-        <item name="android:textSize">18sp</item>
+    <!-- ContentMain-->
+    <style name="saludoContentMain" >
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:gravity">center</item>
     </style>
-    <style name="prendasAddMainActivityDrawer">
-        <item name="android:textSize">17sp</item>
+
+    <style name="prendasAddContentMain">
+        <item name="android:textSize">18sp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">20sp</item>
     </style>
-    <style name="layoutMainActivityDrawer">
-        <item name="android:layout_margin">10sp</item>
+
+    <style name="layoutPrendasAddContentMain">
+        <item name="android:layout_marginTop">10sp</item>
     </style>
+
+    <style name="layoutTextoInformativoContentMain">
+        <item name="android:layout_marginTop">10sp</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+        <item name="android:layout_marginBottom">20sp</item>
+    </style>
+
+    <style name="layoutSuperiorContentMain">
+        <item name="android:layout_marginTop">20sp</item>
+        <item name="android:layout_marginLeft">5sp</item>
+        <item name="android:layout_marginRight">5sp</item>
+    </style>
+
+    <style name="layoutInfeiorBotonContentMain">
+        <item name="android:layout_marginBottom">10sp</item>
+    </style>
+
+    <style name="estiloBotonContentMain">
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">15sp</item>
+        <item name="android:layout_marginRight">15sp</item>
+        <item name="android:layout_marginTop">5sp</item>
+        <item name="android:background">@drawable/boton_redondeado4</item>
+    </style>
+
 
     <!-- MiCuenta-->
     <style name="layoutSecundariosMiCuenta" >
@@ -198,19 +247,54 @@
         <item name="android:layout_marginTop">8sp</item>
     </style>
 
-    <!-- ActividadFotos -->
-    <style name="layoutImageViewActividadFotos">
+    <!-- ActividadAddPrenda -->
+    <style name="layoutImageViewActividadAddPrenda">
         <item name="android:gravity">center</item>
     </style>
-    <style name="estiloImageViewActividadFotos">
-        <item name="android:layout_width">230sp</item>
+    <style name="estiloImageViewActividadAddPrenda">
+        <item name="android:layout_width">240sp</item>
         <item name="android:layout_height">280sp</item>
-        <item name="android:layout_margin">10sp</item>
+        <item name="android:layout_margin">15sp</item>
     </style>
-    <style name="layoutScrollViewActividadFotos">
+    <style name="layoutScrollViewActividadAddPrenda">
         <item name="android:layout_marginLeft">4sp</item>
         <item name="android:layout_marginRight">4sp</item>
         <item name="android:layout_margin">5sp</item>
+    </style>
+
+    <style name="textosExplicativosActividadAddPrenda">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="estiloTextoInicialActividadAddPrenda" parent="textosExplicativosActividadAddPrenda">
+        <item name="android:layout_marginTop">10sp</item>
+    </style>
+
+    <style name="estiloNombreIdentificativoActividadAddPrenda">
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:layout_marginTop">4sp</item>
+    </style>
+
+    <style name="estiloBotonesInsertarActividadAddPrenda">
+        <item name="android:layout_margin">7sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:background">@drawable/boton_redondeado3</item>
+    </style>
+
+    <style name="estiloBotonSubirActividadAddPrenda">
+        <item name="android:layout_marginTop">30sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:layout_marginRight">7sp</item>
+        <item name="android:layout_marginLeft">7sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/boton_redondeado4</item>
     </style>
 
     <!-- ESTILO LAYOUT DIALOG PERSONALIZADOS -->
