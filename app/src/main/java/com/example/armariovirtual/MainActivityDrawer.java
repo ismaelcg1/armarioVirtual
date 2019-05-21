@@ -102,7 +102,8 @@ public class MainActivityDrawer extends AppCompatActivity
         } else if (id == R.id.eliminar_elemento) {
 
         } else if (id == R.id.consultar_elemento) {
-
+            intent = new Intent(this, ActividadConsultar.class);
+            startActivity(intent);
         } else if (id == R.id.intercambio) {
 
         } else if (id == R.id.configuracion_usuario) {

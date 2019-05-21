@@ -100,12 +100,14 @@
     <string name="configuracionMainActivityDrawer">Configuración</string>
     <string name="appMainActivityDrawer">Operaciones</string>
 
+
+
     <!-- Textos MiCuenta -->
     <string name="nombreActividadMiCuenta">Mi cuenta</string>
     <string name="correoMiCuenta">%1$s</string>
     <string name="alturaMiCuenta">Mi altura es: <u>%1$d</u> cm</string>
     <string name="pesoMiCuenta">Mi peso es: <u>%1$d</u> Kg</string>
-    <string name="tallaMiCuenta">Mi talla es: <u>%1$s</u></string>
+    <string name="tallaMiCuenta">Mi tallaPrenda es: <u>%1$s</u></string>
     <string name="caracteristicasAppMiCuenta">Características:</string>
     <string name="opcionesAppMiCuenta">Opciones de mi Armario Virtual:</string>
     <string name="cerrarSesionMiCuenta">Cerrar sesión</string>
@@ -148,7 +150,7 @@
     <string name="pictureDialogTituloActividadInsertar">Seleccione una acción:</string>
     <string name="pictureDialogGaleriaActividadInsertar">Seleccionar foto de Galería</string>
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
-    <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoria, por favor, elija primero una categoría</string>
+    <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoriaPrenda, por favor, elija primero una categoría</string>
 
     <!-- TEXTOS Informacion -->
     <string name="nombreInicialActividadInformacion">Información</string>
@@ -164,10 +166,10 @@
 
     <!-- NumberPickerString -->
 
-    <string name="tallaNumberPickerString">Selecciona la talla de la prenda:</string>
+    <string name="tallaNumberPickerString">Selecciona la tallaPrenda de la prenda:</string>
     <string name="epocaNumberPickerString">Selecciona estación del año para ponerte la prenda:</string>
     <string name="colorNumberPickerString">Selecciona el color principal de la prenda:</string>
-    <string name="estiloNumberPickerString">Elige el estilo de la prenda:</string>
+    <string name="estiloNumberPickerString">Elige el estiloPrenda de la prenda:</string>
     <string name="categoriaNumberPickerString">Elige la categoría de la prenda:</string>
     <string name="subcategoriaNumberPickerString">Elige la subtegoría de la prenda:</string>
 

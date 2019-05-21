@@ -408,5 +408,21 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- List_item_prendas -->
+
+    <style name="estiloImagenListItemPrendas">
+        <item name="android:padding">15sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="estiloLayoutTextosListItemPrendas">
+        <item name="android:padding">10sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="estiloTextosListItemPrendas">
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">3sp</item>
+    </style>
 
 </resources>
