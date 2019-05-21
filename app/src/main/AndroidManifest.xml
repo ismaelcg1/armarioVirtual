@@ -31,6 +31,10 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name="com.example.armariovirtual.MainActivityDrawerAdmin"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name="com.example.armariovirtual.RegistroInicial"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity

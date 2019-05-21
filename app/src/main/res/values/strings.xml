@@ -3,6 +3,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle_admin">Modo Administrador</string>
 
     <!-- TEXTOS LOGIN -->
     <string name="nombreActividadLogin">Identificación</string>
@@ -77,16 +78,24 @@
 
     <!-- Textos MainActivityDrawer -->
     <string name="saludoMainActivityDrawer">Hola %1$s</string>
-    <string name="prendasAnadidasMainActivityDrawer">Has añadido un total de %1$d prendas </string>
-    <string name="accesoriosAnadidosMainActivityDrawer">Y un total de %1$d accesorios </string>
+    <string name="saludoMainActivityDrawerAdmin">¡Hola Administrador!</string>
+    <string name="prendasAnadidasMainActivityDrawer">Has añadido un total de %1$d prenda/s </string>
+    <string name="accesoriosAnadidosMainActivityDrawer">Y un total de %1$d accesorio/s </string>
     <string name="verMiArmarioMainActivityDrawer">Ver mi armario</string>
+
+    <string name="usuariosRegistradosMainActivityDrawerAdmin">Los usuarios registrados son un total de %1$d</string>
+    <string name="totalPrendasMainActivityDrawerAdmin">Se han añadido un total de %1$d prenda/s</string>
 
     <string name="texto1MainActivityDrawer">Mi Armario</string>
     <string name="texto2MainActivityDrawer">Añadir</string>
+    <string name="texto2MainActivityDrawerAdmin">Añadir usuario</string>
     <string name="texto3MainActivityDrawer">Consultar</string>
+    <string name="texto3MainActivityDrawerAdmin">Consultar usuarios</string>
     <string name="texto4MainActivityDrawer">Eliminar</string>
+    <string name="texto4MainActivityDrawerAdmin">Eliminar usuario</string>
     <string name="texto5MainActivityDrawer">Intercambio</string>
     <string name="texto6MainActivityDrawer">Mi cuenta</string>
+    <string name="texto6MainActivityDrawerAdmin">Cuenta</string>
     <string name="texto7MainActivityDrawer">Información</string>
     <string name="configuracionMainActivityDrawer">Configuración</string>
     <string name="appMainActivityDrawer">Operaciones</string>

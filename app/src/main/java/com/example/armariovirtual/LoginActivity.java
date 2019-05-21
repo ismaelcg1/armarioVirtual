@@ -106,11 +106,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+            String emailUser;
+            emailUser = email.getEditText().getText().toString().trim();
+            Intent intent;
+
             if (user.isEmailVerified()) {
                 // Inicializamos la actividad principal si tod@ es correcto:
-                Intent intent2 = new Intent(getApplicationContext(), MainActivityDrawer.class);
-                startActivity(intent2);
-                finish();
+                if (emailUser.equalsIgnoreCase("ismael.casado@itponiente.com")) {
+                    intent = new Intent(getApplicationContext(), MainActivityDrawerAdmin.class);
+                    startActivity(intent);
+                } else {
+                    intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
+                    startActivity(intent);
+
+                    finish();
+                }
+
             } else {
                 // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
                 snackBarVerificacion();

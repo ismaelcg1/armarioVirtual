@@ -179,6 +179,24 @@
         <item name="android:background">@drawable/boton_redondeado4</item>
     </style>
 
+    <!-- ContentMain Admin-->
+
+    <style name="estiloBotonesAdmin">
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">8sp</item>
+        <item name="android:layout_marginRight">8sp</item>
+        <item name="android:layout_marginTop">8sp</item>
+        <item name="android:background">@drawable/boton_redondeado4</item>
+    </style>
+
+    <style name="estiloTextoSuperiorBotonesAdmin">
+        <item name="android:textSize">14.5sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">4sp</item>
+    </style>
+
 
     <!-- MiCuenta-->
     <style name="layoutSecundariosMiCuenta" >

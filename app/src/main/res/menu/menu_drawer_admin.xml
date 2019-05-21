@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="@string/appMainActivityDrawer">
+        <menu>
+            <item
+                android:id="@+id/add_elemento_admin"
+                android:icon="@drawable/add96"
+                android:title="@string/texto2MainActivityDrawerAdmin" />
+            <item
+                android:id="@+id/eliminar_elemento_admin"
+                android:icon="@drawable/eliminar96"
+                android:title="@string/texto4MainActivityDrawerAdmin" />
+            <item
+                android:id="@+id/consultar_elemento_admin"
+                android:icon="@drawable/busqueda480"
+                android:title="@string/texto3MainActivityDrawerAdmin" />
+        </menu>
+    </item>
+
+    <item android:title="@string/configuracionMainActivityDrawer">
+        <menu>
+            <item
+                android:id="@+id/configuracion_usuario_admin"
+                android:icon="@drawable/ajustes96"
+                android:title="@string/texto6MainActivityDrawerAdmin" />
+        </menu>
+    </item>
+
+</menu>
