@@ -3,11 +3,12 @@ package com.example.armariovirtual;
 public class Prenda {
 
     private String nombrePrenda, tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda;
-    private int imagenPrenda;
+    private int id, imagenPrenda;
     private boolean estado_limpio;
 
-    public Prenda (String nombrePrenda, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda,
+    public Prenda (int id, String nombrePrenda, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda,
                    String categoriaPrenda, String subcategoriaPrenda, int imagenPrenda) {
+        this.id = id;
         this.nombrePrenda = nombrePrenda;
         this.tallaPrenda = tallaPrenda;
         this.estiloPrenda = estiloPrenda;
@@ -17,6 +18,14 @@ public class Prenda {
         this.subcategoriaPrenda = subcategoriaPrenda;
         this.imagenPrenda = imagenPrenda;
         estado_limpio = true;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNombrePrenda() {
@@ -91,8 +100,9 @@ public class Prenda {
         this.estado_limpio = estado_limpio;
     }
 
+    @Override
     public String toString() {
-        return "Prenda:\n" +
+        return "Prenda: \n" +
                 "nombrePrenda='" + nombrePrenda + '\'' +
                 ", tallaPrenda='" + tallaPrenda + '\'' +
                 ", estiloPrenda='" + estiloPrenda + '\'' +
@@ -100,7 +110,7 @@ public class Prenda {
                 ", epocaPrenda='" + epocaPrenda + '\'' +
                 ", categoriaPrenda='" + categoriaPrenda + '\'' +
                 ", subcategoriaPrenda='" + subcategoriaPrenda + '\'' +
-                ", imagenPrenda='" + imagenPrenda + '\'' +
+                ", imagenPrenda=" + imagenPrenda +
                 ", estado_limpio=" + estado_limpio;
     }
 }

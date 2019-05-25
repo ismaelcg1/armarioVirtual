@@ -100,7 +100,8 @@ public class MainActivityDrawer extends AppCompatActivity
             intent = new Intent(this, ActividadAddPrenda.class);
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento) {
-
+            intent = new Intent(this, ActividadEliminar.class);
+            startActivity(intent);
         } else if (id == R.id.consultar_elemento) {
             intent = new Intent(this, ActividadConsultar.class);
             startActivity(intent);

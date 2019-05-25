@@ -100,6 +100,14 @@
     <string name="configuracionMainActivityDrawer">Configuración</string>
     <string name="appMainActivityDrawer">Operaciones</string>
 
+    <!-- Textos ActividadInfoPrendaCompleta -->
+    <string name="nombreActividadInfoPrendaCompleta">Información detallada</string>
+    <string name="nombrePrendaActividadInfoPrendaCompleta">Nombre:</string>
+    <string name="TallaPrendaActividadInfoPrendaCompleta">Talla:</string>
+    <string name="estadoPrendaActividadInfoPrendaCompleta">Estado:</string>
+    <string name="estadoLimpioPrendaActividadInfoPrendaCompleta">Limpio</string>
+    <string name="estadoSucioPrendaActividadInfoPrendaCompleta">Sucio</string>
+    <!-- Epoca, color, estilo, categoría y subcategoría se cogen de ActividadInsertar-->
 
 
     <!-- Textos MiCuenta -->
@@ -136,7 +144,7 @@
     <string name="textoExplicativoActividadInsertar">Introduzca los siguientes datos para registrar su prenda correctamente:</string>
     <string name="nombreActividadInsertar">Nombre identificativo de la prenda</string>
     <string name="tallaActividadInsertar">Talla por defecto: </string>
-    <string name="epocaActividadInsertar">Época: </string>
+    <string name="epocaActividadInsertar">Época:</string>
     <string name="colorActividadInsertar">Color: </string>
     <string name="estiloActividadInsertar">Estilo: </string>
     <string name="categoriaActividadInsertar">Categoría: </string>

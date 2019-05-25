@@ -15,7 +15,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/holo_green_dark"
+            android:background="@color/colorfragment5"
             tools:context=".MiArmarioComplementos">
 
             <LinearLayout
@@ -23,10 +23,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewComplementos"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Hola" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </FrameLayout>

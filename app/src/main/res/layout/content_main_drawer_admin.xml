@@ -36,7 +36,7 @@
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="match_parent"
-                android:layout_height="410sp"
+                android:layout_height="360sp"
                 app:srcCompat="@drawable/wardrobe_icon" />
         </LinearLayout>
 

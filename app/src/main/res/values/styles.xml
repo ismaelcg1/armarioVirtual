@@ -425,4 +425,40 @@
         <item name="android:padding">3sp</item>
     </style>
 
+    <!-- actividad_toda_informacion_prenda -->
+
+    <style name="imagenActividadInfoPrendaCompleta">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">240sp</item>
+        <item name="android:layout_height">280sp</item>
+        <item name="android:layout_margin">15sp</item>
+    </style>
+
+    <style name="layoutPrincipalActividadInfoPrendaCompleta">
+        <item name="android:layout_margin">12sp</item>
+    </style>
+
+    <style name="layoutInferiorGlobalTextosActividadInfoPrendaCompleta">
+        <item name="android:layout_margin">12sp</item>
+    </style>
+
+    <style name="layoutTextosActividadInfoPrendaCompleta">
+        <item name="android:layout_marginTop">8sp</item>
+        <item name="android:layout_marginBottom">4sp</item>
+        <item name="android:layout_marginLeft">10sp</item>
+        <item name="android:layout_marginRight">10sp</item>
+    </style>
+
+    <style name="estiloTextoInfoActividadInfoPrendaCompleta">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">10sp</item>
+    </style>
+
+    <style name="estiloTextosActividadInfoPrendaCompleta">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">italic</item>
+    </style>
+
+
 </resources>

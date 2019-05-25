@@ -15,7 +15,7 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray"
+            android:background="@color/colorfragment2"
             tools:context=".MiArmarioRopaInferior">
 
             <LinearLayout
@@ -23,10 +23,10 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerViewRopaInferior"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Hola" />
+                    android:layout_height="match_parent" />
             </LinearLayout>
 
         </FrameLayout>

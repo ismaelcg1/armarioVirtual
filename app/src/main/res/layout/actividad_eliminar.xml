@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,6 +12,7 @@
         <include
             android:id="@+id/appToolbar"
             layout="@layout/clase_toolbar" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -21,24 +20,10 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <FrameLayout
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerEliminar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/colorfragment3"
-            tools:context=".MiArmarioCalzado">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerViewCalzado"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
-
-        </FrameLayout>
+            android:layout_height="match_parent" />
     </LinearLayout>
 
 </LinearLayout>

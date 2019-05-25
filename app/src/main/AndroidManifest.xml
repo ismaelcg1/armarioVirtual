@@ -44,7 +44,13 @@
             android:name="com.example.armariovirtual.ActividadAddPrenda"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name="com.example.armariovirtual.ActividadEliminar"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name="com.example.armariovirtual.ActividadConsultar"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.example.armariovirtual.ActividadInfoPrendaCompleta"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.armariovirtual.MiCuenta"

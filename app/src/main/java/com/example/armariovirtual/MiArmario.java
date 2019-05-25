@@ -43,6 +43,7 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
 
             case R.id.calzado:
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioCalzadoFragment).commit();
+
                 return true;
 
             case R.id.ropa_interior:
