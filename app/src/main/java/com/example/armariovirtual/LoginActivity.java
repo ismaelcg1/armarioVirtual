@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -28,9 +29,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog progressDialog;
     private TextView cambiarPassword;
     private CheckBox terminosCondiciones;
-    // TODO crear clase para guardar datos usuario de BBDD
-    //static Usuario miUsuario;
-    //LoginActivity.miUsuario
+    static Usuario miUsuario;
 
     // FireBase
     private FirebaseAuth mAuth = null;
@@ -93,12 +92,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             email.getEditText().setText(""+currentUser.getEmail());
-
-            // TODO asignar cosas a la clase
-            // hacer consulta a bd para rellenar clase usuario
-            // nombre, edad, sexo......
-            // miUsuario = new Usuario("nombre", edad, sexo, ...);
-
         }
         updateUI(currentUser);
     }
@@ -111,17 +104,37 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Intent intent;
 
             if (user.isEmailVerified()) {
+
+                ServidorPHP objetoServidor = new ServidorPHP();
+                Usuario usuarioObtenido = null;
+
+                try {
+                    usuarioObtenido = objetoServidor.obtenerUsuario(user.getUid());
+                } catch (ServidorPHPException e) {
+                    e.printStackTrace();
+                }
+
+                if (usuarioObtenido == null) {
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastObtenerUsuarioFalloActividadLogin), Toast.LENGTH_SHORT).show();
+                } else {
+                    usuarioObtenido.setEmail(user.getEmail());
+                }
+
+                // Antes de irnos a otra activity, le pasamos el objeto usuarioObtenido
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("usuarioActual", usuarioObtenido);
+
                 // Inicializamos la actividad principal si tod@ es correcto:
                 if (emailUser.equalsIgnoreCase("ismael.casado@itponiente.com")) {
                     intent = new Intent(getApplicationContext(), MainActivityDrawerAdmin.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
                     intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
+                    intent.putExtras(bundle);
                     startActivity(intent);
-
                     finish();
                 }
-
             } else {
                 // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
                 snackBarVerificacion();
@@ -130,8 +143,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void snackBarVerificacion() {
-        // Cogemos la vista con getWindow().getDecorView().getRootView()
-        Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_INDEFINITE)
+        Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_LONG)
                 .setActionTextColor(getResources().getColor(R.color.colorPrimaryDark))
                 .setAction(getResources().getString(R.string.snackBarBotonEnviarEmail), new View.OnClickListener() {
                     @Override
@@ -151,9 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         usuarioCorrecto = false;
 
         // Vemos si se han insertado los datos o están los campos vacios:
-        if (!validarDatos(emailUser, passwordUser)) {
-            return;
-        } else {
+        if (validarDatos(emailUser, passwordUser)) {
 
             // Este método es para cuando un usuario se halla registrado, que no se tenga que volver a registrar:
             mAuth.signInWithEmailAndPassword(emailUser, passwordUser)
@@ -162,18 +172,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Autentificación correcta
-
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 // Actualizamos la vista:
                                 updateUI(user);
                             } else {
-                                // If sign in fails, display a message to the user.
                                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastLoginIncorrectoActividadLogin), Toast.LENGTH_SHORT).show();
                                 updateUI(null);
                             }
                         }
                     });
-
         }
     }
 
@@ -258,8 +265,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void sendPasswordReset(final String email) {
-        FirebaseAuth auth = FirebaseAuth.getInstance();
 
+        FirebaseAuth auth = FirebaseAuth.getInstance();
         auth.sendPasswordResetEmail(email)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -271,7 +278,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // falloCambioPasswordActividadLogin
                             Toast.makeText(LoginActivity.this,
                                     getResources().getString(R.string.falloCambioPasswordActividadLogin), Toast.LENGTH_LONG).show();
-
                         }
                     }
                 });

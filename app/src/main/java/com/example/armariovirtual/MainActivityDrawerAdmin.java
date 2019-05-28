@@ -31,7 +31,7 @@ public class MainActivityDrawerAdmin extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view_admin);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -58,7 +58,7 @@ public class MainActivityDrawerAdmin extends AppCompatActivity
             startActivity(intent);
         }
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_admin);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }

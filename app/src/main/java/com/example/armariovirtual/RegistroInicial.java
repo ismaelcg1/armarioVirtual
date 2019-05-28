@@ -10,11 +10,13 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,7 +54,9 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     private boolean generoMasculinoSeleccionado;
     private int peso, altura;
     private TextView textViewPeso, textViewAltura;
+    private String fechaServidor;
 
+    private RadioButton botonGeneroPulsado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +106,14 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             public void onDateSet(DatePicker datePicker, int anio, int mes, int dia) {
                 mes = mes + 1;
                 // Guardamos la fecha de nacimiento seleccionada
-                fecha = mes + "/" + dia + "/" + anio;
+                fecha = dia + "/" + mes + "/" + anio;
                 mMostrarFecha.setText(fecha);
+                // Guardamos el formato de la fecha para el servidor:
+                if (mes < 10) {
+                    fechaServidor = anio + "-0" + mes + "-" + dia;
+                } else {
+                    fechaServidor = anio + "-" + mes + "-" + dia;
+                }
             }
         };
     }
@@ -142,6 +152,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         generoMasculinoSeleccionado = true;
         peso = 0;
         altura = 0;
+        fechaServidor = "";
         mAuth = FirebaseAuth.getInstance();
     }
 
@@ -188,14 +199,9 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         String passwordUserRepetida = passwordRepetida.getText().toString();
 
         // TODO cambiar orden if, para quitar este return
-        if (!validateForm(nombreUser, emailUser, passwordUser, passwordUserRepetida)) {
-            return; // Paramos la ejecución
-        } else if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
+         if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
             Toast.makeText(this, getResources().getString(R.string.toastPasswordNoCoincidenRegistroIncial), Toast.LENGTH_LONG).show();
-        } else { // Si no hay ningún campo sin completar, registramos desde 0...
-
-            Toast.makeText(this, "Pulsado botón Registrame", Toast.LENGTH_SHORT).show();
-
+        } else if (validateForm(nombreUser, emailUser, passwordUser, passwordUserRepetida)) { // Si no hay ningún campo sin completar, registramos desde 0...
 
             mAuth.createUserWithEmailAndPassword(emailUser, passwordUser)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -209,25 +215,41 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                 boolean correcto = true;
 
                                 //TODO insertar en bd de campos usuario
-                                /*
-                                Sexo sexo;
-                                if (buttonFemenino.isSelected())
-                                    sexo = Sexo.Femenino;
-                                else
-                                    sexo = Sexo.Masculino;
-                                usuarioRegistrado = new (editTextNombre.getString(), editetTExApellidos.getString(), sexo);
-                                usuarioRegistrado.guardaUSuario();
 
-                                */
+                                ServidorPHP objetoServidor = new ServidorPHP();
+                                Boolean todoCorrecto = false;
+                                try {
+                                    todoCorrecto = objetoServidor.registrarUsuario(user.getUid(),aliasUsuario.getText().toString(),
+                                                                    altura, peso, fechaServidor, generoMasculinoSeleccionado );
+                                } catch (ServidorPHPException e) {
+                                    e.printStackTrace();
+                                }
+
+                                // TODO comprobación de errores al insertar datos en la BBDD
+                                if (todoCorrecto) {
+                                    Toast.makeText(RegistroInicial.this, "Todo correcto", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.i("UID USUARIO", user.getUid());
+                                    Log.i("ALIAS USUARIO", aliasUsuario.getText().toString());
+                                    Log.i("ALTURA USUARIO", ""+altura);
+                                    Log.i("PESO USUARIO", ""+peso);
+                                    Log.i("FECHA USUARIO", ""+fechaServidor);
+                                    Log.i("SEXO USUARIO", ""+generoMasculinoSeleccionado);
+
+                                    Toast.makeText(RegistroInicial.this, "Fallo registroInicial BBDD", Toast.LENGTH_SHORT).show();
+                                }
+
 
                                 updateUI(user, correcto);
                             } else {
+                                /*
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(RegistroInicial.this, getResources().getString(R.string.toastRegistroIncorrectoActividadLogin), Toast.LENGTH_SHORT).show();
                                 // Si ha fallado el registro Hacemos invisible el progress bar
                                 layout_registro_inicial.setVisibility(View.VISIBLE);
                                 layout_progress_bar.setVisibility(View.GONE);
                                 updateUI(null, false);
+                                */
                             }
                         }
                     });
@@ -319,22 +341,25 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                 seleccion = "Peso";
                 new DialogPersonalizadoPesoAltura(contexto, RegistroInicial.this, seleccion);
                 break;
-            case R.id.radioGroupGenero:
-                if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonMasculino) {
-                    // RadioButton masculino seleccionado
-                    generoMasculinoSeleccionado = true;
-                } else if (radioGroup.getCheckedRadioButtonId() == R.id.radioButtonFemenino) {
-                    // RadioButton femenino seleccionado
-                    generoMasculinoSeleccionado = false;
-                }
-                break;
 
             case R.id.btnRegistrarme:
+                verGeneroSeleccionado();
                 registrarNuevoUsuario();
                 break;
+
             default:
                 Toast.makeText(this, "Error switch - onClick - RegistroInicial", Toast.LENGTH_SHORT).show();
                 break;
+        }
+    }
+
+    private void verGeneroSeleccionado() {
+        generoMasculinoSeleccionado = true;
+        int selectedId = radioGroup.getCheckedRadioButtonId();
+        botonGeneroPulsado = findViewById(selectedId);
+
+        if (botonGeneroPulsado.getText().toString().equalsIgnoreCase("Femenino")) {
+            generoMasculinoSeleccionado = false;
         }
     }
 

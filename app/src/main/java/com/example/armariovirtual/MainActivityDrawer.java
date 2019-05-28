@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -30,8 +31,9 @@ public class MainActivityDrawer extends AppCompatActivity
     private int prendas, accesorios;
     // Creamos el intent de la nueva actividad
     private Intent intent;
-
     private Button btnVerArmario;
+    private Usuario userActual;
+    private ImageView imagenDrawerInicial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,8 @@ public class MainActivityDrawer extends AppCompatActivity
 
         setSupportActionBar(toolbar);
         conectarVariablesConVista();
-        inicializarTextos();
+        cogerUsuarioActual();
+        inicializarVariables();
         btnVerArmario.setOnClickListener(this);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -53,9 +56,30 @@ public class MainActivityDrawer extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // TODO para obtener el sexo de la persona y poner una imagen u otra
-        // LoginActivity.miUsuario.getSexo() == Sexo.Femenino
+        verSexoUsuario();
 
+    }
+
+    private void verSexoUsuario() {
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        imagenDrawerInicial = hView.findViewById(R.id.imagenInicialUsuario);
+        Sexo objetoSexo = null;
+        if (userActual.getSexo() == objetoSexo.Femenino) {
+            imagenDrawerInicial.setImageResource(R.drawable.usuario_femenino80);
+        } else {
+            imagenDrawerInicial.setImageResource(R.drawable.usuario_masculino80);
+        }
+    }
+
+    private void cogerUsuarioActual() {
+        Bundle objetoRecibido = getIntent().getExtras();
+        userActual = null;
+        if (objetoRecibido != null) {
+            userActual = (Usuario) objetoRecibido.getSerializable("usuarioActual");
+        }
+        // Cambiamos el saludo inicial:
+        nombreUsuarioString = userActual.getNickName();
     }
 
     @Override
@@ -71,13 +95,12 @@ public class MainActivityDrawer extends AppCompatActivity
 
 
     @SuppressLint("StringFormatMatches")
-    private void inicializarTextos () {
+    private void inicializarVariables() {
         prendas = 0;
         accesorios = 0;
         nombreUser.setText( getResources().getString(R.string.saludoMainActivityDrawer, nombreUsuarioString) );
         prendasAdd.setText( getResources().getString(R.string.prendasAnadidasMainActivityDrawer, prendas ) );
         accesoriossAdd.setText( getResources().getString(R.string.accesoriosAnadidosMainActivityDrawer, accesorios ) );
-
     }
 
     private void conectarVariablesConVista () {
@@ -108,7 +131,12 @@ public class MainActivityDrawer extends AppCompatActivity
         } else if (id == R.id.intercambio) {
 
         } else if (id == R.id.configuracion_usuario) {
+            // Pasamos el objeto usuario:
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("usuarioConectado", userActual);
+
             intent = new Intent(this, MiCuenta.class);
+            intent.putExtras(bundle);
             startActivity(intent);
         } else if (id == R.id.informacion) {
             intent = new Intent(this, Informacion.class);

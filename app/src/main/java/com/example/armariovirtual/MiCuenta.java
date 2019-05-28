@@ -18,17 +18,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MiCuenta extends AppCompatActivity implements View.OnClickListener, DialogPersonalizadoPesoAltura.finalizarDialog {
+public class MiCuenta extends AppCompatActivity implements View.OnClickListener, DialogPersonalizadoPesoAltura.finalizarDialog,
+                                                           DialogPropiedadesPrenda.acabarDialog {
 
     private Toolbar appToolbar;
     private Button bCerrarSesion, bCambiarPassword, bEliminarArmario, bEliminarCuenta, bAltura, bPeso, bTalla;
-    private TextView emailUser;
-    private String email;
+    private TextView emailUser, alturaUsuario, pesoUsuario, tallaUsuario;
+    private String email, talla, seleccion, seleccionado;
     // FireBase
     private FirebaseAuth mAuth = null;
     private FirebaseUser user;
     // Ponemos el contexto para el Dialog
     private Context contexto;
+    private Usuario usuarioActual;
+    private int peso;
+    private double altura;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,9 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         conectarVariablesConVista();
         onClickListener();
         ponerEmailUsuario();
+        cogerUsuarioActual();
+
+        incluirVariablesMostradas();
         inicializarToolbar();
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -46,7 +53,53 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 finish();
             }
         });
+    }
 
+    private void cogerUsuarioActual() {
+        Bundle objetoRecibido = getIntent().getExtras();
+        usuarioActual = null;
+        if (objetoRecibido != null) {
+            usuarioActual = (Usuario) objetoRecibido.getSerializable("usuarioConectado");
+        }
+    }
+
+    private void incluirVariablesMostradas() {
+        altura = usuarioActual.getAltura();
+        altura = altura / 100;
+        String alturaMostrada = String.valueOf(altura);
+        peso = usuarioActual.getPeso();
+        alturaUsuario.setText(getResources().getString(R.string.alturaMiCuenta, alturaMostrada));
+        pesoUsuario.setText(getResources().getString(R.string.pesoMiCuenta, peso));
+        // Ahora obtenemos la talla:
+        talla = obtenerTalla();
+        tallaUsuario.setText(getResources().getString(R.string.tallaMiCuenta, talla));
+        // TODO Para poner en negrita:
+        // textoAlturaUsuario.setTypeface(null, Typeface.BOLD);
+
+    }
+
+    private String obtenerTalla() {
+        String tallaObtenida;
+        Double resultadoIMC;
+        // 'Formula' aproximada para calcular la talla, calculando el IMC:
+        //  peso[kg] / (altura[m] * altura[m])
+        resultadoIMC = Double.valueOf ( peso / ( altura * altura) );
+
+        if (resultadoIMC < 18.0) {
+            tallaObtenida = "XS";
+        } else if (resultadoIMC < 21.0) {
+            tallaObtenida = "S";
+        } else if (resultadoIMC < 25.0) {
+            tallaObtenida = "M";
+        } else if (resultadoIMC < 29.0) {
+            tallaObtenida = "L";
+        } else if (resultadoIMC < 34.0) {
+            tallaObtenida = "XL";
+        } else {
+            tallaObtenida = "XXL";
+        }
+
+        return tallaObtenida;
     }
 
     private void inicializarToolbar() {
@@ -84,6 +137,9 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         bEliminarArmario = findViewById(R.id.btnEliminarArmario);
         bEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
         emailUser = findViewById(R.id.tvEmailUsuario);
+        alturaUsuario = findViewById(R.id.textoAlturaUsuario);
+        pesoUsuario = findViewById(R.id.textoPesoUsuario);
+        tallaUsuario = findViewById(R.id.textoTallaUsuario);
     }
 
     protected void onClickListener() {
@@ -217,16 +273,23 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 break;
 
             case R.id.bAlturaMiCuenta:
-                new DialogPersonalizadoPesoAltura(contexto, MiCuenta.this, "Altura");
+                seleccion = "Altura";
+                new DialogPersonalizadoPesoAltura(contexto, MiCuenta.this, seleccion);
                 // TODO hacer que se cambie la altura, por la seleccionada, abajo igual con el peso
+                // TODO cambiar dato en BBDD (para que al iniciar la app, coja las variables bien)
+                usuarioActual.setAltura((int) altura);
                 break;
 
             case R.id.bPesoMiCuenta:
-                new DialogPersonalizadoPesoAltura(contexto, MiCuenta.this, "Peso");
+                seleccion = "Peso";
+                new DialogPersonalizadoPesoAltura(contexto, MiCuenta.this, seleccion);
+                usuarioActual.setPeso(peso);
                 break;
 
             case R.id.bTallaMiCuenta:
                 // TODO hacer el de talla
+                seleccionado = "Talla";
+                new DialogPropiedadesPrenda(MiCuenta.this, MiCuenta.this, seleccionado, null);
                 break;
         }
 
@@ -234,6 +297,27 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
 
     @Override
     public void resultado(int num) {
-        // BLa bla bla
+        if (seleccion.equalsIgnoreCase("Altura")) {
+            altura = Double.valueOf(num) / 100;
+            String alturaMostrada = String.valueOf(altura);
+            alturaUsuario.setText(getResources().getString(R.string.alturaMiCuenta, alturaMostrada));
+            Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadaAlturaRegistroIncial),
+                    Toast.LENGTH_LONG).show();
+        } else if (seleccion.equalsIgnoreCase("Peso")) {
+            peso = num;
+            pesoUsuario.setText(getResources().getString(R.string.pesoMiCuenta, num));
+            Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadoPesoRegistroIncial),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void cogerParametro(String seleccion) {
+        if (seleccionado.equalsIgnoreCase("Talla")) {
+            talla = seleccion;
+            tallaUsuario.setText(getResources().getString(R.string.tallaMiCuenta, talla));
+            Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadaTallaRegistroIncial),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }

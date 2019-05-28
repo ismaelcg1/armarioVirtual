@@ -13,11 +13,15 @@
     <color name="colorRojoOscuro">#EB972703</color>
 
 
-    <!-- Color pruebas -->
+    <!-- Colores fragment -->
     <color name="colorfragment1">#FCF3CF</color> <!-- F9E79F -->
     <color name="colorfragment2">#D6EAF8</color> <!-- A9CCE3 -->
     <color name="colorfragment3">#F6DDCC</color> <!-- EDBB99 -->
     <color name="colorfragment4">#E8DAEF</color> <!-- F5B7B1 -->
     <color name="colorfragment5">#D6DBDF</color> <!-- CCD1D1 -->
+
+
+    <!-- Color eliminar -->
+    <color name="colorLayoutTextoInfoEliminar">#0AF39100</color> <!-- F9E79F -->
 
 </resources>

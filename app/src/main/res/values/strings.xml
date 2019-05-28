@@ -2,7 +2,7 @@
     <string name="app_name">Armario Virtual</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_subtitle">ARMARIO VIRTUAL</string>
     <string name="nav_header_subtitle_admin">Modo Administrador</string>
 
     <!-- TEXTOS LOGIN -->
@@ -27,6 +27,7 @@
     <string name="toastRegistroIncorrectoActividadLogin">Autentificación fallida!</string>
     <string name="toastLoginCorrectoActividadLogin">Autentificación correcta!</string>
     <string name="toastLoginIncorrectoActividadLogin">Autentificación fallida...</string>
+    <string name="toastObtenerUsuarioFalloActividadLogin">Fallo con la base de datos...</string>
     <string name="terminosCondicionesIncorrectoActividadLogin">Debe aceptar los términos y condiciones para poder acceder a la app</string>
     <string name="cambioPasswordActividadLogin">Email de cambio de contraseña enviado a:</string>
     <string name="falloCambioPasswordActividadLogin">Fallo al enviar email de cambio de contraseña</string>
@@ -71,6 +72,9 @@
     <string name="toastEmailVerificacionEnviadoCorrectoRegistroIncial">Email de verificación enviado a:</string>
     <string name="toastEmailVerificacionEnviadoCorrectamenteRegistroIncial">¡Email de verificación enviado correctamente! Revise su correo y si no lo encuentra vaya a spam.</string>
     <string name="toastEmailVerificacionEnviadoIncorrectoRegistroIncial">Fallo al enviar email de verificación</string>
+    <string name="toastCambiadaAlturaRegistroIncial">¡Has cambiado tu altura predeterminada!</string>
+    <string name="toastCambiadoPesoRegistroIncial">¡Has cambiado tu peso predeterminado!</string>
+    <string name="toastCambiadaTallaRegistroIncial">¡Has cambiado tu talla por defecto!</string>
 
     <!-- Para SnackBar -->
     <string name="snackBarEnviarEmail">Email no verificado. ¿Quieres recibir un email de verificación?</string>
@@ -113,9 +117,9 @@
     <!-- Textos MiCuenta -->
     <string name="nombreActividadMiCuenta">Mi cuenta</string>
     <string name="correoMiCuenta">%1$s</string>
-    <string name="alturaMiCuenta">Mi altura es: <u>%1$d</u> cm</string>
-    <string name="pesoMiCuenta">Mi peso es: <u>%1$d</u> Kg</string>
-    <string name="tallaMiCuenta">Mi tallaPrenda es: <u>%1$s</u></string>
+    <string name="alturaMiCuenta">Mi altura es: <b>%1$s m</b></string>
+    <string name="pesoMiCuenta">Mi peso es: <b>%1$d Kg</b></string>
+    <string name="tallaMiCuenta">Talla por defecto: <b>%1$s</b></string>
     <string name="caracteristicasAppMiCuenta">Características:</string>
     <string name="opcionesAppMiCuenta">Opciones de mi Armario Virtual:</string>
     <string name="cerrarSesionMiCuenta">Cerrar sesión</string>
@@ -160,6 +164,13 @@
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
     <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoriaPrenda, por favor, elija primero una categoría</string>
 
+    <!-- Actividad Eliminar -->
+    <string name="mensajeBuilderActividadEliminar">¿Estás seguro de que deseas eliminar dicha/o prenda/accesorio?</string>
+    <string name="builderBorrarActividadEliminar">Eliminar</string>
+    <string name="builderCancelarActividadEliminar">Cancelar</string>
+
+    <string name="textoInfoActividadEliminar">Desliza tu prenda/accesorio hacia la derecha o izquierda para eliminarla/o</string>
+
     <!-- TEXTOS Informacion -->
     <string name="nombreInicialActividadInformacion">Información</string>
     <string name="desarrolladorActividadInformacion">Desarrollador:</string>
@@ -174,7 +185,7 @@
 
     <!-- NumberPickerString -->
 
-    <string name="tallaNumberPickerString">Selecciona la tallaPrenda de la prenda:</string>
+    <string name="tallaNumberPickerString">Selecciona una talla:</string>
     <string name="epocaNumberPickerString">Selecciona estación del año para ponerte la prenda:</string>
     <string name="colorNumberPickerString">Selecciona el color principal de la prenda:</string>
     <string name="estiloNumberPickerString">Elige el estiloPrenda de la prenda:</string>

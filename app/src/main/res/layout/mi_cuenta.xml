@@ -74,7 +74,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/textoAlturaUsuario"
                         style="@style/estiloTextosSuperioresMiCuenta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -84,6 +84,7 @@
                     <Button
                         android:id="@+id/bAlturaMiCuenta"
                         style="@style/estiloBotonesSuperioresMiCuenta"
+                        android:layout_width="98dp"
                         android:layout_weight="1"
                         android:background="@drawable/editar480" />
                 </LinearLayout>
@@ -96,7 +97,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/textoPesoUsuario"
                         style="@style/estiloTextosSuperioresMiCuenta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -118,7 +119,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView13"
+                        android:id="@+id/textoTallaUsuario"
                         style="@style/estiloTextosSuperioresMiCuenta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

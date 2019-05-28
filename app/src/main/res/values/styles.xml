@@ -367,6 +367,32 @@
         <item name="android:layout_marginBottom">-4dp</item>
     </style>
 
+    <!-- Eliminar-->
+    <style name="textoExplicativoActividadEliminar">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="estiloLayoutTextoExplicativoActividadEliminar">
+        <item name="android:paddingTop">10sp</item>
+        <item name="android:paddingBottom">10sp</item>
+        <item name="android:paddingLeft">13sp</item>
+        <item name="android:paddingRight">13sp</item>
+        <item name="android:background">@color/colorLayoutTextoInfoEliminar</item>
+    </style>
+
+    <!-- nav_header_main -->
+
+    <style name="estiloImagenDrawer">
+        <item name="android:layout_margin">5sp</item>
+    </style>
+    <style name="estiloTextoDrawer">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+    </style>
+
     <!-- Informacion -->
 
     <style name="estiloLayoutInformacion">

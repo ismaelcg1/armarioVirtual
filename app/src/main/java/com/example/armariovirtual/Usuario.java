@@ -1,15 +1,17 @@
 package com.example.armariovirtual;
 
-public class Usuario {
+import java.io.Serializable;
 
-    private String nickName, email, password, fechaNacimiento;
+public class Usuario implements Serializable {
+
+    private String nickName, email, fechaNacimiento;
     private Sexo sexo;
     private int altura, peso;
 
-    public Usuario (String nickName, String email, String password, Sexo sexo, String fechaNacimiento, int altura, int peso) {
+    public Usuario(){}
+
+    public Usuario (String nickName, Sexo sexo, String fechaNacimiento, int altura, int peso) {
         this.nickName = nickName;
-        this.email = email;
-        this.password = password;
         this.sexo = sexo;
         this.fechaNacimiento = fechaNacimiento;
         this.altura = altura;
@@ -20,10 +22,6 @@ public class Usuario {
         return nickName;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -32,12 +30,8 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getFechaNacimiento() {
@@ -72,13 +66,15 @@ public class Usuario {
         this.peso = peso;
     }
 
-
-
-    public void guardarDatos () {
-        // TODO
-        // HACER INSERT BBDD
-
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nickName='" + nickName + '\'' +
+                ", email='" + email + '\'' +
+                ", fechaNacimiento='" + fechaNacimiento + '\'' +
+                ", sexo=" + sexo +
+                ", altura=" + altura +
+                ", peso=" + peso +
+                '}';
     }
-
-
 }
