@@ -59,6 +59,9 @@
             android:name="com.example.armariovirtual.MiCuenta"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name="com.example.armariovirtual.MiCuentaAdmin"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name="com.example.armariovirtual.Informacion"
             android:theme="@style/AppTheme.NoActionBar"/>
     </application>

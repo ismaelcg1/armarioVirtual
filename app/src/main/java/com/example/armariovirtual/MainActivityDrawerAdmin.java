@@ -54,7 +54,7 @@ public class MainActivityDrawerAdmin extends AppCompatActivity
             intent = new Intent(this, ActividadAddPrenda.class);
             startActivity(intent);
         } else if (id == R.id.configuracion_usuario_admin) {
-            intent = new Intent(this, MiCuenta.class);
+            intent = new Intent(this, MiCuentaAdmin.class);
             startActivity(intent);
         }
 

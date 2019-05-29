@@ -49,28 +49,6 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView33"
-                        style="@style/estiloTextoInfoActividadInfoPrendaCompleta"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/nombrePrendaActividadInfoPrendaCompleta" />
-
-                    <TextView
-                        android:id="@+id/nombrePrendaVisualizada"
-                        style="@style/estiloTextosActividadInfoPrendaCompleta"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-
-                <LinearLayout
-                    style="@style/layoutTextosActividadInfoPrendaCompleta"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
                         android:id="@+id/textView34"
                         style="@style/estiloTextoInfoActividadInfoPrendaCompleta"
                         android:layout_width="match_parent"
@@ -217,6 +195,28 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/estadoLimpioPrendaActividadInfoPrendaCompleta" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layoutTextosActividadInfoPrendaCompleta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView33"
+                        style="@style/estiloTextoInfoActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cantidadPrendaActividadInfoPrendaCompleta" />
+
+                    <TextView
+                        android:id="@+id/cantidadPrendaVisualizada"
+                        style="@style/estiloTextosActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

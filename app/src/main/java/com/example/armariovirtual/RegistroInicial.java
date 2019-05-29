@@ -197,6 +197,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         String emailUser = email.getText().toString();
         String passwordUser = password.getText().toString();
         String passwordUserRepetida = passwordRepetida.getText().toString();
+        final String tallaPorDefecto = obtenerTalla();
 
         // TODO cambiar orden if, para quitar este return
          if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
@@ -220,7 +221,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                 Boolean todoCorrecto = false;
                                 try {
                                     todoCorrecto = objetoServidor.registrarUsuario(user.getUid(),aliasUsuario.getText().toString(),
-                                                                    altura, peso, fechaServidor, generoMasculinoSeleccionado );
+                                                                    altura, peso, tallaPorDefecto, fechaServidor, generoMasculinoSeleccionado );
                                 } catch (ServidorPHPException e) {
                                     e.printStackTrace();
                                 }
@@ -235,6 +236,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                     Log.i("PESO USUARIO", ""+peso);
                                     Log.i("FECHA USUARIO", ""+fechaServidor);
                                     Log.i("SEXO USUARIO", ""+generoMasculinoSeleccionado);
+                                    Log.i("TALLA USUARIO", ""+tallaPorDefecto);
 
                                     Toast.makeText(RegistroInicial.this, "Fallo registroInicial BBDD", Toast.LENGTH_SHORT).show();
                                 }
@@ -254,6 +256,31 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                         }
                     });
         }
+    }
+
+    private String obtenerTalla() {
+        String tallaObtenida;
+        Double resultadoIMC;
+        Double alturaDoubleMetros = ( Double.valueOf(altura) ) /100;
+        // 'Formula' aproximada para calcular la talla, calculando el IMC:
+        //  peso[kg] / (altura[m] * altura[m])
+        resultadoIMC = Double.valueOf ( peso / ( alturaDoubleMetros * alturaDoubleMetros) );
+
+        if (resultadoIMC < 18.0) {
+            tallaObtenida = "XS";
+        } else if (resultadoIMC < 21.0) {
+            tallaObtenida = "S";
+        } else if (resultadoIMC < 25.0) {
+            tallaObtenida = "M";
+        } else if (resultadoIMC < 29.0) {
+            tallaObtenida = "L";
+        } else if (resultadoIMC < 34.0) {
+            tallaObtenida = "XL";
+        } else {
+            tallaObtenida = "XXL";
+        }
+
+        return tallaObtenida;
     }
 
 

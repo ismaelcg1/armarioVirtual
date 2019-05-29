@@ -49,21 +49,21 @@ public class MiArmarioRopaSuperior extends Fragment implements View.OnClickListe
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
-        ropaSuperior.add(new Prenda( 0,"Camiseta roja", "S", "Deporte",
+        ropaSuperior.add(new Prenda( 0,"S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
 
-        ropaSuperior.add(new Prenda( 1,"Camiseta verde", "M", "Deporte",
+        ropaSuperior.add(new Prenda( 1,"M", "Deporte",
                 "Verde", "Verano", "Parte superior",
-                "Camiseta sin mangas", R.drawable.sueter_r100));
+                "Camiseta sin mangas", R.drawable.sueter_r100, 1));
 
-        ropaSuperior.add(new Prenda( 2,"Camiseta azul", "L", "Diario",
+        ropaSuperior.add(new Prenda( 2,"L", "Diario",
                 "Azul", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
 
-        ropaSuperior.add(new Prenda( 3,"Camiseta amarilla", "XXL", "Diario",
+        ropaSuperior.add(new Prenda( 3,"XXL", "Diario",
                 "Amarilla", "Otoño", "Parte superior",
-                "Camiseta manga larga", R.drawable.sueter_r100));
+                "Camiseta manga larga", R.drawable.sueter_r100, 1));
 
         // ----------------------------------------
 

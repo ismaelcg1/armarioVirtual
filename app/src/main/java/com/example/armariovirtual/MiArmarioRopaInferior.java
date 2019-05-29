@@ -51,17 +51,17 @@ public class MiArmarioRopaInferior extends Fragment implements View.OnClickListe
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
-        ropaInferior.add(new Prenda( 0,"Pantalon a", "L", "Diario",
+        ropaInferior.add(new Prenda( 0,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
+                "Pantalones", R.drawable.pantalones_r100, 1));
 
-        ropaInferior.add(new Prenda( 1,"Pantalon b", "M", "Deportivo",
+        ropaInferior.add(new Prenda( 1,"M", "Deportivo",
                 "Azul", "Primavera", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
+                "Pantalones", R.drawable.pantalones_r100, 1));
 
-        ropaInferior.add(new Prenda( 2,"Pantalon c", "S", "Formal",
+        ropaInferior.add(new Prenda( 2,"S", "Formal",
                 "Azul", "Verano", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
+                "Pantalones", R.drawable.pantalones_r100, 1));
         // ----------------------------------------
 
         // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView

@@ -71,35 +71,11 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         alturaUsuario.setText(getResources().getString(R.string.alturaMiCuenta, alturaMostrada));
         pesoUsuario.setText(getResources().getString(R.string.pesoMiCuenta, peso));
         // Ahora obtenemos la talla:
-        talla = obtenerTalla();
+        talla = usuarioActual.getTallaPorDefecto();
         tallaUsuario.setText(getResources().getString(R.string.tallaMiCuenta, talla));
         // TODO Para poner en negrita:
         // textoAlturaUsuario.setTypeface(null, Typeface.BOLD);
 
-    }
-
-    private String obtenerTalla() {
-        String tallaObtenida;
-        Double resultadoIMC;
-        // 'Formula' aproximada para calcular la talla, calculando el IMC:
-        //  peso[kg] / (altura[m] * altura[m])
-        resultadoIMC = Double.valueOf ( peso / ( altura * altura) );
-
-        if (resultadoIMC < 18.0) {
-            tallaObtenida = "XS";
-        } else if (resultadoIMC < 21.0) {
-            tallaObtenida = "S";
-        } else if (resultadoIMC < 25.0) {
-            tallaObtenida = "M";
-        } else if (resultadoIMC < 29.0) {
-            tallaObtenida = "L";
-        } else if (resultadoIMC < 34.0) {
-            tallaObtenida = "XL";
-        } else {
-            tallaObtenida = "XXL";
-        }
-
-        return tallaObtenida;
     }
 
     private void inicializarToolbar() {

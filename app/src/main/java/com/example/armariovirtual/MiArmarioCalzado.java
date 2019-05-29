@@ -52,33 +52,33 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
-        calzado.add(new Prenda( 0,"Zapatillas nike", "42", "Diario",
+        calzado.add(new Prenda( 0,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 1,"Zapatillas puma", "44", "Diario",
+        calzado.add(new Prenda( 1,"44", "Diario",
                 "Azul", "Verano", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 2,"Zapatillas nike", "38", "Deportivo",
+        calzado.add(new Prenda( 2,"38", "Deportivo",
                 "Azul", "Primavera", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 3,"Zapatillas nike", "42", "Diario",
+        calzado.add(new Prenda( 3,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 4,"Zapatillas nike", "42", "Diario",
+        calzado.add(new Prenda( 4,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 5,"Zapatillas nike", "42", "Diario",
+        calzado.add(new Prenda( 5,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
 
-        calzado.add(new Prenda( 6,"Zapatillas nike", "42", "Diario",
+        calzado.add(new Prenda( 6,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
         // ----------------------------------------
 
 

@@ -41,60 +41,60 @@ public class ActividadConsultar extends AppCompatActivity implements View.OnClic
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
         prendas = new ArrayList<>();
-        prendas.add(new Prenda( 0, "Pantalon", "L", "Diario",
+        prendas.add(new Prenda( 0, "L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 1, "Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 1, "S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 2,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 2, "42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
-        prendas.add(new Prenda( 3,"Pantalon", "L", "Diario",
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
+        prendas.add(new Prenda( 3,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 4,"Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 4,"S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 5,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 5,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
-        prendas.add(new Prenda( 6,"Pantalon", "L", "Diario",
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
+        prendas.add(new Prenda( 6,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 7,"Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 7,"S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 8,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 8,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
-        prendas.add(new Prenda( 9,"Pantalon", "L", "Diario",
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
+        prendas.add(new Prenda( 9,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 10,"Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 10,"S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 11,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 11,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
-        prendas.add(new Prenda( 12,"Pantalon", "L", "Diario",
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
+        prendas.add(new Prenda( 12,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 13,"Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 13,"S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 14,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 14,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
-        prendas.add(new Prenda( 15,"Pantalon", "L", "Diario",
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
+        prendas.add(new Prenda( 15,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100));
-        prendas.add(new Prenda( 16,"Camiseta roja", "S", "Deporte",
+                "Pantalones", R.drawable.pantalones_r100, 1));
+        prendas.add(new Prenda( 16, "S", "Deporte",
                 "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100));
-        prendas.add(new Prenda( 17,"Zapatillas nike", "42", "Diario",
+                "Camiseta manga corta", R.drawable.sueter_r100, 1));
+        prendas.add(new Prenda( 17, "42", "Diario",
                 "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100));
+                "Zapatillas", R.drawable.zapatillas_r100, 1));
         // ----------------------------------------
 
 

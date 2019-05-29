@@ -62,16 +62,61 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/nombrePrenda"
-                        style="@style/estiloNombreIdentificativoActividadAddPrenda"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/nombreActividadInsertar"
-                        android:inputType="textPersonName" />
+                        android:orientation="vertical">
 
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/categoriaPrenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:editable="false"
+                                android:hint="@string/categoriaActividadInsertar" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/bCategoria"
+                            style="@style/estiloBotonesInsertarActividadAddPrenda"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/seleccionarActividadInsertar" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/subcategoriaPrenda"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <android.support.design.widget.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:editable="false"
+                                android:hint="@string/subcategoriaActividadInsertar" />
+                        </android.support.design.widget.TextInputLayout>
+
+                        <Button
+                            android:id="@+id/bSubcategoria"
+                            style="@style/estiloBotonesInsertarActividadAddPrenda"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="@string/seleccionarActividadInsertar" />
+
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
@@ -214,61 +259,16 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <EditText
+                        android:id="@+id/cantidadPrendas"
+                        style="@style/estiloNombreIdentificativoActividadAddPrenda"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:ems="10"
+                        android:hint="@string/cantidadActividadInsertar"
+                        android:inputType="number" />
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/categoriaPrenda"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="@string/categoriaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <Button
-                            android:id="@+id/bCategoria"
-                            style="@style/estiloBotonesInsertarActividadAddPrenda"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/seleccionarActividadInsertar" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/subcategoriaPrenda"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-
-                            <android.support.design.widget.TextInputEditText
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:editable="false"
-                                android:hint="@string/subcategoriaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
-
-                        <Button
-                            android:id="@+id/bSubcategoria"
-                            style="@style/estiloBotonesInsertarActividadAddPrenda"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:text="@string/seleccionarActividadInsertar" />
-
-                    </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>

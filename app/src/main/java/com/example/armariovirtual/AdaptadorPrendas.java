@@ -2,7 +2,6 @@ package com.example.armariovirtual;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,16 +18,16 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
 
 
     public static class HolderPrenda extends RecyclerView.ViewHolder {
-        TextView nombre, talla, estilo, subcategoria;
+        TextView cantidad, talla, estilo, subcategoria;
         ImageView imagenPrenda;
 
         HolderPrenda(View itemView) {
             super(itemView);
-            nombre = itemView.findViewById(R.id.nombrePrenda);
             talla = itemView.findViewById(R.id.tallaPrenda);
             estilo = itemView.findViewById(R.id.estiloPrenda);
             subcategoria = itemView.findViewById(R.id.subcategoriaPrenda);
             imagenPrenda = itemView.findViewById(R.id.imagenPrenda);
+            cantidad = itemView.findViewById(R.id.cantidadDePrendas);
         }
     }
 
@@ -66,7 +65,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
     @Override
     public void onBindViewHolder(final HolderPrenda prendaDeTurno, final int position) {
         // TODO Le paso el objeto completo, para hacerlo bien, se suele usar Parserable o algo así
-        final String nombrePrendaTurno = prendas.get(position).getNombrePrenda();
+        final int cantidadPrendaTurno = prendas.get(position).getCantidadPrenda();
         final String tallaPrendaTurno = prendas.get(position).getTallaPrenda();
         final String estiloPrendaTurno = prendas.get(position).getEstiloPrenda();
         final String colorPrendaTurno = prendas.get(position).getColor();
@@ -91,7 +90,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
         // -----
 
         // Ponemos los datos correspondientes a las prendas de posicion position
-        prendaDeTurno.nombre.setText(prendas.get(position).getNombrePrenda());
+        prendaDeTurno.cantidad.setText(""+prendas.get(position).getCantidadPrenda());
         prendaDeTurno.talla.setText(prendas.get(position).getTallaPrenda());
         prendaDeTurno.estilo.setText(prendas.get(position).getEstiloPrenda());
         prendaDeTurno.subcategoria.setText(prendas.get(position).getSubcategoriaPrenda());
@@ -107,12 +106,8 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
 
                     case R.id.imagenPrenda: // Aquí es cuando se pulsa la imagen de la prenda
 
-                            Snackbar snackbar1 = Snackbar.make (v, "Has pulsado "+prendaDeTurno.nombre.getText(), Snackbar.LENGTH_SHORT);
-                            snackbar1.show ();
-
                         // TODO Prueba, hacer con id, no con nombre
                         intent = new Intent(v.getContext(), ActividadInfoPrendaCompleta.class);
-                        intent.putExtra("nombrePrenda",nombrePrendaTurno);
                         intent.putExtra("tallaPrenda",tallaPrendaTurno);
                         intent.putExtra("estiloPrenda",estiloPrendaTurno);
                         intent.putExtra("colorPrenda",colorPrendaTurno);
@@ -121,6 +116,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
                         intent.putExtra("subcategoriaPrenda",subcategoriaPrendaTurno);
                         intent.putExtra("estadoPrenda",estadoPrendaTurno);
                         intent.putExtra("imagenPrenda",imagenPrendaTurno);
+                        intent.putExtra("cantidadPrenda",cantidadPrendaTurno);
                         contexto.startActivity(intent);
 
                         break;

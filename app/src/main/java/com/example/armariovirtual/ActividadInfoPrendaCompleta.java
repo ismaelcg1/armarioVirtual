@@ -12,7 +12,7 @@ import android.widget.TextView;
 public class ActividadInfoPrendaCompleta extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar appToolbar;
-    private TextView tvNombre, tvTalla, tvEstilo, tvColor, tvEpoca, tvCategoria, tvSubcategoria, tvEstado;
+    private TextView tvCantidad, tvTalla, tvEstilo, tvColor, tvEpoca, tvCategoria, tvSubcategoria, tvEstado;
     private ImageView imagenPrendaActual;
 
     @Override
@@ -28,7 +28,6 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
 
         if(b!=null)
         {
-            String nombrePrendaSeleccionada =(String) b.get("nombrePrenda");
             String tallaPrendaSeleccionada =(String) b.get("tallaPrenda");
             String estiloPrendaSeleccionada =(String) b.get("estiloPrenda");
             String colorPrendaSeleccionada =(String) b.get("colorPrenda");
@@ -37,14 +36,15 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
             String subcategoriaPrendaSeleccionada =(String) b.get("subcategoriaPrenda");
             boolean estadoPrendaSeleccionada =(boolean) b.get("estadoPrenda");
             int imagenPrendaSeleccionada =(int) b.get("imagenPrenda");
+            int cantidadPrendaSeleccionada =(int) b.get("cantidadPrenda");
 
-            tvNombre.setText(nombrePrendaSeleccionada);
             tvTalla.setText(tallaPrendaSeleccionada);
             tvEstilo.setText(estiloPrendaSeleccionada);
             tvColor.setText(colorPrendaSeleccionada);
             tvEpoca.setText(epocaPrendaSeleccionada);
             tvCategoria.setText(categoriaPrendaSeleccionada);
             tvSubcategoria.setText(subcategoriaPrendaSeleccionada);
+            tvCantidad.setText(""+cantidadPrendaSeleccionada);
 
             //imagenPrendaActual.set
 
@@ -70,7 +70,7 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
 
     private void inicializarVariablesConVista() {
         appToolbar = findViewById(R.id.appToolbar);
-        tvNombre = findViewById(R.id.nombrePrendaVisualizada);
+        tvCantidad = findViewById(R.id.cantidadPrendaVisualizada);
         tvTalla = findViewById(R.id.tallaPrendaVisualizada);
         tvEstilo = findViewById(R.id.estiloPrendaVisualizada);
         tvColor = findViewById(R.id.colorPrendaVisualizada);

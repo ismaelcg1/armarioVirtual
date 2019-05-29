@@ -106,14 +106,15 @@
 
     <!-- Textos ActividadInfoPrendaCompleta -->
     <string name="nombreActividadInfoPrendaCompleta">Información detallada</string>
-    <string name="nombrePrendaActividadInfoPrendaCompleta">Nombre:</string>
     <string name="TallaPrendaActividadInfoPrendaCompleta">Talla:</string>
     <string name="estadoPrendaActividadInfoPrendaCompleta">Estado:</string>
     <string name="estadoLimpioPrendaActividadInfoPrendaCompleta">Limpio</string>
     <string name="estadoSucioPrendaActividadInfoPrendaCompleta">Sucio</string>
+    <string name="cantidadPrendaActividadInfoPrendaCompleta">Cantidad:</string>
     <!-- Epoca, color, estilo, categoría y subcategoría se cogen de ActividadInsertar-->
 
 
+    <string name="nombreActividadConfiguracion">Configuración</string>
     <!-- Textos MiCuenta -->
     <string name="nombreActividadMiCuenta">Mi cuenta</string>
     <string name="correoMiCuenta">%1$s</string>
@@ -125,6 +126,7 @@
     <string name="cerrarSesionMiCuenta">Cerrar sesión</string>
     <string name="cambiarPasswordMiCuenta">Cambiar mi contraseña</string>
     <string name="eliminarTodoContenidoArmarioMiCuenta">Eliminar todo el contenido de Mi Armario</string>
+    <string name="eliminarTodoContenidoAdminArmarioMiCuenta">Resetear la base de datos global de Mi Armario</string>
     <string name="eliminarCuentaMiCuenta">Eliminar mi cuenta</string>
 
     <string name="cerrarSesionTituloDialogMiCuenta">Cerrar sesión</string>
@@ -134,7 +136,9 @@
     <string name="cambiarPasswordDialogMiCuenta">¿Quieres recibir un correo a \'<u>%1$s</u>\' para restablecer tu contraseña?</string>
 
     <string name="eliminarArmarioTituloDialogMiCuenta">Eliminar mi Armario</string>
+    <string name="eliminarArmarioTituloDialogMiCuentaAdmin">Resetear BBDD mi Armario</string>
     <string name="eliminarArmarioDialogMiCuenta">¿Desea borrar todo el contenido de Mi Armario?</string>
+    <string name="resetearArmarioDialogMiCuentaAdmin">¿Desea resetear todo el contenido de la BBDD global de Mi Armario?</string>
 
     <string name="eliminarCuentaTituloDialogMiCuenta">Eliminar mi Cuenta</string>
     <string name="eliminarCuentaDialogMiCuenta">¿Quires eliminar toda la información relacionada con la cuenta \'<u>%1$s</u>\' ?</string>
@@ -146,7 +150,7 @@
     <string name="nombreInicialActividadInsertar">Insertar prenda/accesorio</string>
     <string name="textoExplicativoFotoActividadInsertar">Pulse la imagen inferior para añadir una foto:</string>
     <string name="textoExplicativoActividadInsertar">Introduzca los siguientes datos para registrar su prenda correctamente:</string>
-    <string name="nombreActividadInsertar">Nombre identificativo de la prenda</string>
+    <string name="cantidadActividadInsertar">Cantidad de prendas</string>
     <string name="tallaActividadInsertar">Talla por defecto: </string>
     <string name="epocaActividadInsertar">Época:</string>
     <string name="colorActividadInsertar">Color: </string>

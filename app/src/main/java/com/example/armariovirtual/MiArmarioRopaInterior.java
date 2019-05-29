@@ -52,21 +52,21 @@ public class MiArmarioRopaInterior extends Fragment implements View.OnClickListe
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
-        ropaInterior.add(new Prenda( 0,"Calzoncillos rojos", "M", "Diario",
+        ropaInterior.add(new Prenda( 0,"M", "Diario",
                 "Rojo", "Invierno", "Ropa interior",
-                "Calzoncillos", R.drawable.calzoncillos_r100));
+                "Calzoncillos", R.drawable.calzoncillos_r100, 1));
 
-        ropaInterior.add(new Prenda( 0,"Calzoncillos verdes", "L", "Deportivo",
+        ropaInterior.add(new Prenda( 0,"L", "Deportivo",
                 "Verdes", "Primavera", "Ropa interior",
-                "Calzoncillos", R.drawable.calzoncillos_r100));
+                "Calzoncillos", R.drawable.calzoncillos_r100, 1));
 
-        ropaInterior.add(new Prenda( 0,"Calzoncillos azules", "M", "Diario",
+        ropaInterior.add(new Prenda( 0,"M", "Diario",
                 "Azul", "Otoño", "Ropa interior",
-                "Calzoncillos", R.drawable.calzoncillos_r100));
+                "Calzoncillos", R.drawable.calzoncillos_r100, 1));
 
-        ropaInterior.add(new Prenda( 0,"Calzoncillos rojos", "XL", "Diario",
+        ropaInterior.add(new Prenda( 0,"XL", "Diario",
                 "Rojo", "Invierno", "Ropa interior",
-                "Calzoncillos", R.drawable.calzoncillos_r100));
+                "Calzoncillos", R.drawable.calzoncillos_r100, 1));
         // ----------------------------------------
 
 

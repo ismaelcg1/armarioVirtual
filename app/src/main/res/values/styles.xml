@@ -334,6 +334,13 @@
         <item name="android:padding">6dp</item>
     </style>
 
+    <style name="estiloTextoInfoSelectorEstacion">
+        <item name="android:padding">1sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="estiloLayoutPrincipalEstacion">
         <item name="android:gravity">center</item>
     </style>

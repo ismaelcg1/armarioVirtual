@@ -2,14 +2,13 @@ package com.example.armariovirtual;
 
 public class Prenda {
 
-    private String nombrePrenda, tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda;
-    private int id, imagenPrenda;
+    private String tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda;
+    private int id, imagenPrenda, cantidadPrenda;
     private boolean estado_limpio;
 
-    public Prenda (int id, String nombrePrenda, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda,
-                   String categoriaPrenda, String subcategoriaPrenda, int imagenPrenda) {
+    public Prenda (int id, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda,
+                   String categoriaPrenda, String subcategoriaPrenda, int imagenPrenda, int cantidadPrenda) {
         this.id = id;
-        this.nombrePrenda = nombrePrenda;
         this.tallaPrenda = tallaPrenda;
         this.estiloPrenda = estiloPrenda;
         this.color = color;
@@ -17,6 +16,7 @@ public class Prenda {
         this.categoriaPrenda = categoriaPrenda;
         this.subcategoriaPrenda = subcategoriaPrenda;
         this.imagenPrenda = imagenPrenda;
+        this.cantidadPrenda = cantidadPrenda;
         estado_limpio = true;
     }
 
@@ -26,14 +26,6 @@ public class Prenda {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getNombrePrenda() {
-        return nombrePrenda;
-    }
-
-    public void setNombrePrenda(String nombrePrenda) {
-        this.nombrePrenda = nombrePrenda;
     }
 
     public String getTallaPrenda() {
@@ -100,17 +92,27 @@ public class Prenda {
         this.estado_limpio = estado_limpio;
     }
 
+    public int getCantidadPrenda() {
+        return cantidadPrenda;
+    }
+
+    public void setCantidadPrenda(int cantidadPrenda) {
+        this.cantidadPrenda = cantidadPrenda;
+    }
+
     @Override
     public String toString() {
-        return "Prenda: \n" +
-                "nombrePrenda='" + nombrePrenda + '\'' +
-                ", tallaPrenda='" + tallaPrenda + '\'' +
+        return "Prenda{" +
+                "tallaPrenda='" + tallaPrenda + '\'' +
                 ", estiloPrenda='" + estiloPrenda + '\'' +
                 ", color='" + color + '\'' +
                 ", epocaPrenda='" + epocaPrenda + '\'' +
                 ", categoriaPrenda='" + categoriaPrenda + '\'' +
                 ", subcategoriaPrenda='" + subcategoriaPrenda + '\'' +
+                ", id=" + id +
                 ", imagenPrenda=" + imagenPrenda +
-                ", estado_limpio=" + estado_limpio;
+                ", cantidadPrenda=" + cantidadPrenda +
+                ", estado_limpio=" + estado_limpio +
+                '}';
     }
 }

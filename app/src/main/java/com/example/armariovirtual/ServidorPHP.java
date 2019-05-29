@@ -19,8 +19,8 @@ public class ServidorPHP {
         // Constructor por defecto vacio
     }
 
-    public boolean registrarUsuario(String uid, String nickusuario, int altura, int peso, String fecha_nacimiento,
-                                    boolean genero_masculino) throws ServidorPHPException {
+    public boolean registrarUsuario(String uid, String nickusuario, int altura, int peso, String tallaPorDefecto,
+                                    String fecha_nacimiento, boolean genero_masculino) throws ServidorPHPException {
         boolean registrado = false;
 
 
@@ -35,6 +35,7 @@ public class ServidorPHP {
             parametros.put("nickusuario", nickusuario);
             parametros.put("altura", ""+altura);
             parametros.put("peso", ""+peso);
+            parametros.put("talla_por_defecto", tallaPorDefecto);
             parametros.put("fecha_nacimiento", fecha_nacimiento);
             if (genero_masculino) {
                 parametros.put("genero_masculino", "0");
@@ -115,11 +116,11 @@ public class ServidorPHP {
 
             if (consultaCorrecta) {
 
-                // TODO si da fallo algún int, coger primero String y después realizar la conversión
                 String aliasUser = datosUsuario.getString("alias");
                 int alturaUser = datosUsuario.getInt("altura");
                 int pesoUser = datosUsuario.getInt("peso");
                 String fecha_nacimientoUser = datosUsuario.getString("fecha_nacimiento");
+                String tallaUser = datosUsuario.getString("talla_por_defecto");
                 int genero_masculinoUser = datosUsuario.getInt("genero_masculino");
                 Sexo sexo;
 
@@ -129,7 +130,7 @@ public class ServidorPHP {
                     sexo = Sexo.Femenino;
                 }
                 // String nickName, Sexo sexo, String fechaNacimiento, int altura, int peso)
-                miUsuario = new Usuario(aliasUser, sexo, fecha_nacimientoUser, alturaUser, pesoUser);
+                miUsuario = new Usuario(aliasUser, sexo, tallaUser, fecha_nacimientoUser, alturaUser, pesoUser);
             }
 
         } catch (JSONException e) {

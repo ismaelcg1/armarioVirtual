@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/appToolbar"
+            layout="@layout/clase_toolbar" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            style="@style/layoutTextoInformativoContentMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/usuario_masculino80" />
+
+                <TextView
+                    android:id="@+id/tvEmailAdmin"
+                    style="@style/estiloTextoEmailMiCuenta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="correo@gmail.com" />
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/layoutSecundarios2MiCuenta"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="40sp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        style="@style/estiloTextoInformacionMiCuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/opcionesAppMiCuenta" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/estilolayoutInferioresMiCuenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView19"
+                        style="@style/estiloTextosInferioresMiCuenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cerrarSesionMiCuenta" />
+
+                    <Button
+                        android:id="@+id/btnCerrarSesionAdmin"
+                        style="@style/estiloBotonesInferioresMiCuenta"
+                        android:background="@drawable/cerrar_sesion96" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/estilolayoutInferioresMiCuenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView17"
+                        style="@style/estiloTextosInferioresMiCuenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eliminarCuentaMiCuenta" />
+
+                    <Button
+                        android:id="@+id/btnEliminarCuentaAdmin"
+                        style="@style/estiloBotonesInferioresMiCuenta"
+                        android:background="@drawable/eliminar_usuario96" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/estilolayoutInferioresMiCuenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView20"
+                        style="@style/estiloTextosInferioresMiCuenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/cambiarPasswordMiCuenta" />
+
+                    <Button
+                        android:id="@+id/btnCambiarPasswordAdmin"
+                        style="@style/estiloBotonesInferioresMiCuenta"
+                        android:background="@drawable/cambio_password96" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/estilolayoutInferioresMiCuenta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView18"
+                        style="@style/estiloTextosInferioresMiCuenta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/eliminarTodoContenidoAdminArmarioMiCuenta" />
+
+                    <Button
+                        android:id="@+id/btnEliminarArmarioAdmin"
+                        style="@style/estiloBotonesInferioresMiCuenta"
+                        android:background="@drawable/eliminar_armario96" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
