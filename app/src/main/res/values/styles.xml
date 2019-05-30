@@ -34,10 +34,10 @@
         <item name="android:gravity">center</item>
     </style>
     <style name="LoginActivityEstiloTextoInicial">
-        <item name="android:textSize">25sp</item>
+        <item name="android:textSize">27sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorNegro</item>
-        <item name="android:layout_marginTop">5sp</item>
+        <item name="android:layout_marginTop">6sp</item>
     </style>
     <style name="LoginActivityLayout">
         <item name="android:paddingBottom">12sp</item>
@@ -491,6 +491,27 @@
     <style name="estiloTextosActividadInfoPrendaCompleta">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">italic</item>
+    </style>
+
+    <!-- splash_inicio -->
+    <style name="imagenSplashInicio">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_height">210sp</item>
+        <item name="android:layout_width">210sp</item>
+        <item name="android:layout_marginBottom">70sp</item>
+    </style>
+
+    <style name="textoInicialSplashInicio">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="textoSecundarioSplashScreen">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
 

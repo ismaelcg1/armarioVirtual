@@ -62,24 +62,42 @@
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
+                    <EditText
+                        android:id="@+id/cantidadPrendas"
+                        style="@style/estiloNombreIdentificativoActividadAddPrenda"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:ems="10"
+                        android:hint="@string/cantidadActividadInsertar"
+                        android:inputType="number" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/categoriaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:hint="@string/categoriaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/bCategoria"
@@ -96,18 +114,18 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/subcategoriaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:hint="@string/subcategoriaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/bSubcategoria"
@@ -131,18 +149,18 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/tallaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:hint="@string/tallaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/bTalla"
@@ -159,18 +177,18 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/estiloPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:hint="@string/estiloActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/bEstilo"
@@ -200,18 +218,18 @@
                             android:layout_weight="1"
                             android:orientation="horizontal">
 
-                            <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/colorPrenda"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1">
 
-                                <android.support.design.widget.TextInputEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:editable="false"
                                     android:hint="@string/colorActividadInsertar" />
-                            </android.support.design.widget.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
@@ -230,18 +248,18 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/epocaPrenda"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_weight="1">
 
-                            <android.support.design.widget.TextInputEditText
+                            <com.google.android.material.textfield.TextInputEditText
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:editable="false"
                                 android:hint="@string/epocaActividadInsertar" />
-                        </android.support.design.widget.TextInputLayout>
+                        </com.google.android.material.textfield.TextInputLayout>
 
                         <Button
                             android:id="@+id/bEpoca"
@@ -251,24 +269,6 @@
                             android:text="@string/seleccionarActividadInsertar" />
 
                     </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/cantidadPrendas"
-                        style="@style/estiloNombreIdentificativoActividadAddPrenda"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:hint="@string/cantidadActividadInsertar"
-                        android:inputType="number" />
-
                 </LinearLayout>
 
             </LinearLayout>

@@ -146,6 +146,8 @@
     <string name="dialogTextoSiMiCuenta">Sí, claro</string>
     <string name="dialogTextoCancelarMiCuenta">Cancelar</string>
 
+    <string name="falloActualizarBBDDMiCuenta">Fallo al actualizar BBDD</string>
+
     <!-- TEXTOS ActividadInsertar -->
     <string name="nombreInicialActividadInsertar">Insertar prenda/accesorio</string>
     <string name="textoExplicativoFotoActividadInsertar">Pulse la imagen inferior para añadir una foto:</string>
@@ -425,7 +427,9 @@
     </string-array>
 
 
-
+    <!-- TEXTOS SplashScreen -->
+    <string name="textoInicioSplashScreen">ARMARIO VIRTUAL</string>
+    <string name="textoUsuarioCorrectoSplashScreen">Obteniendo los datos de su perfil...</string>
 
 
 </resources>

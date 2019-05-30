@@ -22,9 +22,13 @@
         <activity
             android:name="com.example.armariovirtual.LoginActivity"
             android:theme="@style/AppTheme">
+        </activity>
+
+        <activity
+            android:name="com.example.armariovirtual.SplashScreenInicial"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,6 +43,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.armariovirtual.RegistroInicial"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.example.armariovirtual.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.armariovirtual.MiArmario"

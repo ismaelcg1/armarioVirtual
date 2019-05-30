@@ -22,6 +22,9 @@
 
 
     <!-- Color eliminar -->
-    <color name="colorLayoutTextoInfoEliminar">#0AF39100</color> <!-- F9E79F -->
+    <color name="colorLayoutTextoInfoEliminar">#0AF39100</color>
+
+    <!-- Pantallas SplashScreen -->
+    <color name="colorLottie">#0DFCEACF</color>
 
 </resources>

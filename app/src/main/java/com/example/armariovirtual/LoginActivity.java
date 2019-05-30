@@ -1,13 +1,14 @@
 package com.example.armariovirtual;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import androidx.annotation.NonNull;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputLayout;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,7 +27,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private Button botonIniciarSesion, btnCuentaNueva;
     private TextInputLayout email, password;
-    private ProgressDialog progressDialog;
     private TextView cambiarPassword;
     private CheckBox terminosCondiciones;
     static Usuario miUsuario;
@@ -34,8 +34,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // FireBase
     private FirebaseAuth mAuth = null;
 
-    // Para ver si el usuario está registrado:
-    private boolean usuarioCorrecto;
+    private final int TIEMPO_SPLASH_USUARIO_CORRECTO = 1050;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.setTitle(R.string.nombreActividadLogin);
 
         conectarVariablesConVista();
-        progressDialog = new ProgressDialog(this);
 
         // Aplicamos al botón que pueda ser 'pulsado'
         botonIniciarSesion.setOnClickListener(this);
@@ -54,25 +53,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         // Para autentificación con FireBase
         mAuth = FirebaseAuth.getInstance();
-
-        /*
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            // Name, email address, and profile photo Url
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-
-            // Check if user's email is verified
-            boolean emailVerified = user.isEmailVerified();
-
-            // The user's ID, unique to the Firebase project. Do NOT use this value to
-            // authenticate with your backend server, if you have one. Use
-            // FirebaseUser.getIdToken() instead.
-            String uid = user.getUid();
-        }
-*/
     }
 
     private void conectarVariablesConVista() {
@@ -98,10 +78,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void updateUI(FirebaseUser user) {
+        String seleccion="";
+
         if (user != null) {
             String emailUser;
             emailUser = email.getEditText().getText().toString().trim();
-            Intent intent;
 
             if (user.isEmailVerified()) {
 
@@ -120,26 +101,46 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     usuarioObtenido.setEmail(user.getEmail());
                 }
 
-                // Antes de irnos a otra activity, le pasamos el objeto usuarioObtenido
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("usuarioActual", usuarioObtenido);
-
                 // Inicializamos la actividad principal si tod@ es correcto:
                 if (emailUser.equalsIgnoreCase("ismael.casado@itponiente.com")) {
-                    intent = new Intent(getApplicationContext(), MainActivityDrawerAdmin.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
+                    seleccion = "Admin";
+                    verActividadPosterior(usuarioObtenido, seleccion);
                 } else {
-                    intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                    finish();
+                    seleccion = "otro";
+                    verActividadPosterior(usuarioObtenido, seleccion);
                 }
             } else {
                 // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
                 snackBarVerificacion();
             }
         }
+    }
+
+    private void verActividadPosterior(Usuario usuarioObtenido, String seleccion) {
+        final Intent intent;
+        Handler handler = new Handler();
+        abrirSplashScreenRegistroCorrecto();
+
+        // Antes de irnos a otra activity, le pasamos el objeto usuarioObtenido
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("usuarioActual", usuarioObtenido);
+        if (seleccion.equalsIgnoreCase("Admin")) {
+            intent = new Intent(getApplicationContext(), MainActivityDrawerAdmin.class);
+        } else {
+            intent = new Intent(getApplicationContext(), MainActivityDrawer.class);
+        }
+        intent.putExtras(bundle);
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                startActivity(intent);
+                finish();
+            }
+        }, TIEMPO_SPLASH_USUARIO_CORRECTO);
+    }
+
+    private void abrirSplashScreenRegistroCorrecto() {
+        Intent intent = new Intent(getApplicationContext(), SplashScreen.class);
+        startActivity(intent);
     }
 
     private void snackBarVerificacion() {
@@ -159,8 +160,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         final String emailUser, passwordUser;
         emailUser = email.getEditText().getText().toString().trim(); // Para quitar espacios en blanco --> trim()
         passwordUser = password.getEditText().getText().toString().trim();
-
-        usuarioCorrecto = false;
 
         // Vemos si se han insertado los datos o están los campos vacios:
         if (validarDatos(emailUser, passwordUser)) {

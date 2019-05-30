@@ -3,17 +3,21 @@ package com.example.armariovirtual;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Ciclo formativo: Desarrollo de Aplicaciones Multiplataforma
@@ -57,7 +61,32 @@ public class MainActivityDrawer extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         verSexoUsuario();
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO aqui actualizamos el objeto usuario ¿se puede hacer sólo si venimos de la actividad MiCuenta???
+        actualizarDatosUsuario();
+    }
+
+    private void actualizarDatosUsuario() {
+
+        ServidorPHP objetoServidor = new ServidorPHP();
+        Usuario usuarioObtenido = null;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        try {
+            usuarioObtenido = objetoServidor.obtenerUsuario(user.getUid());
+        } catch (ServidorPHPException e) {
+            e.printStackTrace();
+        }
+
+        if (usuarioObtenido == null) {
+            Toast.makeText(MainActivityDrawer.this, getResources().getString(R.string.toastObtenerUsuarioFalloActividadLogin), Toast.LENGTH_SHORT).show();
+        } else {
+            userActual = usuarioObtenido;
+        }
     }
 
     private void verSexoUsuario() {

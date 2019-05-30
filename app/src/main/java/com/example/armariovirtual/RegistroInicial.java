@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -230,14 +229,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                 if (todoCorrecto) {
                                     Toast.makeText(RegistroInicial.this, "Todo correcto", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Log.i("UID USUARIO", user.getUid());
-                                    Log.i("ALIAS USUARIO", aliasUsuario.getText().toString());
-                                    Log.i("ALTURA USUARIO", ""+altura);
-                                    Log.i("PESO USUARIO", ""+peso);
-                                    Log.i("FECHA USUARIO", ""+fechaServidor);
-                                    Log.i("SEXO USUARIO", ""+generoMasculinoSeleccionado);
-                                    Log.i("TALLA USUARIO", ""+tallaPorDefecto);
-
                                     Toast.makeText(RegistroInicial.this, "Fallo registroInicial BBDD", Toast.LENGTH_SHORT).show();
                                 }
 

@@ -5,11 +5,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MiCuenta extends AppCompatActivity implements View.OnClickListener, DialogPersonalizadoPesoAltura.finalizarDialog,
                                                            DialogPropiedadesPrenda.acabarDialog {
-
     private Toolbar appToolbar;
     private Button bCerrarSesion, bCambiarPassword, bEliminarArmario, bEliminarCuenta, bAltura, bPeso, bTalla;
     private TextView emailUser, alturaUsuario, pesoUsuario, tallaUsuario;
@@ -33,6 +33,8 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
     private Usuario usuarioActual;
     private int peso;
     private double altura;
+    private boolean cambiosRealizados = false;
+    private ImageView imagenDelSexoUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +45,40 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         onClickListener();
         ponerEmailUsuario();
         cogerUsuarioActual();
-
         incluirVariablesMostradas();
         inicializarToolbar();
-        // Hago que cuando se pulse la flecha de atras se cierre la actividad
+        verSexoUsuario();
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (cambiosRealizados) actualizarDatosBBDD();
                 finish();
             }
         });
+    }
+
+    private void verSexoUsuario() {
+        Sexo objetoSexo = null;
+        if (usuarioActual.getSexo() == objetoSexo.Femenino) {
+            imagenDelSexoUsuario.setImageResource(R.drawable.usuario_femenino80);
+        } else {
+            imagenDelSexoUsuario.setImageResource(R.drawable.usuario_masculino80);
+        }
+    }
+
+    private void actualizarDatosBBDD() {
+
+        ServidorPHP objetoServidor = new ServidorPHP();
+        Boolean todoCorrecto = false;
+        int alturaInt = (int)( altura * 100);
+        try {
+            todoCorrecto = objetoServidor.actualizarUsuario(user.getUid(), alturaInt, peso, talla);
+        } catch (ServidorPHPException e) {
+            e.printStackTrace();
+        }
+        if (!todoCorrecto) {
+            Toast.makeText(MiCuenta.this, R.string.falloActualizarBBDDMiCuenta, Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void cogerUsuarioActual() {
@@ -73,9 +99,6 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         // Ahora obtenemos la talla:
         talla = usuarioActual.getTallaPorDefecto();
         tallaUsuario.setText(getResources().getString(R.string.tallaMiCuenta, talla));
-        // TODO Para poner en negrita:
-        // textoAlturaUsuario.setTypeface(null, Typeface.BOLD);
-
     }
 
     private void inicializarToolbar() {
@@ -116,6 +139,8 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         alturaUsuario = findViewById(R.id.textoAlturaUsuario);
         pesoUsuario = findViewById(R.id.textoPesoUsuario);
         tallaUsuario = findViewById(R.id.textoTallaUsuario);
+
+        imagenDelSexoUsuario = findViewById(R.id.ivMiCuenta);
     }
 
     protected void onClickListener() {
@@ -151,54 +176,37 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         ob.finish();
     }
 
-    private void sendEmailVerification() {
-        user = mAuth.getCurrentUser();
-        user.sendEmailVerification()
-                .addOnCompleteListener(this, new OnCompleteListener<Void>() {
+    private void sendPasswordReset(final String email) {
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
                             Toast.makeText(MiCuenta.this,
-                                    getResources().getString(R.string.toastEmailVerificacionEnviadoCorrectamenteRegistroIncial),
-                                    Toast.LENGTH_LONG).show();
+                                    getResources().getString(R.string.cambioPasswordActividadLogin)+" "+email, Toast.LENGTH_LONG).show();
                         } else {
+                            // falloCambioPasswordActividadLogin
                             Toast.makeText(MiCuenta.this,
-                                    getResources().getString(R.string.toastEmailVerificacionEnviadoIncorrectoRegistroIncial),
-                                    Toast.LENGTH_SHORT).show();
+                                    getResources().getString(R.string.falloCambioPasswordActividadLogin), Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
-/*
-    private void snackBarVerificacion() {
-        // Cogemos la vista con getWindow().getDecorView().getRootView()
-        Snackbar.make(getWindow().getDecorView().getRootView(), getResources().getString(R.string.snackBarEnviarEmail), Snackbar.LENGTH_LONG)
-                .setActionTextColor(getResources().getColor(R.color.colorPrimaryDark))
-                .setAction(getResources().getString(R.string.snackBarBotonEnviarEmail), new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        final int id = 1;
-                        signOut(id);
-                    }
-                })
-                .show();
-    }
-*/
 
     public void crearDialog(String titulo, String mensaje, final int opcion) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         // Ponemos el mensaje y el título:
         builder.setMessage(mensaje)
                 .setTitle(titulo);
-
-
         builder.setPositiveButton(R.string.dialogTextoSiMiCuenta, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
                 if (opcion == 1) {
                     signOut(opcion);
                 } else if (opcion == 2) {
-                    sendEmailVerification();
+                    sendPasswordReset(email);
                 } else if (opcion == 3) {
 
                 } else if (opcion == 4){
@@ -214,7 +222,6 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 dialog.dismiss();
             }
         });
-
         AlertDialog dialog = builder.create();
         builder.show();
     }
@@ -251,8 +258,6 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
             case R.id.bAlturaMiCuenta:
                 seleccion = "Altura";
                 new DialogPersonalizadoPesoAltura(contexto, MiCuenta.this, seleccion);
-                // TODO hacer que se cambie la altura, por la seleccionada, abajo igual con el peso
-                // TODO cambiar dato en BBDD (para que al iniciar la app, coja las variables bien)
                 usuarioActual.setAltura((int) altura);
                 break;
 
@@ -263,12 +268,10 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 break;
 
             case R.id.bTallaMiCuenta:
-                // TODO hacer el de talla
                 seleccionado = "Talla";
                 new DialogPropiedadesPrenda(MiCuenta.this, MiCuenta.this, seleccionado, null);
                 break;
         }
-
     }
 
     @Override
@@ -278,12 +281,14 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
             String alturaMostrada = String.valueOf(altura);
             alturaUsuario.setText(getResources().getString(R.string.alturaMiCuenta, alturaMostrada));
             Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadaAlturaRegistroIncial),
-                    Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
+            cambiosRealizados = true;
         } else if (seleccion.equalsIgnoreCase("Peso")) {
             peso = num;
             pesoUsuario.setText(getResources().getString(R.string.pesoMiCuenta, num));
             Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadoPesoRegistroIncial),
-                    Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
+            cambiosRealizados = true;
         }
     }
 
@@ -293,7 +298,8 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
             talla = seleccion;
             tallaUsuario.setText(getResources().getString(R.string.tallaMiCuenta, talla));
             Toast.makeText(MiCuenta.this, getResources().getString(R.string.toastCambiadaTallaRegistroIncial),
-                    Toast.LENGTH_LONG).show();
+                            Toast.LENGTH_LONG).show();
+            cambiosRealizados = true;
         }
     }
 }
