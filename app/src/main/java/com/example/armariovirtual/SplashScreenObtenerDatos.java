@@ -10,18 +10,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
 
-public class SplashScreen extends AppCompatActivity {
+public class SplashScreenObtenerDatos extends AppCompatActivity {
 
     private LottieAnimationView lottieAnimationView;
-    private final int TIEMPO_EJECUCION = 1050;
+    private final int TIEMPO_ESPERA_EJECUCION = 1200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         quitarBarraDeNotificaciones();
-        setContentView(R.layout.splash_screen);
+        setContentView(R.layout.splash_screen_obtener_datos);
 
-        lottieAnimationView = findViewById(R.id.animation_view);
+        lottieAnimationView = findViewById(R.id.animation_view_obtener);
         startCheckAnimation();
         ejecutarHandler();
     }
@@ -39,11 +39,11 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 finish();
             }
-        }, TIEMPO_EJECUCION);
+        }, TIEMPO_ESPERA_EJECUCION);
     }
 
     private void startCheckAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0f,1f).setDuration(1100);
+        ValueAnimator animator = ValueAnimator.ofFloat(0f,1f).setDuration(2250);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

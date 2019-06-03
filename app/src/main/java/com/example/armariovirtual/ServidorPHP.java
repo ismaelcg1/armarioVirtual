@@ -1,20 +1,37 @@
 package com.example.armariovirtual;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.util.Log;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ServidorPHP {
 
-
-    private String urlServidor = "http://192.168.0.106:80/armarioVirtual/";
+    private String urlServidor = "http://192.168.0.106:80/armarioVirtual/";  // 192.168.2.65  // 192.168.0.106:80
     private String registrarUsuario = urlServidor + "registrarUsuario.php";
     private String actualizarUsuario = urlServidor + "actualizarUsuario.php";
     private String eliminarUsuario = urlServidor + "eliminarUsuario.php";
     private String obtenerUsuario = urlServidor + "obtenerUsuario.php";
+    private String insertarPrenda = urlServidor + "insertarPrenda.php";
+    private String insertarPrendaPost = urlServidor + "insertarPrendaPost.php?";
+    private String obtenerPrendas = urlServidor + "obtenerPrendas.php";
 
     public ServidorPHP() {
         // Constructor por defecto vacio
@@ -103,6 +120,126 @@ public class ServidorPHP {
     }
 
 
+    public void cargarWebService(final String uid, final Context contexto, final String talla, final String estilo, final String color,
+                                 final String epoca, final String categoria, final String subcategoria, final int cantidad, final String marca, final String imagenConvertida) {
+        final int ESTADO_LIMPIO_TRUE = 1;
+        StringRequest stringRequest;
+        // Para mostrar al usuario que se está subiendo la prenda
+        /*
+        final ProgressDialog progreso;
+
+        progreso=new ProgressDialog(contexto);
+        progreso.setMessage(contexto.getResources().getString(R.string.subiendoFotoActividadInsertar));
+        progreso.show();
+*/
+        stringRequest=new StringRequest(Request.Method.POST, insertarPrendaPost, new Response.Listener<String>() {
+
+            @Override
+            public void onResponse(String response) {
+                //progreso.hide();
+
+                if (response.trim().equalsIgnoreCase("true")){
+                    Toast.makeText(contexto,contexto.getResources().getString(R.string.prendaRegistroCorrectoActividadInsertar),Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(contexto,contexto.getResources().getString(R.string.prendaRegistroIncorrectoActividadInsertar),Toast.LENGTH_SHORT).show();
+                    Log.i("RESPUESTA:",""+response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(contexto,"No se ha podido conectar",Toast.LENGTH_SHORT).show();
+                //progreso.hide();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                Map<String,String> parametros=new HashMap<>();
+
+                parametros.put("talla", talla);
+                parametros.put("estilo", estilo);
+                parametros.put("color", color);
+                parametros.put("epoca", epoca);
+                parametros.put("categoria", categoria);
+                parametros.put("subcategoria", subcategoria);
+                parametros.put("cantidad", ""+cantidad);
+                parametros.put("marca", marca);
+                parametros.put("imagenString", imagenConvertida);
+                parametros.put("estado_limpio", ""+ESTADO_LIMPIO_TRUE);
+                parametros.put("uidUsuario", uid);
+
+                return parametros;
+            }
+        };
+        //request.add(stringRequest);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2, DefaultRetryPolicy.DEFAULT_MAX_RETRIES, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        VolleySingleton.getIntanciaVolley(contexto).addToRequestQueue(stringRequest);
+    }
+
+
+
+    public ArrayList<Prenda> obtenerPrendas(String uid) throws ServidorPHPException {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        // Variables;
+        int id, cantidad;
+        String talla, estilo, color, epoca, categoria, subcategoria, fotoString, marca, estadoLimpio;
+        boolean limpio;
+        ArrayList<Prenda> todasPrendas = new ArrayList<>();
+
+        Prenda prenda = null;
+
+        HashMap<String, String> parametros = new HashMap<>();
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(obtenerPrendas, parametros);
+
+            JSONArray arrayPrendas = datos.getJSONArray("datos");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                for (int i = 0; i < arrayPrendas.length(); i++) {
+                    JSONObject obj = (JSONObject) arrayPrendas.get(i);
+                    id = obj.getInt("id");
+                    talla = obj.getString("talla");
+                    estilo = obj.getString("estilo");
+                    color = obj.getString("color");
+                    epoca = obj.getString("epoca");
+                    categoria = obj.getString("categoria");
+                    subcategoria = obj.getString("subcategoria");
+                    fotoString = obj.getString("foto");
+                    cantidad = obj.getInt("cantidad");
+                    marca = obj.getString("marca");
+                    estadoLimpio = obj.getString("estado_limpio");
+
+                    if (estadoLimpio.equalsIgnoreCase("1")) {
+                        limpio = true;
+                    } else {
+                        limpio = false;
+                    }
+
+                    Bitmap imagenPrendaConvertida = Prenda.convertirStringABitmap(fotoString);
+
+                    prenda = new Prenda(id, talla, estilo, color, epoca, categoria, subcategoria, imagenPrendaConvertida, cantidad, marca, limpio);
+                    todasPrendas.add(prenda);
+                }
+                Log.d("LONGITUD ARRAY", ""+todasPrendas.size());
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return todasPrendas;
+    }
+
+
     public boolean actualizarUsuario(String uid, int altura, int peso, String tallaPorDefecto) throws ServidorPHPException {
 
         Boolean consultaCorrecta = false;
@@ -129,6 +266,45 @@ public class ServidorPHP {
         }
 
         return consultaCorrecta;
+    }
+
+
+    public boolean insertarPrenda(String talla, String estilo, String color, String epoca, String categoria, String subcategoria,
+                                  int cantidad, String marca, String imagen, boolean estado_limpio, String uid ) throws ServidorPHPException {
+        boolean insertada = false;
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+
+        HashMap<String, String> parametros = new HashMap<>();
+        if (uid.isEmpty() && talla.isEmpty() && estilo.isEmpty() && color.isEmpty() && categoria.isEmpty() && subcategoria.isEmpty()
+                && cantidad == 0 && marca.isEmpty() && imagen.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("talla", talla);
+            parametros.put("estilo", estilo);
+            parametros.put("color", color);
+            parametros.put("epoca", epoca);
+            parametros.put("categoria", categoria);
+            parametros.put("subcategoria", subcategoria);
+            parametros.put("cantidad", ""+cantidad);
+            parametros.put("marca", marca);
+            parametros.put("imagenString", imagen);
+            parametros.put("estado_limpio", ""+estado_limpio);
+            parametros.put("uidUsuario", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(insertarPrenda, parametros);
+            // Pruebas:
+            Log.d("Parametros: ", ""+parametros);
+            insertada = datos.getBoolean("resultado");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return insertada;
     }
 
 

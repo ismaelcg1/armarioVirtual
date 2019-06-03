@@ -47,7 +47,7 @@ public class MiArmarioRopaInferior extends Fragment implements View.OnClickListe
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         listaRopaInferior.setLayoutManager(llm);
 
-
+/*
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
@@ -63,7 +63,7 @@ public class MiArmarioRopaInferior extends Fragment implements View.OnClickListe
                 "Azul", "Verano", "Parte inferior",
                 "Pantalones", R.drawable.pantalones_r100, 1));
         // ----------------------------------------
-
+*/
         // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
         AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(getContext(), ropaInferior);
         listaRopaInferior.setAdapter(adaptadorPrendas);

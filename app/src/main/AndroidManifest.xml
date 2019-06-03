@@ -60,7 +60,13 @@
             android:name="com.example.armariovirtual.ActividadConsultar"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
+            android:name="com.example.armariovirtual.SplashScreenObtenerDatos"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name="com.example.armariovirtual.ActividadInfoPrendaCompleta"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name="com.example.armariovirtual.MainIntercambio"
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name="com.example.armariovirtual.MiCuenta"

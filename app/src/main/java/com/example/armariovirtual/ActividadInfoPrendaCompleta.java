@@ -1,6 +1,7 @@
 package com.example.armariovirtual;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -12,7 +13,7 @@ import android.widget.TextView;
 public class ActividadInfoPrendaCompleta extends AppCompatActivity implements View.OnClickListener{
 
     private Toolbar appToolbar;
-    private TextView tvCantidad, tvTalla, tvEstilo, tvColor, tvEpoca, tvCategoria, tvSubcategoria, tvEstado;
+    private TextView tvCantidad, tvTalla, tvEstilo, tvColor, tvEpoca, tvCategoria, tvSubcategoria, tvEstado, tvMarca;
     private ImageView imagenPrendaActual;
 
     @Override
@@ -35,8 +36,11 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
             String categoriaPrendaSeleccionada =(String) b.get("categoriaPrenda");
             String subcategoriaPrendaSeleccionada =(String) b.get("subcategoriaPrenda");
             boolean estadoPrendaSeleccionada =(boolean) b.get("estadoPrenda");
-            int imagenPrendaSeleccionada =(int) b.get("imagenPrenda");
+            Bitmap imagenPrendaSeleccionada =(Bitmap) b.get("imagenPrenda");
             int cantidadPrendaSeleccionada =(int) b.get("cantidadPrenda");
+            String marcaPrendaSeleccionada = (String) b.get("marcaPrenda");
+
+            //aaaaaaaaaaaaaaa por aqui te habias quedado
 
             tvTalla.setText(tallaPrendaSeleccionada);
             tvEstilo.setText(estiloPrendaSeleccionada);
@@ -45,8 +49,8 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
             tvCategoria.setText(categoriaPrendaSeleccionada);
             tvSubcategoria.setText(subcategoriaPrendaSeleccionada);
             tvCantidad.setText(""+cantidadPrendaSeleccionada);
-
-            //imagenPrendaActual.set
+            tvMarca.setText(marcaPrendaSeleccionada);
+            imagenPrendaActual.setImageBitmap(imagenPrendaSeleccionada);
 
             if (estadoPrendaSeleccionada) {
                 tvEstado.setText("Limpio");
@@ -54,8 +58,6 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
                 tvEstado.setText("Sucio");
             }
         }
-
-
         // Toobar
         appToolbar.setTitle(R.string.nombreActividadInfoPrendaCompleta);
         appToolbar.setNavigationIcon(R.drawable.atras_34dp);
@@ -78,6 +80,8 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
         tvCategoria = findViewById(R.id.categoriaPrendaVisualizada);
         tvSubcategoria = findViewById(R.id.subcategoriaPrendaVisualizada);
         tvEstado = findViewById(R.id.estadoPrendaVisualizada);
+        imagenPrendaActual = findViewById(R.id.imagenPrendaDetallada);
+        tvMarca = findViewById(R.id.marcaPrendaVisualizada);
     }
 
 

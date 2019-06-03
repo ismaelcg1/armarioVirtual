@@ -51,6 +51,8 @@ public class MiArmarioComplementos extends Fragment implements View.OnClickListe
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
+
+        /*
         complementos.add(new Prenda( 0,"M", "Diario",
                 "Azul", "Otoño", "Accesorios",
                 "Reloj", R.drawable.reloj_r100, 1));
@@ -64,7 +66,7 @@ public class MiArmarioComplementos extends Fragment implements View.OnClickListe
                 "Reloj", R.drawable.reloj_r100, 1));
 
         // ----------------------------------------
-
+*/
         AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(getContext(), complementos);
         listaComplementos.setAdapter(adaptadorPrendas);
         adaptadorPrendas.refrescar();

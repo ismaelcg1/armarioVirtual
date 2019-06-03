@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -210,7 +212,7 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 } else if (opcion == 3) {
 
                 } else if (opcion == 4){
-
+                    eliminarUsuario();
                 } else {
 
                 }
@@ -224,6 +226,45 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         });
         AlertDialog dialog = builder.create();
         builder.show();
+    }
+
+    private void eliminarUsuario() {
+
+        user.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            // TODO Cuenta de usuario borrada, hay que borrarlo todo
+                            // TODO Segun firebase, si el usuario accedió hace un tiempo debe volver a re-autentificarse para poder borrar la sesión por seguridad.
+                            Toast.makeText(MiCuenta.this, "Cuenta borrada",
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(MiCuenta.this, "Usuario: "+user,
+                                    Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
+
+    private void reAutentificacion() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Get auth credentials from the user for re-authentication. The example below shows
+        // email and password credentials but there are multiple possible providers,
+        // such as GoogleAuthProvider or FacebookAuthProvider.
+        AuthCredential credential = EmailAuthProvider
+                .getCredential("user@example.com", "password1234");
+
+        // Prompt the user to re-provide their sign-in credentials
+        user.reauthenticate(credential)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        // Usuario re-autentificado
+                    }
+                });
+        // [END reauthenticate]
     }
 
     @Override

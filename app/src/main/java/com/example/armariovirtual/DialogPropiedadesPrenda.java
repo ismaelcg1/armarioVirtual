@@ -101,32 +101,39 @@ public class DialogPropiedadesPrenda {
     }
 
     private void inicializarStringPicker(String op) {
-        numberPickerString.setMinValue(0);
-        numberPickerString.setWrapSelectorWheel(true);
-        // Debemos ver la opción a coger y devolver el array:
-        switch (op) {
-            case "Talla":
-                cabeceraStringPicker.setText(R.string.tallaNumberPickerString);
-                numberPickerString.setMaxValue(tallas.length-1);
-                numberPickerString.setDisplayedValues(tallas);
-                break;
-            case "Estilo":
-                cabeceraStringPicker.setText(R.string.estiloNumberPickerString);
-                numberPickerString.setMaxValue(estilos.length-1);
-                numberPickerString.setDisplayedValues(estilos);
-                break;
-            case "Categoria":
-                cabeceraStringPicker.setText(R.string.categoriaNumberPickerString);
-                numberPickerString.setMaxValue(categorias.length-1);
-                numberPickerString.setDisplayedValues(categorias);
-                break;
-            case "Subcategoria":
-                cabeceraStringPicker.setText(R.string.subcategoriaNumberPickerString);
-                numberPickerString.setMaxValue(subcategorias.length-1);
-                numberPickerString.setDisplayedValues(subcategorias);
-                break;
-        }
 
+        if (op.equalsIgnoreCase("Cantidad")) {
+            numberPickerString.setMinValue(1);
+            numberPickerString.setMaxValue(1000);
+            numberPickerString.setWrapSelectorWheel(true);
+            cabeceraStringPicker.setText(R.string.cantidadNumberPickerString);
+        } else {
+            numberPickerString.setMinValue(0);
+            numberPickerString.setWrapSelectorWheel(true);
+            // Debemos ver la opción a coger y devolver el array:
+            switch (op) {
+                case "Talla":
+                    cabeceraStringPicker.setText(R.string.tallaNumberPickerString);
+                    numberPickerString.setMaxValue(tallas.length-1);
+                    numberPickerString.setDisplayedValues(tallas);
+                    break;
+                case "Estilo":
+                    cabeceraStringPicker.setText(R.string.estiloNumberPickerString);
+                    numberPickerString.setMaxValue(estilos.length-1);
+                    numberPickerString.setDisplayedValues(estilos);
+                    break;
+                case "Categoria":
+                    cabeceraStringPicker.setText(R.string.categoriaNumberPickerString);
+                    numberPickerString.setMaxValue(categorias.length-1);
+                    numberPickerString.setDisplayedValues(categorias);
+                    break;
+                case "Subcategoria":
+                    cabeceraStringPicker.setText(R.string.subcategoriaNumberPickerString);
+                    numberPickerString.setMaxValue(subcategorias.length-1);
+                    numberPickerString.setDisplayedValues(subcategorias);
+                    break;
+            }
+        }
     }
 
     private void verOpcion (String opcion) {
@@ -145,6 +152,9 @@ public class DialogPropiedadesPrenda {
                 break;
             case "Subcategoria":
                 interfazDialogString.cogerParametro(subcategorias[seleccionStringPicker]);
+                break;
+            case "Cantidad":
+                interfazDialogString.cogerParametro(""+seleccionStringPicker);
                 break;
         }
 

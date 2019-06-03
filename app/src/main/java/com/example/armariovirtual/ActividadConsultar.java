@@ -1,12 +1,19 @@
 package com.example.armariovirtual;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.widget.Toolbar;
+
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -16,13 +23,21 @@ public class ActividadConsultar extends AppCompatActivity implements View.OnClic
     private ImageView imagenPrenda;
     private ArrayList<Prenda> prendas;
     private Toolbar appToolbar;
+    // FireBase
+    private FirebaseUser user;
+    private ServidorPHP objetoServidor;
+    private final int TIEMPO_ESPERA_INICIAL = 800;
+    private Context contexto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_consultar);
+        contexto = this;
         // Toobar
         appToolbar = findViewById(R.id.appToolbar);
+        listaPrendas = findViewById(R.id.recyclerConsultar);
+        imagenPrenda = findViewById(R.id.imagenPrenda);
         appToolbar.setTitle(R.string.texto3MainActivityDrawer);
         appToolbar.setNavigationIcon(R.drawable.atras_34dp);
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -31,87 +46,47 @@ public class ActividadConsultar extends AppCompatActivity implements View.OnClic
                 finish();
             }
         });
-
-        listaPrendas = findViewById(R.id.recyclerConsultar);
-        imagenPrenda = findViewById(R.id.imagenPrenda);
-
         listaPrendas.setOnClickListener(this);
 
-        // ----------------------------------------
-        // TODO arraylist de prueba
-        // Aquí introducimos los datos en el array, su foto y su texto
+        // Para que el usuario 'no tenga que esperar a que se rellene el array con la peticion', le mostramos una animación:
+        abrirSplashEsperarDatos();
+
         prendas = new ArrayList<>();
-        prendas.add(new Prenda( 0, "L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 1, "S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 2, "42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        prendas.add(new Prenda( 3,"L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 4,"S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 5,"42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        prendas.add(new Prenda( 6,"L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 7,"S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 8,"42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        prendas.add(new Prenda( 9,"L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 10,"S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 11,"42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        prendas.add(new Prenda( 12,"L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 13,"S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 14,"42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        prendas.add(new Prenda( 15,"L", "Diario",
-                "Azul", "Otoño", "Parte inferior",
-                "Pantalones", R.drawable.pantalones_r100, 1));
-        prendas.add(new Prenda( 16, "S", "Deporte",
-                "Rojo", "Primavera", "Parte superior",
-                "Camiseta manga corta", R.drawable.sueter_r100, 1));
-        prendas.add(new Prenda( 17, "42", "Diario",
-                "Azul", "Otoño", "Calzado",
-                "Zapatillas", R.drawable.zapatillas_r100, 1));
-        // ----------------------------------------
-
-
-        // Hay que crear en la carpeta values un fichero dimens.xml y crear ahí list_space
-        // SpaceItemDecoration nos dará error, hay que crear una clase: Alt+Intro
+        objetoServidor = new ServidorPHP();
+        user = FirebaseAuth.getInstance().getCurrentUser();
         listaPrendas.addItemDecoration(new SpaceItemDecoration(this, R.dimen.list_space_recycler_consultar, true, true));
         // Con esto el tamaño del recyclerwiew no cambiará
         listaPrendas.setHasFixedSize(true);
-
         // Creo un layoutmanager para el recyclerview
         LinearLayoutManager llm = new LinearLayoutManager(this);
         listaPrendas.setLayoutManager(llm);
 
-        // Creamos un adaptadorF para incluirlo en la listaOptimizada -> RecyclerView
-        AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(this, prendas);
-        listaPrendas.setAdapter(adaptadorPrendas);
-        adaptadorPrendas.refrescar();
+        obtenerDatosServidor();
+
+    }
+
+    private void obtenerDatosServidor() {
+        Handler handler = new Handler();
+
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                try {
+                    prendas = objetoServidor.obtenerPrendas(user.getUid());
+                    // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
+                    AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(contexto, prendas);
+                    listaPrendas.setAdapter(adaptadorPrendas);
+                    adaptadorPrendas.refrescar();
+                } catch (ServidorPHPException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, TIEMPO_ESPERA_INICIAL);
+    }
+
+
+    private void abrirSplashEsperarDatos() {
+        Intent intent = new Intent(this, SplashScreenObtenerDatos.class);
+        startActivity(intent);
     }
 
 

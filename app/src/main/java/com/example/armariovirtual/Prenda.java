@@ -1,13 +1,18 @@
 package com.example.armariovirtual;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
+
 public class Prenda {
 
-    private String tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda;
-    private int id, imagenPrenda, cantidadPrenda;
+    private String tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda, marca;
+    private int id, cantidadPrenda;
+    private Bitmap imagenPrenda;
     private boolean estado_limpio;
 
-    public Prenda (int id, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda,
-                   String categoriaPrenda, String subcategoriaPrenda, int imagenPrenda, int cantidadPrenda) {
+    public Prenda (int id, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda, String categoriaPrenda,
+                   String subcategoriaPrenda, Bitmap imagenPrenda, int cantidadPrenda, String marca, boolean estado_limpio) {
         this.id = id;
         this.tallaPrenda = tallaPrenda;
         this.estiloPrenda = estiloPrenda;
@@ -17,7 +22,8 @@ public class Prenda {
         this.subcategoriaPrenda = subcategoriaPrenda;
         this.imagenPrenda = imagenPrenda;
         this.cantidadPrenda = cantidadPrenda;
-        estado_limpio = true;
+        this.marca = marca;
+        this.estado_limpio = estado_limpio;
     }
 
     public int getId() {
@@ -76,11 +82,11 @@ public class Prenda {
         this.subcategoriaPrenda = subcategoriaPrenda;
     }
 
-    public int getImagenPrenda() {
+    public Bitmap getImagenPrenda() {
         return imagenPrenda;
     }
 
-    public void setImagenPrenda(int imagenPrenda) {
+    public void setImagenPrenda(Bitmap imagenPrenda) {
         this.imagenPrenda = imagenPrenda;
     }
 
@@ -100,6 +106,27 @@ public class Prenda {
         this.cantidadPrenda = cantidadPrenda;
     }
 
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public static Bitmap convertirStringABitmap(String fotoString) {
+        try{
+            byte [] encodeByte = Base64.decode(fotoString,Base64.DEFAULT);
+            Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+            return bitmap;
+        }
+        catch(Exception e){
+            e.getMessage();
+            return null;
+        }
+    }
+
+
     @Override
     public String toString() {
         return "Prenda{" +
@@ -109,9 +136,10 @@ public class Prenda {
                 ", epocaPrenda='" + epocaPrenda + '\'' +
                 ", categoriaPrenda='" + categoriaPrenda + '\'' +
                 ", subcategoriaPrenda='" + subcategoriaPrenda + '\'' +
+                ", marca='" + marca + '\'' +
                 ", id=" + id +
-                ", imagenPrenda=" + imagenPrenda +
                 ", cantidadPrenda=" + cantidadPrenda +
+                ", imagenPrenda=" + imagenPrenda +
                 ", estado_limpio=" + estado_limpio +
                 '}';
     }

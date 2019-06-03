@@ -31,7 +31,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imageView7"
+                    android:id="@+id/imagenPrendaDetallada"
                     style="@style/imagenActividadInfoPrendaCompleta"
                     app:srcCompat="@drawable/gafas_r100" />
             </LinearLayout>
@@ -168,6 +168,28 @@
 
                     <TextView
                         android:id="@+id/subcategoriaPrendaVisualizada"
+                        style="@style/estiloTextosActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/layoutTextosActividadInfoPrendaCompleta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView333"
+                        style="@style/estiloTextoInfoActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/marcaPrendaActividadInfoPrendaCompleta" />
+
+                    <TextView
+                        android:id="@+id/marcaPrendaVisualizada"
                         style="@style/estiloTextosActividadInfoPrendaCompleta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

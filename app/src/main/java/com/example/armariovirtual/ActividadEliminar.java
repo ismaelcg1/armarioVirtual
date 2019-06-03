@@ -47,6 +47,7 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
         // ----------------------------------------
         // TODO arraylist de prueba
         prendas = new ArrayList<>();
+        /*
         prendas.add(new Prenda( 0,"L", "Diario",
                 "Azul", "Otoño", "Parte inferior",
                 "Pantalones", R.drawable.pantalones_r100, 1));
@@ -101,7 +102,7 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
         adaptadorPrendas = new AdaptadorPrendas(this, prendas);
         listaPrendas.setAdapter(adaptadorPrendas);
         adaptadorPrendas.refrescar();
-
+*/
 
         // ------------------------------
         // Para poder deslizar RecyclerView

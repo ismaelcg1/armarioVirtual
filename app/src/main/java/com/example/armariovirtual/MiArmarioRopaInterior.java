@@ -48,7 +48,7 @@ public class MiArmarioRopaInterior extends Fragment implements View.OnClickListe
         // Creo un layoutmanager para el recyclerview
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         listaRopaInterior.setLayoutManager(llm);
-
+/*
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
@@ -68,7 +68,7 @@ public class MiArmarioRopaInterior extends Fragment implements View.OnClickListe
                 "Rojo", "Invierno", "Ropa interior",
                 "Calzoncillos", R.drawable.calzoncillos_r100, 1));
         // ----------------------------------------
-
+*/
 
         // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
         AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(getContext(), ropaInterior);

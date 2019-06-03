@@ -158,6 +158,8 @@ public class MainActivityDrawer extends AppCompatActivity
             intent = new Intent(this, ActividadConsultar.class);
             startActivity(intent);
         } else if (id == R.id.intercambio) {
+            intent = new Intent(this, MainIntercambio.class);
+            startActivity(intent);
 
         } else if (id == R.id.configuracion_usuario) {
             // Pasamos el objeto usuario:

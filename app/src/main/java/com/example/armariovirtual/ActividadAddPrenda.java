@@ -2,21 +2,30 @@ package com.example.armariovirtual;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import androidx.annotation.RequiresApi;
+
 import com.google.android.material.textfield.TextInputLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -24,6 +33,8 @@ import com.karumi.dexter.listener.DexterError;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.PermissionRequestErrorListener;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,15 +42,19 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         DialogoSeleccionarEstacionPersonalizado.finalizarDialog, DialogoSeleccionarColorPersonalizado.finalizarDialogColores {
 
     private ImageView botonInsertarImagen;
-    private static final String IMAGE_DIRECTORY = "/imagenes_Armario_Virtual";
     private int GALLERY = 1, CAMERA = 2;
     private Toolbar appToolbar;
+    private Context contexto;
 
-    private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnCategoria, btnEstilo, btnSubcategoria;
-    private TextInputLayout textoTalla, textoEpoca, textoColor, textoCategoria, textoEstilo, textoSubcategoria;
-    private String seleccion, talla, estacion, color, estilo , categoria, subcategoria;
+    private Button subirPrenda, btnTalla, btnEpoca, btnColor, btnCategoria, btnEstilo, btnSubcategoria, btnCantidadPrendas, btnMarca;
+    private TextInputLayout textoTalla, textoEpoca, textoColor, textoCategoria, textoEstilo, textoSubcategoria, textoCantidadPrendas, textoMarca;
+    private String seleccion, talla, epoca, color, estilo , categoria, subcategoria, imagenConvertida, marca, usuarioActual;
+    private int cantidadDePrendas;
     // Para almacenar la foto de la prenda
     private Bitmap imagenFoto;
+    private Bitmap bitmapRedimensionado;
+    // FireBase
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,20 +75,42 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
             }
         });
         requestMultiplePermissions();
-
-        botonInsertarImagen = findViewById(R.id.imageViewInsertarImagen);
-        subirPrenda = findViewById(R.id.bSubirPrenda);
-
-
-        botonInsertarImagen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPictureDialog();
-            }
-        });
-
     }
 
+    protected void definicionDeVariables() {
+        botonInsertarImagen = findViewById(R.id.imageViewInsertarImagen);
+        appToolbar = findViewById(R.id.appToolbar);
+        subirPrenda = findViewById(R.id.bSubirPrenda);
+        btnTalla = findViewById(R.id.bTalla);
+        btnEpoca = findViewById(R.id.bEpoca);
+        btnColor = findViewById(R.id.bColor);
+        btnCategoria = findViewById(R.id.bCategoria);
+        btnEstilo = findViewById(R.id.bEstilo);
+        btnSubcategoria = findViewById(R.id.bSubcategoria);
+        btnCantidadPrendas = findViewById(R.id.bCantidad);
+        btnMarca = findViewById(R.id.bMarca);
+
+        textoTalla = findViewById(R.id.tallaPrenda);
+        textoEpoca = findViewById(R.id.epocaPrenda);
+        textoColor = findViewById(R.id.colorPrenda);
+        textoCategoria = findViewById(R.id.categoriaPrenda);
+        textoEstilo = findViewById(R.id.estiloPrenda);
+        textoSubcategoria = findViewById(R.id.subcategoriaPrenda);
+        textoCantidadPrendas = findViewById(R.id.cantidadPrendas);
+        textoMarca = findViewById(R.id.marcaPrenda);
+
+        contexto = this;
+
+        epoca = "";
+        color = "";
+        estilo = "";
+        talla = "";
+        categoria = "";
+        subcategoria = "";
+        imagenConvertida = "";
+        cantidadDePrendas = 1;
+        marca = "";
+    }
 
     private void onClickListener() {
         btnTalla.setOnClickListener(this);
@@ -82,11 +119,15 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         btnEpoca.setOnClickListener(this);
         btnCategoria.setOnClickListener(this);
         btnSubcategoria.setOnClickListener(this);
+        btnCantidadPrendas.setOnClickListener(this);
+        btnMarca.setOnClickListener(this);
+        botonInsertarImagen.setOnClickListener(this);
+        subirPrenda.setOnClickListener(this);
     }
 
 
     private void showPictureDialog(){
-        AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
+        final AlertDialog.Builder pictureDialog = new AlertDialog.Builder(this);
         pictureDialog.setTitle(getResources().getString(R.string.pictureDialogTituloActividadInsertar));
         String[] pictureDialogItems = {
                 getResources().getString(R.string.pictureDialogGaleriaActividadInsertar),
@@ -106,30 +147,6 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                     }
                 });
         pictureDialog.show();
-    }
-
-    protected void definicionDeVariables() {
-        appToolbar = findViewById(R.id.appToolbar);
-        subirPrenda = findViewById(R.id.bSubirPrenda);
-        btnTalla = findViewById(R.id.bTalla);
-        btnEpoca = findViewById(R.id.bEpoca);
-        btnColor = findViewById(R.id.bColor);
-        btnCategoria = findViewById(R.id.bCategoria);
-        btnEstilo = findViewById(R.id.bEstilo);
-        btnSubcategoria = findViewById(R.id.bSubcategoria);
-
-        textoTalla = findViewById(R.id.tallaPrenda);
-        textoEpoca = findViewById(R.id.epocaPrenda);
-        textoColor = findViewById(R.id.colorPrenda);
-        textoCategoria = findViewById(R.id.categoriaPrenda);
-        textoEstilo = findViewById(R.id.estiloPrenda);
-        textoSubcategoria = findViewById(R.id.subcategoriaPrenda);
-
-        estacion = "";
-        color = "";
-        estilo = "";
-        categoria = "";
-        subcategoria = "";
     }
 
     public void choosePhotoFromGallary() {
@@ -157,10 +174,10 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 Uri contentURI = data.getData();
                 try {
                     imagenFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
-                    Bitmap bitmapaux = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
+                    bitmapRedimensionado = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
 
                     Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
-                    botonInsertarImagen.setImageBitmap(bitmapaux);
+                    botonInsertarImagen.setImageBitmap(bitmapRedimensionado);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -169,48 +186,47 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
             }
 
         } else if (requestCode == CAMERA) {
-            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-            Bitmap bitmap = Bitmap.createScaledBitmap(thumbnail, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
-            botonInsertarImagen.setImageBitmap(bitmap);
+            imagenFoto = (Bitmap) data.getExtras().get("data");
+            bitmapRedimensionado = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
+            botonInsertarImagen.setImageBitmap(bitmapRedimensionado);
 
             Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
         }
-
-        // TODO guardar Imagen
-
+        // Redimensionamos la imagen para guardarla posteriormente y que no ocupe tanto espacio:
+        bitmapRedimensionado = redimensionarImagen(imagenFoto, 240, 290);
+        imagenConvertida = convertirImgString(bitmapRedimensionado);
     }
 
-    /* PARA GUARDAR LA IMAGEN EN EL DISPOSITIVO
-    public String saveImage(Bitmap myBitmap) {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File wallpaperDirectory = new File(
-                Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY);
-        // have the object build the directory structure, if needed.
-        if (!wallpaperDirectory.exists()) {
-            wallpaperDirectory.mkdirs();
-        }
+    private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
 
-        try {
-            File f = new File(wallpaperDirectory, Calendar.getInstance()
-                    .getTimeInMillis() + ".jpg");
-            f.createNewFile();
-            FileOutputStream fo = new FileOutputStream(f);
-            fo.write(bytes.toByteArray());
-            MediaScannerConnection.scanFile(this,
-                    new String[]{f.getPath()},
-                    new String[]{"image/jpeg"}, null);
-            fo.close();
-            Log.d("TAG", "File Saved::---&gt;" + f.getAbsolutePath());
+        int ancho=bitmap.getWidth();
+        int alto=bitmap.getHeight();
 
-            return f.getAbsolutePath();
-        } catch (IOException e1) {
-            e1.printStackTrace();
+        if(ancho>anchoNuevo || alto>altoNuevo){
+            float escalaAncho=anchoNuevo/ancho;
+            float escalaAlto= altoNuevo/alto;
+
+            Matrix matrix=new Matrix();
+            matrix.postScale(escalaAncho,escalaAlto);
+
+            return Bitmap.createBitmap(bitmap,0,0,ancho,alto,matrix,false);
+
+        }else{
+            return bitmap;
         }
-        return "";
     }
 
-*/
+    private String convertirImgString(Bitmap bitmap) {
+
+        ByteArrayOutputStream array=new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100,array);
+        byte[] imagenByte=array.toByteArray();
+        String imagenString= Base64.encodeToString(imagenByte,Base64.DEFAULT);
+
+        return imagenString;
+    }
+
+
     private void  requestMultiplePermissions(){
         Dexter.withActivity(this)
                 .withPermissions(
@@ -280,11 +296,101 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                     new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, categoria);
                 }
                 break;
+            case R.id.bCantidad:
+                seleccion = "Cantidad";
+                new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, null);
+                break;
+            case R.id.bMarca:
+                seleccion = "Marca";
+                new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, null);
+                break;
             case R.id.bSubirPrenda:
-                // TODO porque no van los errores?
-                textoTalla.setError("Talla requerida");
+                if (!comprobarDatosVacios()) {
+                    ServidorPHP objeto = new ServidorPHP();
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    marca = "Nike";
+                    objeto.cargarWebService(user.getUid(), contexto, talla, estilo, color, epoca, categoria, subcategoria, cantidadDePrendas, marca, imagenConvertida);
+                }
+
+                break;
+            case R.id.imageViewInsertarImagen:
+                showPictureDialog();
                 break;
         }
+    }
+
+    /*
+
+    private void insertarPrenda() {
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        ServidorPHP objeto = new ServidorPHP();
+        // Tambien pruebas
+        marca = "Nike";
+        boolean pruebas = false;
+        try {
+            pruebas = objeto.insertarPrenda(talla, estilo, color, epoca, categoria, subcategoria, cantidadDePrendas, marca,
+                    imagenConvertida, false, user.getUid() );
+
+        } catch (ServidorPHPException e) {
+            e.printStackTrace();
+        }
+        // Pruebas
+        Toast.makeText(ActividadAddPrenda.this,"Resultado consulta: "+pruebas, Toast.LENGTH_LONG).show();
+    }
+    */
+
+    private boolean comprobarDatosVacios() {
+        boolean algunDatoVacio = false;
+
+        if (categoria.isEmpty()) {
+            textoCategoria.getEditText().setError(getResources().getString(R.string.faltaCategoriaActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoCategoria.getEditText().setError(null);
+        }
+
+        if (subcategoria.isEmpty()) {
+            textoSubcategoria.getEditText().setError(getResources().getString(R.string.faltaSubcategoriaActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoSubcategoria.getEditText().setError(null);
+        }
+
+        if (talla.isEmpty()) {
+            textoTalla.getEditText().setError(getResources().getString(R.string.faltaTallaActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoTalla.getEditText().setError(null);
+        }
+
+        if (estilo.isEmpty()) {
+            textoEstilo.getEditText().setError(getResources().getString(R.string.faltaEstiloActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoEstilo.getEditText().setError(null);
+        }
+
+        if (color.isEmpty()) {
+            textoColor.getEditText().setError(getResources().getString(R.string.faltaColorActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoColor.getEditText().setError(null);
+        }
+
+        if (epoca.isEmpty()) {
+            textoEpoca.getEditText().setError(getResources().getString(R.string.faltaEpocaActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoEpoca.getEditText().setError(null);
+        }
+
+        if (imagenConvertida.isEmpty()) {
+            algunDatoVacio = true;
+            Toast.makeText(ActividadAddPrenda.this,
+                    getResources().getString(R.string.faltaImagenActividadInsertar), Toast.LENGTH_LONG).show();
+        }
+
+        return algunDatoVacio;
     }
 
 
@@ -308,6 +414,10 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 subcategoria = seleccionado;
                 textoSubcategoria.getEditText().setText(subcategoria);
                 break;
+            case "Cantidad":
+                cantidadDePrendas = Integer.parseInt(seleccionado);
+                textoCantidadPrendas.getEditText().setText(seleccionado); // Porque en este caso sería el nº en String
+                break;
             default:
                 // Por defecto
                 break;
@@ -316,8 +426,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
 
     @Override
     public void cogerString(String seleccion) {
-        estacion = seleccion;
-        textoEpoca.getEditText().setText(estacion);
+        epoca = seleccion;
+        textoEpoca.getEditText().setText(epoca);
     }
 
     @Override

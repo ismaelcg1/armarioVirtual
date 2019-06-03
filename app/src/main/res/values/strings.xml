@@ -111,6 +111,7 @@
     <string name="estadoLimpioPrendaActividadInfoPrendaCompleta">Limpio</string>
     <string name="estadoSucioPrendaActividadInfoPrendaCompleta">Sucio</string>
     <string name="cantidadPrendaActividadInfoPrendaCompleta">Cantidad:</string>
+    <string name="marcaPrendaActividadInfoPrendaCompleta">Marca:</string>
     <!-- Epoca, color, estilo, categoría y subcategoría se cogen de ActividadInsertar-->
 
 
@@ -141,7 +142,8 @@
     <string name="resetearArmarioDialogMiCuentaAdmin">¿Desea resetear todo el contenido de la BBDD global de Mi Armario?</string>
 
     <string name="eliminarCuentaTituloDialogMiCuenta">Eliminar mi Cuenta</string>
-    <string name="eliminarCuentaDialogMiCuenta">¿Quires eliminar toda la información relacionada con la cuenta \'<u>%1$s</u>\' ?</string>
+    <string name="eliminarCuentaDialogMiCuenta">¿Quires eliminar toda la información relacionada con la cuenta \'<u>%1$s</u>\' ?\n\n
+                                                <b>NOTA:</b> Se borrará todo el contenido asociado a dicha cuenta y se cerrará la sesión actual.</string>
 
     <string name="dialogTextoSiMiCuenta">Sí, claro</string>
     <string name="dialogTextoCancelarMiCuenta">Cancelar</string>
@@ -152,13 +154,14 @@
     <string name="nombreInicialActividadInsertar">Insertar prenda/accesorio</string>
     <string name="textoExplicativoFotoActividadInsertar">Pulse la imagen inferior para añadir una foto:</string>
     <string name="textoExplicativoActividadInsertar">Introduzca los siguientes datos para registrar su prenda correctamente:</string>
-    <string name="cantidadActividadInsertar">Cantidad de prendas</string>
     <string name="tallaActividadInsertar">Talla por defecto: </string>
     <string name="epocaActividadInsertar">Época:</string>
     <string name="colorActividadInsertar">Color: </string>
     <string name="estiloActividadInsertar">Estilo: </string>
     <string name="categoriaActividadInsertar">Categoría: </string>
     <string name="subcategoriaActividadInsertar">Subcategoría: </string>
+    <string name="marcaActividadInsertar">Marca: </string>
+    <string name="cantidadActividadInsertar">Cantidad por defecto: </string>
 
     <string name="cambiarActividadInsertar">Cambiar</string>
     <string name="seleccionarActividadInsertar">Seleccionar</string>
@@ -169,6 +172,19 @@
     <string name="pictureDialogGaleriaActividadInsertar">Seleccionar foto de Galería</string>
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
     <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoriaPrenda, por favor, elija primero una categoría</string>
+
+    <string name="subiendoFotoActividadInsertar">Espere un momento, por favor. Subiendo prenda...</string>
+    <string name="prendaRegistroCorrectoActividadInsertar">Prenda registrada correctamente :)</string>
+    <string name="prendaRegistroIncorrectoActividadInsertar">Fallo con el servidor. Prenda no registrada :(</string>
+
+    <string name="faltaCategoriaActividadInsertar">Categoría requerida</string>
+    <string name="faltaSubcategoriaActividadInsertar">Subcategoría requerida</string>
+    <string name="faltaTallaActividadInsertar">Talla requerida</string>
+    <string name="faltaEstiloActividadInsertar">Estilo requerido</string>
+    <string name="faltaColorActividadInsertar">Color requerido</string>
+    <string name="faltaEpocaActividadInsertar">Estación del año requerida</string>
+    <string name="faltaImagenActividadInsertar">Seleccione una imagen haciendo click en la imagen superior</string>
+
 
     <!-- Actividad Eliminar -->
     <string name="mensajeBuilderActividadEliminar">¿Estás seguro de que deseas eliminar dicha/o prenda/accesorio?</string>
@@ -186,15 +202,16 @@
     <string name="agradecimientosInfoInformacion">Al director, mis compañeros y profesores de IT Poniente</string>
 
     <!-- DialogPersonalizados -->
-    <string name="textoDialogColor">Selecciona el color principal de su prenda:</string>
+    <string name="textoDialogColor">Selecciona el color principal de la prenda:</string>
     <string name="textoDialogEstacion">Selecciona la época del año en la que te pondrías dicha prenda:</string>
 
     <!-- NumberPickerString -->
 
     <string name="tallaNumberPickerString">Selecciona una talla:</string>
+    <string name="cantidadNumberPickerString">Selecciona la cantidad de prendas similares:</string>
     <string name="epocaNumberPickerString">Selecciona estación del año para ponerte la prenda:</string>
     <string name="colorNumberPickerString">Selecciona el color principal de la prenda:</string>
-    <string name="estiloNumberPickerString">Elige el estiloPrenda de la prenda:</string>
+    <string name="estiloNumberPickerString">Elige el estilo de la prenda:</string>
     <string name="categoriaNumberPickerString">Elige la categoría de la prenda:</string>
     <string name="subcategoriaNumberPickerString">Elige la subtegoría de la prenda:</string>
 
@@ -312,6 +329,41 @@
     <string name="chaqueta">Chaqueta</string>
     <string name="rebeca">Rebeca</string>
     <string name="abrigo">Abrigo</string>
+
+    <!-- MARCAS -->
+    <string name="sinMarca">Sin marca</string>
+    <string name="filsMarca">Fils</string>
+    <string name="adidasMarca">Adidas</string>
+    <string name="lottoMarca">Lotto</string>
+    <string name="jommaMarca">Joma</string>
+    <string name="kappaMarca">Kappa</string>
+    <string name="kelmeMarca">Kelme</string>
+    <string name="nikeMarca">Nike</string>
+    <string name="pumaMarca">Puma</string>
+    <string name="umbroMarca">Umbro</string>
+    <string name="vansMarca">Vans</string>
+    <string name="quicksilverMarca">Quicksilver</string>
+    <string name="armaniMarca">Giorgio Armani</string>
+    <string name="calvinKleinMarca">Calvin Klein</string>
+    <string name="chanelMarca">Chanel</string>
+    <string name="gucciMarca">Gucci</string>
+    <string name="lacosteMarca">Lacoste</string>
+
+    <string name="ralphMarca">Ralph Lauren</string>
+    <string name="levisMarca">Levi\'s</string>
+    <string name="dieselMarca">Diesel</string>
+    <string name="billabongMarca">Billabong</string>
+    <string name="zaraMarca">Zara</string>
+    <string name="bershkaMarca">Bershka</string>
+    <string name="cyaMarca">C&amp;A</string>
+    <string name="pullBearMarca">Pull&amp;Bear</string>
+
+    <string-array name="arrayMarcas">
+        <item>@string/sinMarca</item>
+        <item>@string/filsMarca</item>
+    </string-array>
+
+
     <!-- MUJERES ROPA SUPERIOR-->
     <string name="top">Top</string>
     <string name="bodie">Bodie</string>
@@ -430,6 +482,12 @@
     <!-- TEXTOS SplashScreen -->
     <string name="textoInicioSplashScreen">ARMARIO VIRTUAL</string>
     <string name="textoUsuarioCorrectoSplashScreen">Obteniendo los datos de su perfil...</string>
+    <string name="textoObtenerDatosSplashScreen">Obteniendo los datos de sus prendas</string>
+    <string name="textoUnMomentoSplashScreen">Un momento, por favor...</string>
 
+    <!-- TabbedActivity -->
+    <string name="nombreInicialMainIntercambio">Intercambio</string>
+    <string name="texto_tab_1_MainIntercambio">Mis prendas</string>
+    <string name="texto_tab_2_MainIntercambio">Otras prendas</string>
 
 </resources>

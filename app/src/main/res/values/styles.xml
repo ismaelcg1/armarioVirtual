@@ -444,18 +444,18 @@
     <!-- List_item_prendas -->
 
     <style name="estiloImagenListItemPrendas">
-        <item name="android:padding">15sp</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="estiloLayoutTextosListItemPrendas">
         <item name="android:padding">10sp</item>
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="estiloLayoutTextosListItemPrendas">
+        <item name="android:padding">8sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="estiloTextosListItemPrendas">
-        <item name="android:textSize">14sp</item>
-        <item name="android:padding">3sp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:padding">2sp</item>
     </style>
 
     <!-- actividad_toda_informacion_prenda -->
@@ -514,5 +514,21 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <!-- Toolbar intercambio -->
+    <style name="textoToolbarIntercambio">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:text">@string/nombreInicialMainIntercambio</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:layout_marginRight">56sp</item>
+    </style>
+
+    <style name="dividerListItem">
+        <item name="android:background">@color/colorRojoOscuro</item>
+        <item name="android:layout_marginRight">8sp</item>
+        <item name="android:layout_marginLeft">8sp</item>
+        <item name="android:layout_height">0.6sp</item>
+    </style>
 
 </resources>

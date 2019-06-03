@@ -52,6 +52,7 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
         // ----------------------------------------
         // TODO arraylist de prueba
         // Aquí introducimos los datos en el array, su foto y su texto
+        /*
         calzado.add(new Prenda( 0,"42", "Diario",
                 "Azul", "Otoño", "Calzado",
                 "Zapatillas", R.drawable.zapatillas_r100, 1));
@@ -80,7 +81,7 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
                 "Azul", "Otoño", "Calzado",
                 "Zapatillas", R.drawable.zapatillas_r100, 1));
         // ----------------------------------------
-
+*/
 
         // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
         AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(getContext(), calzado);
