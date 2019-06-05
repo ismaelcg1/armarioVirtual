@@ -114,8 +114,31 @@
     <string name="marcaPrendaActividadInfoPrendaCompleta">Marca:</string>
     <!-- Epoca, color, estilo, categoría y subcategoría se cogen de ActividadInsertar-->
 
-
     <string name="nombreActividadConfiguracion">Configuración</string>
+
+    <!-- Textos Consultar -->
+    <string name="nombreBotonActividadConsultar">Filtrar</string>
+    <string name="sinFiltrosActividadConsultar">Sin filtros</string>
+    <string name="filtroTallaActividadConsultar">Talla</string>
+    <string name="filtroEstiloActividadConsultar">Estilo</string>
+    <string name="filtroColorActividadConsultar">Color</string>
+    <string name="filtroEpocaActividadConsultar">Época</string>
+    <string name="filtroSubcategoriaActividadConsultar">Subcategoría</string>
+    <string name="filtroMarcaActividadConsultar">Marca</string>
+    <string name="filtroEstadoActividadConsultar">Estado prenda</string>
+    <string name="textoBusquedaActividadConsultar">Búsqueda: %1$s  ➭  %2$s</string>
+
+    <string-array name="arrayFiltros">
+        <item>@string/sinFiltrosActividadConsultar</item>
+        <item>@string/filtroTallaActividadConsultar</item>
+        <item>@string/filtroEstiloActividadConsultar</item>
+        <item>@string/filtroColorActividadConsultar</item>
+        <item>@string/filtroEpocaActividadConsultar</item>
+        <item>@string/filtroSubcategoriaActividadConsultar</item>
+        <item>@string/filtroMarcaActividadConsultar</item>
+        <item>@string/filtroEstadoActividadConsultar</item>
+    </string-array>
+
     <!-- Textos MiCuenta -->
     <string name="nombreActividadMiCuenta">Mi cuenta</string>
     <string name="correoMiCuenta">%1$s</string>
@@ -167,10 +190,11 @@
     <string name="seleccionarActividadInsertar">Seleccionar</string>
     <string name="registrarPrendaActividadInsertar">Registrar prenda</string>
 
-    <string name="permisosAceptadosActividadInsertar">Permisos aceptados por el usuario</string>
+    <string name="permisosNoAceptadosActividadInsertar">Algunos permisos no han sido aceptados por el usuario. Podía ocurrir algún fallo...</string>
     <string name="pictureDialogTituloActividadInsertar">Seleccione una acción:</string>
     <string name="pictureDialogGaleriaActividadInsertar">Seleccionar foto de Galería</string>
     <string name="pictureDialogRealizarFotoActividadInsertar">Hacer una foto</string>
+    <string name="pictureDialogCancelarActividadInsertar">Cancelar</string>
     <string name="subcategoriaErrorActividadInsertar">Para elegir subcategoriaPrenda, por favor, elija primero una categoría</string>
 
     <string name="subiendoFotoActividadInsertar">Espere un momento, por favor. Subiendo prenda...</string>
@@ -183,6 +207,7 @@
     <string name="faltaEstiloActividadInsertar">Estilo requerido</string>
     <string name="faltaColorActividadInsertar">Color requerido</string>
     <string name="faltaEpocaActividadInsertar">Estación del año requerida</string>
+    <string name="faltaMarcaActividadInsertar">Marca requerida</string>
     <string name="faltaImagenActividadInsertar">Seleccione una imagen haciendo click en la imagen superior</string>
 
 
@@ -214,6 +239,7 @@
     <string name="estiloNumberPickerString">Elige el estilo de la prenda:</string>
     <string name="categoriaNumberPickerString">Elige la categoría de la prenda:</string>
     <string name="subcategoriaNumberPickerString">Elige la subtegoría de la prenda:</string>
+    <string name="marcaNumberPickerString">Elige la marca de la prenda:</string>
 
     <string name="tallaXS">XS</string>
     <string name="tallaS">S</string>
@@ -331,11 +357,12 @@
     <string name="abrigo">Abrigo</string>
 
     <!-- MARCAS -->
-    <string name="sinMarca">Sin marca</string>
+    <string name="sinMarca">Sin definir</string>
     <string name="filsMarca">Fils</string>
     <string name="adidasMarca">Adidas</string>
     <string name="lottoMarca">Lotto</string>
-    <string name="jommaMarca">Joma</string>
+    <string name="jommaMarca">Jack &amp; Jones</string>
+    <string name="jackMarca">Joma</string>
     <string name="kappaMarca">Kappa</string>
     <string name="kelmeMarca">Kelme</string>
     <string name="nikeMarca">Nike</string>
@@ -360,37 +387,63 @@
 
     <string-array name="arrayMarcas">
         <item>@string/sinMarca</item>
+        <item>@string/adidasMarca</item>
+        <item>@string/bershkaMarca</item>
+        <item>@string/billabongMarca</item>
+        <item>@string/cyaMarca</item>
+       <item>@string/calvinKleinMarca</item>
+        <item>@string/chanelMarca</item>
+        <item>@string/dieselMarca</item>
         <item>@string/filsMarca</item>
+        <item>@string/armaniMarca</item>
+        <item>@string/gucciMarca</item>
+        <item>@string/jackMarca</item>
+        <item>@string/jommaMarca</item>
+        <item>@string/kappaMarca</item>
+        <item>@string/kelmeMarca</item>
+        <item>@string/lacosteMarca</item>
+        <item>@string/levisMarca</item>
+        <item>@string/lottoMarca</item>
+        <item>@string/nikeMarca</item>
+        <item>@string/pullBearMarca</item>
+        <item>@string/pumaMarca</item>
+        <item>@string/quicksilverMarca</item>
+        <item>@string/ralphMarca</item>
+        <item>@string/umbroMarca</item>
+        <item>@string/vansMarca</item>
+        <item>@string/zaraMarca</item>
     </string-array>
 
 
-    <!-- MUJERES ROPA SUPERIOR-->
+    <!-- MUJERES ROPA SUPERIOR + anterior-->
     <string name="top">Top</string>
     <string name="bodie">Bodie</string>
     <string name="blusa">Blusa</string>
 
-    <!-- HOMBRES/MUEJRES ROPA INFERIOR     OJO, NO PONER DEPORTIVO NI NADA, ESO SE INDICA EN EL ESTILO DE LA PRENDA-->
+    <!-- HOMBRES/MUEJRES ROPA INFERIOR -->
     <string name="pantalon">Pantalón largo</string>
     <string name="pantalonVaquero">Pantalón vaquero</string>
     <string name="bermudas">Bermudas</string>
     <string name="shortPantalon">Short</string>
     <string name="chandal">Chándal</string>
-    <string name="banador">Bañador</string>
-    <!-- MUJERES ROPA INFERIOR -->
-    <string name="falda">Falda</string>
     <string name="leggins">Leggins</string>
-    <string name="bikini">Bikini</string>
+    <!-- MUJERES ROPA INFERIOR, además de lo anterior -->
+    <string name="falda">Falda</string>
 
     <!-- HOMBRES ROPA INTERIOR -->
     <string name="calzoncillos">Calzoncillos</string>
     <string name="boxer">Boxér</string>
+    <string name="slipHombre">Slip</string>
+    <string name="banador">Bañador</string>
     <!-- MUEJRES ROPA INTERIOR -->
-    <string name="bragas">Bragas</string>
+    <string name="braga">Braga</string>
     <string name="tanga">Tanga</string>
     <string name="sujetador">Sujetador</string>
+    <string name="slipMujer">Slip</string>
+    <string name="bikini">Bikini</string>
 
 
-    <!-- HOMBRES/MUEJRES CALZADO -->
+    <!-- HOMBRES/MUJRES CALZADO -->
     <string name="zapatos">Zapatos</string>
     <string name="zapatillas">Zapatillas</string>
     <string name="botas">Botas</string>
@@ -416,66 +469,100 @@
     <string name="bolso">Bolso</string>
     <string name="cartera">Cartera</string>
 
-    <!-- ************************************  -->
-
-    <string-array name="arrayRopaParteSuperior">
+    <string-array name="arrayRopaParteSuperiorHombre">
+        <item>@string/abrigo</item>
+        <item>@string/americana</item>
+        <item>@string/camisa</item>
         <item>@string/camisetaCorta</item>
         <item>@string/camisetaLarga</item>
         <item>@string/camisetaSinMangas</item>
-        <item>@string/camisa</item>
-        <item>@string/polo</item>
-        <item>@string/sudadera</item>
-        <item>@string/americana</item>
         <item>@string/chaqueta</item>
+        <item>@string/polo</item>
         <item>@string/rebeca</item>
-        <item>@string/abrigo</item>
+        <item>@string/sudadera</item>
     </string-array>
 
-    <string-array name="arrayRopaParteInferior">
+    <string-array name="arrayRopaParteSuperiorMujer">
+        <item>@string/abrigo</item>
+        <item>@string/americana</item>
+        <item>@string/blusa</item>
+        <item>@string/bodie</item>
+        <item>@string/camisa</item>
+        <item>@string/camisetaCorta</item>
+        <item>@string/camisetaLarga</item>
+        <item>@string/camisetaSinMangas</item>
+        <item>@string/chaqueta</item>
+        <item>@string/polo</item>
+        <item>@string/rebeca</item>
+        <item>@string/sudadera</item>
+        <item>@string/top</item>
+    </string-array>
+
+    <string-array name="arrayRopaParteInferiorHombre">
+        <item>@string/bermudas</item>
+        <item>@string/chandal</item>
         <item>@string/pantalon</item>
         <item>@string/pantalonVaquero</item>
-        <item>@string/bermudas</item>
         <item>@string/shortPantalon</item>
+    </string-array>
+
+    <string-array name="arrayRopaParteInferiorMujer">
+        <item>@string/bermudas</item>
         <item>@string/chandal</item>
-        <item>@string/banador</item>
+        <item>@string/falda</item>
+        <item>@string/pantalon</item>
+        <item>@string/pantalonVaquero</item>
+        <item>@string/shortPantalon</item>
     </string-array>
 
     <string-array name="arrayRopaParteInteriorHombre">
-        <item>@string/calzoncillos</item>
+        <item>@string/banador</item>
         <item>@string/boxer</item>
+        <item>@string/calzoncillos</item>
+        <item>@string/slipHombre</item>
     </string-array>
 
     <string-array name="arrayRopaParteInteriorMujer">
-        <item>@string/bragas</item>
-        <item>@string/tanga</item>
+        <item>@string/bikini</item>
+        <item>@string/braga</item>
+        <item>@string/slipMujer</item>
         <item>@string/sujetador</item>
+        <item>@string/tanga</item>
     </string-array>
 
-    <string-array name="arrayCalzado">
-        <item>@string/zapatos</item>
-        <item>@string/zapatillas</item>
+    <string-array name="arrayCalzadoHombre">
         <item>@string/botas</item>
-        <item>@string/sandalias</item>
         <item>@string/chanclas</item>
+        <item>@string/sandalias</item>
+        <item>@string/zapatillas</item>
+        <item>@string/zapatos</item>
+    </string-array>
+
+    <string-array name="arrayCalzadoMujer">
+        <item>@string/botas</item>
+        <item>@string/chanclas</item>
+        <item>@string/sandalias</item>
         <item>@string/tacones</item>
+        <item>@string/zapatillas</item>
+        <item>@string/zapatos</item>
     </string-array>
 
     <string-array name="arrayComplementos">
-        <item>@string/calcetines</item>
-        <item>@string/gorro</item>
-        <item>@string/gorra</item>
-        <item>@string/corbata</item>
-        <item>@string/pajarita</item>
-        <item>@string/reloj</item>
-        <item>@string/bufanda</item>
         <item>@string/anillo</item>
-        <item>@string/colgante</item>
-        <item>@string/pulsera</item>
-        <item>@string/pendientes</item>
-        <item>@string/sombrero</item>
-        <item>@string/gafas</item>
         <item>@string/bolso</item>
+        <item>@string/bufanda</item>
+        <item>@string/calcetines</item>
         <item>@string/cartera</item>
+        <item>@string/colgante</item>
+        <item>@string/corbata</item>
+        <item>@string/gafas</item>
+        <item>@string/gorra</item>
+        <item>@string/gorro</item>
+        <item>@string/pajarita</item>
+        <item>@string/pendientes</item>
+        <item>@string/pulsera</item>
+        <item>@string/reloj</item>
+        <item>@string/sombrero</item>
     </string-array>
 
 
@@ -483,7 +570,12 @@
     <string name="textoInicioSplashScreen">ARMARIO VIRTUAL</string>
     <string name="textoUsuarioCorrectoSplashScreen">Obteniendo los datos de su perfil...</string>
     <string name="textoObtenerDatosSplashScreen">Obteniendo los datos de sus prendas</string>
+    <string name="textoCargarArmarioSplashScreen">Cargando los datos de su armario...</string>
     <string name="textoUnMomentoSplashScreen">Un momento, por favor...</string>
+    <string name="textoErrorSplashScreen">Error de conexión</string>
+    <string name="textoCompruebaConexionSplashScreen">Compruebe su conexión de red</string>
+
+    <string name="botonSalirSplashScreen">Salir</string>
 
     <!-- TabbedActivity -->
     <string name="nombreInicialMainIntercambio">Intercambio</string>

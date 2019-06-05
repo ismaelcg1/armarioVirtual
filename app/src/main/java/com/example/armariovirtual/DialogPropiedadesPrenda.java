@@ -21,6 +21,7 @@ public class DialogPropiedadesPrenda {
     private Dialog dialogSeleccion;
     // Para cambiar el texto de 'StringPicker'
     private TextView cabeceraStringPicker;
+
     public interface acabarDialog {
         void cogerParametro(String seleccion);
     }
@@ -30,6 +31,9 @@ public class DialogPropiedadesPrenda {
     private String [] estilos;
     private String [] categorias;
     private String [] subcategorias;
+    private String [] marcas;
+
+    private Boolean esMasculino;
 
 
     public DialogPropiedadesPrenda (Context contexto, acabarDialog actividadDialog, final String opcion, String categoriaSeleccionada) {
@@ -38,6 +42,13 @@ public class DialogPropiedadesPrenda {
         tallas = contexto.getResources().getStringArray(R.array.arrayTallas);
         estilos = contexto.getResources().getStringArray(R.array.arrayEstilos);
         categorias = contexto.getResources().getStringArray(R.array.arrayCategorias);
+        marcas = contexto.getResources().getStringArray(R.array.arrayMarcas);
+
+        if (opcion.equalsIgnoreCase("Masculino")) {
+            esMasculino = true;
+        } else {
+            esMasculino = false;
+        }
         // La subcategoría dependerá de la categoría seleccionada
         if (categoriaSeleccionada!=null) {
             Map<String, List<String>> subcategoriasList = crearArraysSubcategorias(contexto);
@@ -51,42 +62,47 @@ public class DialogPropiedadesPrenda {
 
     private Map<String, List<String>> crearArraysSubcategorias(Context contexto) {
 
-        String [] ropaParteSuperior = contexto.getResources().getStringArray(R.array.arrayRopaParteSuperior);
+        String [] ropaParteSuperiorH = contexto.getResources().getStringArray(R.array.arrayRopaParteSuperiorHombre);
+        String [] ropaParteSuperiorM = contexto.getResources().getStringArray(R.array.arrayRopaParteSuperiorMujer);
 
-        String [] ropaParteInferior = contexto.getResources().getStringArray(R.array.arrayRopaParteInferior);
+        String [] ropaParteInferiorH = contexto.getResources().getStringArray(R.array.arrayRopaParteInferiorHombre);
+        String [] ropaParteInferiorM = contexto.getResources().getStringArray(R.array.arrayRopaParteInferiorMujer);
+
         String [] ropaParteInteriorHombre = contexto.getResources().getStringArray(R.array.arrayRopaParteInteriorHombre);
         String [] ropaParteInteriorMujer = contexto.getResources().getStringArray(R.array.arrayRopaParteInteriorMujer);
-        String [] complementos = contexto.getResources().getStringArray(R.array.arrayComplementos);
-        String [] calzadoArray = contexto.getResources().getStringArray(R.array.arrayCalzado);
 
+        String [] complementos = contexto.getResources().getStringArray(R.array.arrayComplementos);
+
+        String [] calzadoArrayH = contexto.getResources().getStringArray(R.array.arrayCalzadoHombre);
+        String [] calzadoArrayM = contexto.getResources().getStringArray(R.array.arrayCalzadoMujer);
 
         Map<String, List<String>> subcategorias = new HashMap<String, List<String>>();
 
-        List<String> ropaSuperior = Arrays.asList(ropaParteSuperior);
-        List<String> ropaInferior = Arrays.asList(ropaParteInferior);
+        List<String> ropaSuperiorH = Arrays.asList(ropaParteSuperiorH);
+        List<String> ropaSuperiorM = Arrays.asList(ropaParteSuperiorM);
+        List<String> ropaInferiorH = Arrays.asList(ropaParteInferiorH);
+        List<String> ropaInferiorM = Arrays.asList(ropaParteInferiorM);
         List<String> ropaInteriorHombre = Arrays.asList(ropaParteInteriorHombre);
-        List<String> ropaInferiorMujer = Arrays.asList(ropaParteInteriorMujer);
+        List<String> ropaInteriorMujer = Arrays.asList(ropaParteInteriorMujer);
         List<String> complementosRopa = Arrays.asList(complementos);
-        List<String> calzado = Arrays.asList(calzadoArray);
-
+        List<String> calzadoH = Arrays.asList(calzadoArrayH);
+        List<String> calzadoM = Arrays.asList(calzadoArrayM);
 
         // Añadimos los elementos al Map:
-        subcategorias.put("Ropa superior", (ropaSuperior));
-        subcategorias.put("Ropa inferior", (ropaInferior));
-
-        // TODO para saber sexo, para subcategorias de ropa interior
-        /*
-        if (LoginActivity.miUsuario.getSexo() == Sexo.Masculino) {
+        if (esMasculino) {
+            subcategorias.put("Ropa superior", (ropaSuperiorH));
+            subcategorias.put("Ropa inferior", (ropaInferiorH));
             subcategorias.put("Ropa interior", (ropaInteriorHombre));
+            subcategorias.put("Calzado", (calzadoH));
         } else {
-            subcategorias.put("Ropa interior", (ropaInferiorMujer));
+            subcategorias.put("Ropa superior", (ropaSuperiorM));
+            subcategorias.put("Ropa inferior", (ropaInferiorM));
+            subcategorias.put("Ropa interior", (ropaInteriorMujer));
+            subcategorias.put("Calzado", (calzadoM));
         }
-        */
         subcategorias.put("Complementos", (complementosRopa));
-        subcategorias.put("Calzado", (calzado));
 
         return subcategorias;
-
     }
 
     private void conectarVariablesConVista(Context context) {
@@ -127,10 +143,16 @@ public class DialogPropiedadesPrenda {
                     numberPickerString.setMaxValue(categorias.length-1);
                     numberPickerString.setDisplayedValues(categorias);
                     break;
-                case "Subcategoria":
+                case "Masculino":
+                case "Femenino":
                     cabeceraStringPicker.setText(R.string.subcategoriaNumberPickerString);
                     numberPickerString.setMaxValue(subcategorias.length-1);
                     numberPickerString.setDisplayedValues(subcategorias);
+                    break;
+                case "Marca":
+                    cabeceraStringPicker.setText(R.string.marcaNumberPickerString);
+                    numberPickerString.setMaxValue(marcas.length-1);
+                    numberPickerString.setDisplayedValues(marcas);
                     break;
             }
         }
@@ -150,14 +172,17 @@ public class DialogPropiedadesPrenda {
             case "Categoria":
                 interfazDialogString.cogerParametro(categorias[seleccionStringPicker]);
                 break;
-            case "Subcategoria":
+            case "Masculino":
+            case "Femenino":
                 interfazDialogString.cogerParametro(subcategorias[seleccionStringPicker]);
                 break;
             case "Cantidad":
                 interfazDialogString.cogerParametro(""+seleccionStringPicker);
                 break;
+            case "Marca":
+                interfazDialogString.cogerParametro(marcas[seleccionStringPicker]);
+                break;
         }
-
     }
 
     private void asignarOpcion(String opcionSeleccionada) {
@@ -170,7 +195,6 @@ public class DialogPropiedadesPrenda {
                 dialogSeleccion.dismiss();
             }
         });
-
         bCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -179,5 +203,4 @@ public class DialogPropiedadesPrenda {
         });
         dialogSeleccion.show();
     }
-
 }

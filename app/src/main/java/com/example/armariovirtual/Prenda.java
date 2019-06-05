@@ -2,9 +2,11 @@ package com.example.armariovirtual;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Base64;
 
-public class Prenda {
+public class Prenda implements Parcelable {
 
     private String tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda, marca;
     private int id, cantidadPrenda;
@@ -142,5 +144,15 @@ public class Prenda {
                 ", imagenPrenda=" + imagenPrenda +
                 ", estado_limpio=" + estado_limpio +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        // Default required
     }
 }

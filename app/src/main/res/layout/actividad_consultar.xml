@@ -20,6 +20,39 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5sp"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/spinnerConsultar"
+                style="@style/estiloSpinnerActividadConsultar"
+                android:layout_weight="1"
+                android:entries="@array/arrayFiltros" />
+
+            <Button
+                android:id="@+id/btnFiltrar"
+                style="@style/estiloBotonFiltrarActividadConsultar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/nombreBotonActividadConsultar" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutFiltroEscogido"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvBusquedaFiltro"
+                style="@style/textoBusquedaFiltroActividadConsultar" />
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerConsultar"
             android:layout_width="match_parent"

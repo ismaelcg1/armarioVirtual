@@ -37,46 +37,68 @@
             android:name="com.example.armariovirtual.MainActivityDrawer"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.MainActivityDrawerAdmin"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.RegistroInicial"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.example.armariovirtual.SplashScreenErrorRedServidor"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.example.armariovirtual.SplashScreenCargarMiArmario"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.MiArmario"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.ActividadAddPrenda"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.ActividadEliminar"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.ActividadConsultar"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.SplashScreenObtenerDatos"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.ActividadInfoPrendaCompleta"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.MainIntercambio"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.MiCuenta"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.MiCuentaAdmin"
             android:theme="@style/AppTheme.NoActionBar"/>
+
         <activity
             android:name="com.example.armariovirtual.Informacion"
             android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 
 </manifest>

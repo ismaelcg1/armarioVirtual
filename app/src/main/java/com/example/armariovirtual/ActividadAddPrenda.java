@@ -2,7 +2,6 @@ package com.example.armariovirtual;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -55,6 +54,7 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
     private Bitmap bitmapRedimensionado;
     // FireBase
     private FirebaseUser user;
+    private Boolean esMasculino;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +75,23 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
             }
         });
         requestMultiplePermissions();
+        obtenerDatosUsuario();
+    }
+
+    private void obtenerDatosUsuario() {
+
+        Intent intentActividadActual = getIntent();
+        Bundle b = intentActividadActual.getExtras();
+
+        if(b!=null) {
+            talla = (String) b.get("tallaPorDefecto");
+            textoTalla.getEditText().setText(talla);
+
+            Sexo sexoUsuario = (Sexo) b.get("sexoUsuario");
+            if (sexoUsuario == Sexo.Femenino) {
+                esMasculino = false;
+            }
+        }
     }
 
     protected void definicionDeVariables() {
@@ -100,7 +117,6 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         textoMarca = findViewById(R.id.marcaPrenda);
 
         contexto = this;
-
         epoca = "";
         color = "";
         estilo = "";
@@ -110,6 +126,7 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         imagenConvertida = "";
         cantidadDePrendas = 1;
         marca = "";
+        esMasculino = true;
     }
 
     private void onClickListener() {
@@ -131,7 +148,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         pictureDialog.setTitle(getResources().getString(R.string.pictureDialogTituloActividadInsertar));
         String[] pictureDialogItems = {
                 getResources().getString(R.string.pictureDialogGaleriaActividadInsertar),
-                getResources().getString(R.string.pictureDialogRealizarFotoActividadInsertar)};
+                getResources().getString(R.string.pictureDialogRealizarFotoActividadInsertar),
+                getResources().getString(R.string.pictureDialogCancelarActividadInsertar)};
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -142,6 +160,9 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                                 break;
                             case 1:
                                 takePhotoFromCamera();
+                                break;
+                            case 2:
+                                dialog.dismiss();
                                 break;
                         }
                     }
@@ -164,8 +185,9 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         super.onActivityResult(requestCode, resultCode, data);
+        Bitmap imagenRedimensionada = null;
+
         if (resultCode == this.RESULT_CANCELED) {
             return;
         }
@@ -175,10 +197,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 try {
                     imagenFoto = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     bitmapRedimensionado = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
-
-                    Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     botonInsertarImagen.setImageBitmap(bitmapRedimensionado);
-
+                    imagenRedimensionada = redimensionarImagen(imagenFoto, 400, 500);
                 } catch (IOException e) {
                     e.printStackTrace();
                     Toast.makeText(ActividadAddPrenda.this, "Failed!", Toast.LENGTH_SHORT).show();
@@ -189,12 +209,9 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
             imagenFoto = (Bitmap) data.getExtras().get("data");
             bitmapRedimensionado = Bitmap.createScaledBitmap(imagenFoto, botonInsertarImagen.getWidth(), botonInsertarImagen.getHeight(), false);
             botonInsertarImagen.setImageBitmap(bitmapRedimensionado);
-
-            Toast.makeText(ActividadAddPrenda.this, "Image Saved!", Toast.LENGTH_SHORT).show();
+            imagenRedimensionada = redimensionarImagen(imagenFoto, 1200, 1400);
         }
-        // Redimensionamos la imagen para guardarla posteriormente y que no ocupe tanto espacio:
-        bitmapRedimensionado = redimensionarImagen(imagenFoto, 240, 290);
-        imagenConvertida = convertirImgString(bitmapRedimensionado);
+        imagenConvertida = convertirImgString(imagenRedimensionada);
     }
 
     private Bitmap redimensionarImagen(Bitmap bitmap, float anchoNuevo, float altoNuevo) {
@@ -203,8 +220,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         int alto=bitmap.getHeight();
 
         if(ancho>anchoNuevo || alto>altoNuevo){
-            float escalaAncho=anchoNuevo/ancho;
-            float escalaAlto= altoNuevo/alto;
+            float escalaAncho = anchoNuevo/ancho;
+            float escalaAlto  = altoNuevo/alto;
 
             Matrix matrix=new Matrix();
             matrix.postScale(escalaAncho,escalaAlto);
@@ -236,15 +253,13 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 .withListener(new MultiplePermissionsListener() {
                     @Override
                     public void onPermissionsChecked(MultiplePermissionsReport report) {
-                        // check if all permissions are granted
-                        if (report.areAllPermissionsGranted()) {
-                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.permisosAceptadosActividadInsertar), Toast.LENGTH_SHORT).show();
-                        }
 
+                        if (report.areAllPermissionsGranted()) {
+                            // check if all permissions are granted
+                        }
                         // check for permanent denial of any permission
                         if (report.isAnyPermissionPermanentlyDenied()) {
-                            // show alert dialog navigating to Settings
-                            //openSettingsDialog();
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.permisosNoAceptadosActividadInsertar), Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -252,9 +267,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
-
-                }).
-                withErrorListener(new PermissionRequestErrorListener() {
+                })
+                .withErrorListener(new PermissionRequestErrorListener() {
                     @Override
                     public void onError(DexterError error) {
                         Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
@@ -291,7 +305,11 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 if (categoria.isEmpty()) {
                     Toast.makeText(ActividadAddPrenda.this, getResources().getString(R.string.subcategoriaErrorActividadInsertar), Toast.LENGTH_LONG).show();
                 } else {
-                    seleccion = "Subcategoria";
+                    if (esMasculino) {
+                        seleccion = "Masculino";
+                    } else {
+                        seleccion = "Femenino";
+                    }
                     // Dependiendo de la Categoría elegida, mostrar unas opciones u otra de subcategoría
                     new DialogPropiedadesPrenda(ActividadAddPrenda.this, ActividadAddPrenda.this, seleccion, categoria);
                 }
@@ -308,10 +326,8 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 if (!comprobarDatosVacios()) {
                     ServidorPHP objeto = new ServidorPHP();
                     user = FirebaseAuth.getInstance().getCurrentUser();
-                    marca = "Nike";
                     objeto.cargarWebService(user.getUid(), contexto, talla, estilo, color, epoca, categoria, subcategoria, cantidadDePrendas, marca, imagenConvertida);
                 }
-
                 break;
             case R.id.imageViewInsertarImagen:
                 showPictureDialog();
@@ -319,25 +335,6 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
         }
     }
 
-    /*
-
-    private void insertarPrenda() {
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        ServidorPHP objeto = new ServidorPHP();
-        // Tambien pruebas
-        marca = "Nike";
-        boolean pruebas = false;
-        try {
-            pruebas = objeto.insertarPrenda(talla, estilo, color, epoca, categoria, subcategoria, cantidadDePrendas, marca,
-                    imagenConvertida, false, user.getUid() );
-
-        } catch (ServidorPHPException e) {
-            e.printStackTrace();
-        }
-        // Pruebas
-        Toast.makeText(ActividadAddPrenda.this,"Resultado consulta: "+pruebas, Toast.LENGTH_LONG).show();
-    }
-    */
 
     private boolean comprobarDatosVacios() {
         boolean algunDatoVacio = false;
@@ -390,6 +387,13 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                     getResources().getString(R.string.faltaImagenActividadInsertar), Toast.LENGTH_LONG).show();
         }
 
+        if (marca.isEmpty()) {
+            textoMarca.getEditText().setError(getResources().getString(R.string.faltaMarcaActividadInsertar));
+            algunDatoVacio = true;
+        } else {
+            textoMarca.getEditText().setError(null);
+        }
+
         return algunDatoVacio;
     }
 
@@ -410,13 +414,18 @@ public class ActividadAddPrenda extends AppCompatActivity implements DialogPropi
                 categoria = seleccionado;
                 textoCategoria.getEditText().setText(categoria);
                 break;
-            case "Subcategoria":
+            case "Masculino":
+            case "Femenino":
                 subcategoria = seleccionado;
                 textoSubcategoria.getEditText().setText(subcategoria);
                 break;
             case "Cantidad":
                 cantidadDePrendas = Integer.parseInt(seleccionado);
                 textoCantidadPrendas.getEditText().setText(seleccionado); // Porque en este caso sería el nº en String
+                break;
+            case "Marca":
+                marca = seleccionado;
+                textoMarca.getEditText().setText(marca);
                 break;
             default:
                 // Por defecto

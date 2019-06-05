@@ -33,6 +33,18 @@ public class ServidorPHP {
     private String insertarPrendaPost = urlServidor + "insertarPrendaPost.php?";
     private String obtenerPrendas = urlServidor + "obtenerPrendas.php";
 
+    private String PARAMETRO_TALLA = "";
+    private String PARAMETRO_ESTILO = "";
+    private String PARAMETRO_COLOR = "";
+    private String PARAMETRO_EPOCA = "";
+    private String PARAMETRO_CATEGORIA = "";
+    private String PARAMETRO_SUBCATEGORIA = "";
+    private String PARAMETRO_MARCA = "";
+    private String PARAMETRO_ESTADO = "";
+
+    private HashMap<String, String> parametros;
+
+
     public ServidorPHP() {
         // Constructor por defecto vacio
     }
@@ -43,8 +55,8 @@ public class ServidorPHP {
 
         JSONParser parser = new JSONParser();
         JSONObject datos;
+        parametros = new HashMap<>();
 
-        HashMap<String, String> parametros = new HashMap<>();
         if (uid.isEmpty() && nickusuario.isEmpty() && altura == 0 && peso == 0 && fecha_nacimiento.isEmpty() ) {
             parametros = null;
         } else {
@@ -78,8 +90,8 @@ public class ServidorPHP {
         JSONObject datos;
 
         Usuario miUsuario = null;
+        parametros = new HashMap<>();
 
-        HashMap<String, String> parametros = new HashMap<>();
         if (uid.isEmpty() ) {
             parametros = null;
         } else {
@@ -142,7 +154,6 @@ public class ServidorPHP {
                     Toast.makeText(contexto,contexto.getResources().getString(R.string.prendaRegistroCorrectoActividadInsertar),Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(contexto,contexto.getResources().getString(R.string.prendaRegistroIncorrectoActividadInsertar),Toast.LENGTH_SHORT).show();
-                    Log.i("RESPUESTA:",""+response);
                 }
             }
         }, new Response.ErrorListener() {
@@ -155,7 +166,7 @@ public class ServidorPHP {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
 
-                Map<String,String> parametros=new HashMap<>();
+                parametros=new HashMap<>();
 
                 parametros.put("talla", talla);
                 parametros.put("estilo", estilo);
@@ -179,7 +190,7 @@ public class ServidorPHP {
 
 
 
-    public ArrayList<Prenda> obtenerPrendas(String uid) throws ServidorPHPException {
+    public ArrayList<Prenda> obtenerPrendas(String uid, String filtrado, String valorFiltrado) throws ServidorPHPException {
         JSONParser parser = new JSONParser();
         JSONObject datos;
         // Variables;
@@ -190,11 +201,16 @@ public class ServidorPHP {
 
         Prenda prenda = null;
 
-        HashMap<String, String> parametros = new HashMap<>();
+        parametros = new HashMap<>();
         if (uid.isEmpty() ) {
             parametros = null;
         } else {
             parametros.put("uid", uid);
+
+            if (filtrado != null) {
+                verFiltrado(filtrado, valorFiltrado);
+            }
+            asignarParametrosHashMap();
         }
 
         try {
@@ -239,13 +255,45 @@ public class ServidorPHP {
         return todasPrendas;
     }
 
+    private void asignarParametrosHashMap() {
+        parametros.put("talla", PARAMETRO_TALLA);
+        parametros.put("estilo", PARAMETRO_ESTILO);
+        parametros.put("color", PARAMETRO_COLOR);
+        parametros.put("epoca", PARAMETRO_EPOCA);
+        parametros.put("categoria", PARAMETRO_CATEGORIA);
+        parametros.put("subcategoria", PARAMETRO_SUBCATEGORIA);
+        parametros.put("marca", PARAMETRO_MARCA);
+        parametros.put("estado_limpio", PARAMETRO_ESTADO);
+    }
+
+    private void verFiltrado(String filtrado, String valorFiltrado) {
+
+        if (filtrado.equalsIgnoreCase("talla")) {
+            PARAMETRO_TALLA = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("estilo")) {
+            PARAMETRO_ESTILO = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("color")) {
+            PARAMETRO_COLOR = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("epoca")) {
+            PARAMETRO_EPOCA = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("categoria")) {
+            PARAMETRO_CATEGORIA = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("subcategoria")) {
+            PARAMETRO_SUBCATEGORIA = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("marca")) {
+            PARAMETRO_MARCA = valorFiltrado;
+        } else if (filtrado.equalsIgnoreCase("estado_limpio")) {
+            PARAMETRO_ESTADO = valorFiltrado;
+        }
+    }
+
 
     public boolean actualizarUsuario(String uid, int altura, int peso, String tallaPorDefecto) throws ServidorPHPException {
 
         Boolean consultaCorrecta = false;
         JSONParser parser = new JSONParser();
         JSONObject datos;
-        HashMap<String, String> parametros = new HashMap<>();
+        parametros = new HashMap<>();
 
         if (uid.isEmpty() ) {
             parametros = null;
@@ -274,8 +322,8 @@ public class ServidorPHP {
         boolean insertada = false;
         JSONParser parser = new JSONParser();
         JSONObject datos;
+        parametros = new HashMap<>();
 
-        HashMap<String, String> parametros = new HashMap<>();
         if (uid.isEmpty() && talla.isEmpty() && estilo.isEmpty() && color.isEmpty() && categoria.isEmpty() && subcategoria.isEmpty()
                 && cantidad == 0 && marca.isEmpty() && imagen.isEmpty() ) {
             parametros = null;

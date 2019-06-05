@@ -2,15 +2,18 @@ package com.example.armariovirtual;
 
 
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
+import static com.example.armariovirtual.MiArmario.ARRAY_LIST_COMPLEMENTOS;
+import static com.example.armariovirtual.MiArmario.UID_USUARIO;
 
 
 /**
@@ -20,58 +23,49 @@ public class MiArmarioComplementos extends Fragment implements View.OnClickListe
 
 
     private RecyclerView listaComplementos;
-    private ImageView imagenComplemento;
     private ArrayList<Prenda> complementos;
+    private String uidUsuario;
+    private AdaptadorPrendas adaptadorPrendas;
+    private LinearLayoutManager llm;
 
     public MiArmarioComplementos() {
-        // Required empty public constructor
+        // Constructor por defecto necesario
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        complementos = new ArrayList();
+
+        if (getArguments() != null) {
+            uidUsuario = getArguments().getString(UID_USUARIO);
+            complementos = getArguments().getParcelableArrayList(ARRAY_LIST_COMPLEMENTOS);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View vista = inflater.inflate(R.layout.fragment_complementos, container, false);
-
         listaComplementos = vista.findViewById(R.id.recyclerViewComplementos);
-        imagenComplemento = vista.findViewById(R.id.imagenPrenda);
-        complementos = new ArrayList();
         listaComplementos.setOnClickListener(this);
 
-        // SpaceItemDecoration nos dará error, hay que crear una clase: Alt+Intro
-        //listaCalzado.addItemDecoration(new SpaceItemDecoration( this, R.dimen.list_space_recycler_consultar, true, true));
-        // Con esto el tamaño del recyclerwiew no cambiará
-        listaComplementos.setHasFixedSize(true);
-
-        // Creo un layoutmanager para el recyclerview
-        LinearLayoutManager llm = new LinearLayoutManager(getContext());
-        listaComplementos.setLayoutManager(llm);
-
-        // ----------------------------------------
-        // TODO arraylist de prueba
-        // Aquí introducimos los datos en el array, su foto y su texto
-
-        /*
-        complementos.add(new Prenda( 0,"M", "Diario",
-                "Azul", "Otoño", "Accesorios",
-                "Reloj", R.drawable.reloj_r100, 1));
-
-        complementos.add(new Prenda( 1,"L", "Deportivo",
-                "Azul", "Otoño", "Accesorios",
-                "Pulsera", R.drawable.reloj_r100, 1));
-
-        complementos.add(new Prenda( 2,"S", "Diario",
-                "Azul", "Otoño", "Accesorios",
-                "Reloj", R.drawable.reloj_r100, 1));
-
-        // ----------------------------------------
-*/
-        AdaptadorPrendas adaptadorPrendas = new AdaptadorPrendas(getContext(), complementos);
-        listaComplementos.setAdapter(adaptadorPrendas);
-        adaptadorPrendas.refrescar();
+        iniciarRecyclerView();
 
         return vista;
+    }
+
+    private void iniciarRecyclerView() {
+        // Con esto el tamaño del recyclerwiew no cambiará
+        listaComplementos.setHasFixedSize(true);
+        // Creo un layoutmanager para el recyclerview
+        llm = new LinearLayoutManager(getContext());
+        listaComplementos.setLayoutManager(llm);
+
+        adaptadorPrendas = new AdaptadorPrendas(getContext(), complementos);
+        listaComplementos.setAdapter(adaptadorPrendas);
+        adaptadorPrendas.refrescar();
     }
 
     @Override

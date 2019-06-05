@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private TextInputLayout email, password;
     private TextView cambiarPassword;
     private CheckBox terminosCondiciones;
-    static Usuario miUsuario;
 
     // FireBase
     private FirebaseAuth mAuth = null;
@@ -72,8 +71,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
             email.getEditText().setText(""+currentUser.getEmail());
+            updateUI(currentUser);
         }
-        updateUI(currentUser);
     }
 
 
@@ -95,20 +94,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     e.printStackTrace();
                 }
 
-                if (usuarioObtenido == null) {
-                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.toastObtenerUsuarioFalloActividadLogin), Toast.LENGTH_SHORT).show();
-                } else {
+                if (usuarioObtenido != null) {
                     usuarioObtenido.setEmail(user.getEmail());
+                    // Inicializamos la actividad principal si tod@ es correcto:
+                    if (emailUser.equalsIgnoreCase("ismael.casado@itponiente.com")) {
+                        seleccion = "Admin";
+                        verActividadPosterior(usuarioObtenido, seleccion);
+                    } else {
+                        seleccion = "otro";
+                        verActividadPosterior(usuarioObtenido, seleccion);
+                    }
+                } else {
+                    Intent intent = new Intent(this, SplashScreenErrorRedServidor.class);
+                    startActivity(intent);
+                    finish();
                 }
 
-                // Inicializamos la actividad principal si tod@ es correcto:
-                if (emailUser.equalsIgnoreCase("ismael.casado@itponiente.com")) {
-                    seleccion = "Admin";
-                    verActividadPosterior(usuarioObtenido, seleccion);
-                } else {
-                    seleccion = "otro";
-                    verActividadPosterior(usuarioObtenido, seleccion);
-                }
             } else {
                 // Aunque el usuario se haya registrado, si no ha verificado el email debe hacerlo:
                 snackBarVerificacion();
@@ -320,4 +321,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
 }

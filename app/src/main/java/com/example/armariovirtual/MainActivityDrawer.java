@@ -38,6 +38,7 @@ public class MainActivityDrawer extends AppCompatActivity
     private Button btnVerArmario;
     private Usuario userActual;
     private ImageView imagenDrawerInicial;
+    private FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,6 @@ public class MainActivityDrawer extends AppCompatActivity
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        verSexoUsuario();
     }
 
     @Override
@@ -74,7 +74,6 @@ public class MainActivityDrawer extends AppCompatActivity
 
         ServidorPHP objetoServidor = new ServidorPHP();
         Usuario usuarioObtenido = null;
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         try {
             usuarioObtenido = objetoServidor.obtenerUsuario(user.getUid());
@@ -108,7 +107,10 @@ public class MainActivityDrawer extends AppCompatActivity
             userActual = (Usuario) objetoRecibido.getSerializable("usuarioActual");
         }
         // Cambiamos el saludo inicial:
-        nombreUsuarioString = userActual.getNickName();
+        if (userActual != null) {
+            nombreUsuarioString = userActual.getNickName();
+            verSexoUsuario();
+        }
     }
 
     @Override
@@ -127,6 +129,7 @@ public class MainActivityDrawer extends AppCompatActivity
     private void inicializarVariables() {
         prendas = 0;
         accesorios = 0;
+        user = FirebaseAuth.getInstance().getCurrentUser();
         nombreUser.setText( getResources().getString(R.string.saludoMainActivityDrawer, nombreUsuarioString) );
         prendasAdd.setText( getResources().getString(R.string.prendasAnadidasMainActivityDrawer, prendas ) );
         accesoriossAdd.setText( getResources().getString(R.string.accesoriosAnadidosMainActivityDrawer, accesorios ) );
@@ -147,9 +150,12 @@ public class MainActivityDrawer extends AppCompatActivity
 
         if (id == R.id.mi_armario) {
             intent = new Intent(this, MiArmario.class);
+            intent.putExtra("uidUsuario", user.getUid());
             startActivity(intent);
         } else if (id == R.id.add_elemento) {
             intent = new Intent(this, ActividadAddPrenda.class);
+            intent.putExtra("sexoUsuario", userActual.getSexo());
+            intent.putExtra("tallaPorDefecto", userActual.getTallaPorDefecto());
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento) {
             intent = new Intent(this, ActividadEliminar.class);

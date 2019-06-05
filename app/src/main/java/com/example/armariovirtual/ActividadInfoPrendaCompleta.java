@@ -40,8 +40,6 @@ public class ActividadInfoPrendaCompleta extends AppCompatActivity implements Vi
             int cantidadPrendaSeleccionada =(int) b.get("cantidadPrenda");
             String marcaPrendaSeleccionada = (String) b.get("marcaPrenda");
 
-            //aaaaaaaaaaaaaaa por aqui te habias quedado
-
             tvTalla.setText(tallaPrendaSeleccionada);
             tvEstilo.setText(estiloPrendaSeleccionada);
             tvColor.setText(colorPrendaSeleccionada);

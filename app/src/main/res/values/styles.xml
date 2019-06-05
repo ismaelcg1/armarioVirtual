@@ -198,6 +198,38 @@
     </style>
 
 
+    <!-- Consultar -->
+    <style name="estiloBotonFiltrarActividadConsultar">
+        <item name="android:layout_margin">2sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:background">@drawable/boton_redondeado3</item>
+    </style>
+
+    <style name="estiloSpinnerActividadConsultar">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">15sp</item>
+        <item name="android:layout_marginRight">5sp</item>
+        <item name="android:layout_marginTop">2sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="textoBusquedaFiltroActividadConsultar">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginLeft">8sp</item>
+        <item name="android:layout_marginRight">8sp</item>
+        <item name="android:layout_marginTop">5sp</item>
+        <item name="android:layout_marginBottom">8sp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+
     <!-- MiCuenta-->
     <style name="layoutSecundariosMiCuenta" >
         <item name="android:layout_marginBottom">15sp</item>
@@ -313,6 +345,19 @@
         <item name="android:textColor">@color/colorBlanco</item>
         <item name="android:textStyle">bold</item>
         <item name="android:background">@drawable/boton_redondeado4</item>
+    </style>
+
+    <style name="estiloBotonSalirApp">
+        <item name="android:layout_marginTop">30sp</item>
+        <item name="android:layout_marginBottom">10sp</item>
+        <item name="android:layout_marginRight">7sp</item>
+        <item name="android:layout_marginLeft">7sp</item>
+        <item name="android:layout_width">230sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/colorBlanco</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/boton_redondeado_salir</item>
     </style>
 
     <!-- ESTILO LAYOUT DIALOG PERSONALIZADOS -->
