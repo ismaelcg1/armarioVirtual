@@ -88,6 +88,7 @@ public class DialogPropiedadesPrenda {
         List<String> calzadoH = Arrays.asList(calzadoArrayH);
         List<String> calzadoM = Arrays.asList(calzadoArrayM);
 
+
         // Añadimos los elementos al Map:
         if (esMasculino) {
             subcategorias.put("Ropa superior", (ropaSuperiorH));

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,7 +43,7 @@ public class SplashScreenErrorRedServidor extends AppCompatActivity {
     }
 
     private void startCheckAnimation() {
-        ValueAnimator animator = ValueAnimator.ofFloat(0f,1f).setDuration(5800);
+        ValueAnimator animator = ValueAnimator.ofFloat(0f,1f).setDuration(5600);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {

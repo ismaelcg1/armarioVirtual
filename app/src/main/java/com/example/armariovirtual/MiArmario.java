@@ -4,23 +4,26 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Handler;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
+
+import static com.example.armariovirtual.MainActivityDrawer.UID_USUARIO_KEY;
 
 
 public class MiArmario extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     BottomNavigationView bottomNavigationView;
-    private FirebaseUser user;
     private ServidorPHP objetoServidor;
     private String uidUsuarioActual;
     protected static final String UID_USUARIO = "UID";
-    private final int TIEMPO_ESPERA_INICIAL = 600;
+    protected static final String CANTIDAD_DE_PRENDAS = "CANTIDAD_PRENDAS";
+    private final int TIEMPO_ESPERA_INICIAL = 500;
 
     protected static final String ARRAY_LIST_ROPA_SUPERIOR   = "ROPA_SUPERIOR";
     protected static final String ARRAY_LIST_ROPA_INFERIOR   = "ROPA_INFERIOR";
@@ -41,6 +44,12 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
     protected static ArrayList <Prenda> listadoCalzado;
     protected static ArrayList <Prenda> listadoComplementos;
 
+    private int cantidadPrendasSuperiores;
+    private int cantidadPrendasInferiores;
+    private int cantidadPrendasInteriores;
+    private int cantidadCalzado;
+    private int cantidadComplementos;
+
     Bundle bundleRopaSuperior;
     Bundle bundleRopaInferior;
     Bundle bundleRopaInterior;
@@ -53,25 +62,36 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
     MiArmarioRopaInterior miArmarioRopaInteriorFragment;
     MiArmarioComplementos miArmarioComplementosFragment;
 
+    // No elementos:
+    private LinearLayout layoutNoElementos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mi_armario_principal);
 
+        obtenerDatosUsuario();
         inicializarVariablesIniciales();
         abrirSplashEsperarDatos();
+        obtenerCalzado();
 
         bottomNavigationView = findViewById(R.id.bottom_navigation_view);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.calzado);
 
-        obtenerPrendasSuperiores();
         obtenerDatosServidor();
+
+    }
+
+    private void obtenerDatosUsuario() {
+        Intent intentActividadActual = getIntent();
+        Bundle b = intentActividadActual.getExtras();
+        if(b!=null) {
+            uidUsuarioActual = (String) b.get(UID_USUARIO_KEY);
+        }
     }
 
     private void inicializarVariablesIniciales() {
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        uidUsuarioActual = user.getUid();
         objetoServidor = new ServidorPHP();
         listadoPrendasSuperiores = new ArrayList();
         listadoPrendasInferiores = new ArrayList();
@@ -80,6 +100,7 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
         bundleRopaInterior = new Bundle();
         bundleCalzado      = new Bundle();
         bundleComplementos = new Bundle();
+        layoutNoElementos = findViewById(R.id.layoutSinElementos);
 
         inicializarFragment();
     }
@@ -99,13 +120,14 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
         }, TIEMPO_ESPERA_INICIAL);
     }
 
-    private void obtenerPrendasSuperiores() {
+    private void obtenerCalzado() {
         try {
             listadoCalzado = objetoServidor.obtenerPrendas(uidUsuarioActual, VARIABLE_FILTRADA, VALOR_FILTRO_CALZADO);
             insertarParametrosCalzado();
         } catch (ServidorPHPException e) {
             e.printStackTrace();
         }
+        cantidadCalzado = listadoCalzado.size();
     }
 
     private void obtenerPrendasRestantes() {
@@ -119,6 +141,10 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
         } catch (ServidorPHPException e) {
             e.printStackTrace();
         }
+        cantidadPrendasSuperiores = listadoPrendasSuperiores.size();
+        cantidadPrendasInferiores = listadoPrendasInferiores.size();
+        cantidadPrendasInteriores = listadoPrendasInteriores.size();
+        cantidadComplementos = listadoComplementos.size();
     }
 
     private void inicializarFragment() {
@@ -131,24 +157,29 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
 
     private void insertarParametrosCalzado() {
         bundleCalzado.putString(UID_USUARIO, uidUsuarioActual);
+        bundleCalzado.putInt(CANTIDAD_DE_PRENDAS, listadoCalzado.size());
         bundleCalzado.putParcelableArrayList(ARRAY_LIST_CALZADO, listadoCalzado);
         miArmarioCalzadoFragment.setArguments(bundleCalzado);
     }
 
     private void insertarParametrosRestantes() {
         bundleRopaSuperior.putString(UID_USUARIO, uidUsuarioActual);
+        bundleCalzado.putInt(CANTIDAD_DE_PRENDAS, listadoPrendasSuperiores.size());
         bundleRopaSuperior.putParcelableArrayList(ARRAY_LIST_ROPA_SUPERIOR, listadoPrendasSuperiores);
         miArmarioRopaSuperiorFragment.setArguments(bundleRopaSuperior);
 
         bundleRopaInferior.putString(UID_USUARIO, uidUsuarioActual);
+        bundleCalzado.putInt(CANTIDAD_DE_PRENDAS, listadoPrendasInferiores.size());
         bundleRopaInferior.putParcelableArrayList(ARRAY_LIST_ROPA_INFERIOR, listadoPrendasInferiores);
         miArmarioRopaInferiorFragment.setArguments(bundleRopaInferior);
 
         bundleRopaInterior.putString(UID_USUARIO, uidUsuarioActual);
+        bundleCalzado.putInt(CANTIDAD_DE_PRENDAS, listadoPrendasInteriores.size());
         bundleRopaInterior.putParcelableArrayList(ARRAY_LIST_ROPA_INTERIOR, listadoPrendasInteriores);
         miArmarioRopaInteriorFragment.setArguments(bundleRopaInterior);
 
         bundleComplementos.putString(UID_USUARIO, uidUsuarioActual);
+        bundleCalzado.putInt(CANTIDAD_DE_PRENDAS, listadoComplementos.size());
         bundleComplementos.putParcelableArrayList(ARRAY_LIST_COMPLEMENTOS, listadoComplementos);
         miArmarioComplementosFragment.setArguments(bundleComplementos);
     }
@@ -156,25 +187,49 @@ public class MiArmario extends AppCompatActivity implements BottomNavigationView
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.ropa_superior:
+                if (cantidadPrendasSuperiores > 0) {
+                    layoutNoElementos.setVisibility(View.GONE);
+                } else {
+                    layoutNoElementos.setVisibility(View.VISIBLE);
+                }
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioRopaSuperiorFragment).commit();
                 return true;
 
             case R.id.ropa_inferior:
+                if (cantidadPrendasInferiores > 0) {
+                    layoutNoElementos.setVisibility(View.GONE);
+                } else {
+                    layoutNoElementos.setVisibility(View.VISIBLE);
+                }
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioRopaInferiorFragment).commit();
                 return true;
 
             case R.id.calzado:
+                if (cantidadCalzado > 0) {
+                    layoutNoElementos.setVisibility(View.GONE);
+                } else {
+                    layoutNoElementos.setVisibility(View.VISIBLE);
+                }
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioCalzadoFragment).commit();
                 return true;
 
             case R.id.ropa_interior:
+                if (cantidadPrendasInteriores > 0) {
+                    layoutNoElementos.setVisibility(View.GONE);
+                } else {
+                    layoutNoElementos.setVisibility(View.VISIBLE);
+                }
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioRopaInteriorFragment).commit();
                 return true;
 
             case R.id.ropa_complementos:
+                if (cantidadComplementos > 0) {
+                    layoutNoElementos.setVisibility(View.GONE);
+                } else {
+                    layoutNoElementos.setVisibility(View.VISIBLE);
+                }
                 getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.fade_in, R.anim.fade_out).replace(R.id.container, miArmarioComplementosFragment).commit();
                 return true;
         }

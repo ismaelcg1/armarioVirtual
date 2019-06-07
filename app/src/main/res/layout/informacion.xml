@@ -15,74 +15,79 @@
             layout="@layout/clase_toolbar" />
     </LinearLayout>
 
-    <LinearLayout
-        style="@style/estiloLayoutInformacion"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
+            style="@style/estiloLayoutInformacion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView16"
-                style="@style/estiloTextoIntroInformacion"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/desarrolladorActividadInformacion" />
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/imageView8"
-                style="@style/estiloMiFotoInformacion"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                app:srcCompat="@drawable/ismael_graduacion" />
+                <TextView
+                    android:id="@+id/textView16"
+                    style="@style/estiloTextoIntroInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/desarrolladorActividadInformacion" />
 
-            <TextView
-                android:id="@+id/textView27"
-                style="@style/estiloTextoDesarrolladorInformacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/nombreDesarrolladorInformacion" />
+                <ImageView
+                    android:id="@+id/imageView8"
+                    style="@style/estiloMiFotoInformacion"
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    app:srcCompat="@drawable/ismael_graduacion" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/textView27"
+                    style="@style/estiloTextoDesarrolladorInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nombreDesarrolladorInformacion" />
 
-        <LinearLayout
-            style="@style/estiloLayoutInferiorInformacion"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView25"
-                style="@style/estiloTextoIntroInformacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/agradecimientosInformacion" />
-
-            <ImageView
-                android:id="@+id/imageView9"
-                style="@style/estiloFotoPonienteInformacion"
-                app:srcCompat="@drawable/it_poniente" />
-
-            <TextView
-                android:id="@+id/textView26"
-                style="@style/estiloTextosInformacion"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/agradecimientosInfoInformacion" />
-
-            <TextView
-                android:id="@+id/textView28"
-                style="@style/estiloTextosInformacion"
+            <LinearLayout
+                style="@style/estiloLayoutInferiorInformacion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/copyRightInformacion" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView25"
+                    style="@style/estiloTextoIntroInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agradecimientosInformacion" />
+
+                <ImageView
+                    android:id="@+id/imageView9"
+                    style="@style/estiloFotoPonienteInformacion"
+                    app:srcCompat="@drawable/it_poniente" />
+
+                <TextView
+                    android:id="@+id/textView26"
+                    style="@style/estiloTextosInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/agradecimientosInfoInformacion" />
+
+                <TextView
+                    android:id="@+id/textView28"
+                    style="@style/estiloTextosInformacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/copyRightInformacion" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

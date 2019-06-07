@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +14,7 @@ import com.airbnb.lottie.LottieAnimationView;
 public class SplashScreenCargarMiArmario extends AppCompatActivity {
 
     private LottieAnimationView lottieAnimationView;
-    private final int TIEMPO_ESPERA_EJECUCION = 1000;
+    private final int TIEMPO_ESPERA_EJECUCION = 3000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class SplashScreenCargarMiArmario extends AppCompatActivity {
         if (lottieAnimationView.getProgress() == 0f) {
             animator.setStartDelay(50);
             animator.start();
+            animator.setRepeatCount(Animation.INFINITE);
         } else {
             lottieAnimationView.setProgress(0f);
         }

@@ -1,5 +1,6 @@
 package com.example.armariovirtual;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -10,20 +11,23 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.armariovirtual.ui.main.SectionsPagerAdapter;
 import com.google.android.material.tabs.TabLayout;
 
+import static com.example.armariovirtual.MainActivityDrawer.UID_USUARIO_KEY;
+
 public class MainIntercambio extends AppCompatActivity {
 
     private Toolbar appToolbar;
-
+    private String uidUsuario;
+    private SectionsPagerAdapter sectionsPagerAdapter;
+    private ViewPager viewPager;
+    private TabLayout tabs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actividad_intercambio_main);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
+
+        obtenerUidUsuario();
+        inicializarVariables();
         inicializarToolbar();
         // Hago que cuando se pulse la flecha de atras se cierre la actividad
         appToolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -32,7 +36,22 @@ public class MainIntercambio extends AppCompatActivity {
                 finish();
             }
         });
+    }
 
+    private void inicializarVariables() {
+        sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
+        viewPager = findViewById(R.id.view_pager);
+        viewPager.setAdapter(sectionsPagerAdapter);
+        tabs = findViewById(R.id.tabs);
+        tabs.setupWithViewPager(viewPager);
+    }
+
+    private void obtenerUidUsuario() {
+        Intent intentActividadActual = getIntent();
+        Bundle b = intentActividadActual.getExtras();
+        if(b!=null) {
+            uidUsuario = (String) b.get(UID_USUARIO_KEY);
+        }
     }
 
 

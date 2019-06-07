@@ -4,12 +4,17 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MicrophoneInfo;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MiCuenta extends AppCompatActivity implements View.OnClickListener, DialogPersonalizadoPesoAltura.finalizarDialog,
-                                                           DialogPropiedadesPrenda.acabarDialog {
+                                                           DialogPropiedadesPrenda.acabarDialog, DialogoReautentificacion.obtenerPasswordRe {
     private Toolbar appToolbar;
     private Button bCerrarSesion, bCambiarPassword, bEliminarArmario, bEliminarCuenta, bAltura, bPeso, bTalla;
     private TextView emailUser, alturaUsuario, pesoUsuario, tallaUsuario;
@@ -37,6 +42,8 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
     private double altura;
     private boolean cambiosRealizados = false;
     private ImageView imagenDelSexoUsuario;
+    // Para reautentificación
+    private String passwordIntroducida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -210,9 +217,9 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                 } else if (opcion == 2) {
                     sendPasswordReset(email);
                 } else if (opcion == 3) {
-
+                    eliminarMiArmario(false);
                 } else if (opcion == 4){
-                    eliminarUsuario();
+                    new DialogoReautentificacion(MiCuenta.this, MiCuenta.this);
                 } else {
 
                 }
@@ -228,44 +235,68 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
         builder.show();
     }
 
-    private void eliminarUsuario() {
+    private void eliminarMiArmario(Boolean deEliminarCuenta) {
+        Boolean borrado = true;
+        ServidorPHP objetoServidor = new ServidorPHP();
+        try {
+            borrado = objetoServidor.eliminarArmario(user.getUid());
+        } catch (ServidorPHPException e) {
+            e.printStackTrace();
+        }
 
+        if (!deEliminarCuenta) {
+            Toast.makeText(MiCuenta.this, getResources().getString(R.string.eliminarArmarioCorrectoMiCuenta),
+                    Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void eliminarUsuario() {
+        final Boolean actividadEliminar = true;
         user.delete()
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if (task.isSuccessful()) {
-                            // TODO Cuenta de usuario borrada, hay que borrarlo todo
-                            // TODO Segun firebase, si el usuario accedió hace un tiempo debe volver a re-autentificarse para poder borrar la sesión por seguridad.
-                            Toast.makeText(MiCuenta.this, "Cuenta borrada",
+                            eliminarMiArmario(actividadEliminar);
+                            // Eliminamos el usuario en nuestra BBDD
+                            ServidorPHP objetoPHP = new ServidorPHP();
+                            try {
+                                objetoPHP.eliminarUsuario(user.getUid());
+                            } catch (ServidorPHPException e) {
+                                e.printStackTrace();
+                            }
+                            Toast.makeText(MiCuenta.this, getResources().getString(R.string.eliminarCuentaCorrectoMiCuenta),
                                     Toast.LENGTH_LONG).show();
+                            finish();
+                            Intent intentLoginActivity = new Intent(MiCuenta.this, LoginActivity.class);
+                            startActivity(intentLoginActivity);
                         } else {
-                            Toast.makeText(MiCuenta.this, "Usuario: "+user,
+                            Toast.makeText(MiCuenta.this, getResources().getString(R.string.eliminarCuentaFalloMiCuenta),
                                     Toast.LENGTH_LONG).show();
                         }
                     }
                 });
     }
 
+
     private void reAutentificacion() {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
         // Get auth credentials from the user for re-authentication. The example below shows
         // email and password credentials but there are multiple possible providers,
         // such as GoogleAuthProvider or FacebookAuthProvider.
         AuthCredential credential = EmailAuthProvider
-                .getCredential("user@example.com", "password1234");
+                .getCredential(user.getEmail(), passwordIntroducida);
 
-        // Prompt the user to re-provide their sign-in credentials
         user.reauthenticate(credential)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         // Usuario re-autentificado
+                        eliminarUsuario();
                     }
                 });
-        // [END reauthenticate]
     }
+
 
     @Override
     public void onClick(View v) {
@@ -342,5 +373,11 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                             Toast.LENGTH_LONG).show();
             cambiosRealizados = true;
         }
+    }
+
+    @Override
+    public void cogerString(String seleccion) {
+        passwordIntroducida = seleccion;
+        reAutentificacion();
     }
 }

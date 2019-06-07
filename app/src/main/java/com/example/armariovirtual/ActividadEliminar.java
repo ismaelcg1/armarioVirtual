@@ -1,8 +1,9 @@
 package com.example.armariovirtual;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,12 +13,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 
 import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
-
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+
+import static com.example.armariovirtual.MainActivityDrawer.NUMERO_PRENDAS;
+import static com.example.armariovirtual.MainActivityDrawer.UID_USUARIO_KEY;
 
 public class ActividadEliminar extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,9 +28,10 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
 
     private AdaptadorPrendas adaptadorPrendas;
     private final int TIEMPO_ESPERA_INICIAL = 50;
-    private FirebaseUser user;
+    private String uidUsuario;
+    private int cantidadPrendas;
     private ServidorPHP objetoServidor;
-
+    private LinearLayout layoutSinElementos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +43,20 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
 
         listaPrendas.setOnClickListener(this);
 
-        obtenerDatosServidor();
+        if (cantidadPrendas < 1) {
+            layoutSinElementos.setVisibility(View.VISIBLE);
+        } else {
+            layoutSinElementos.setVisibility(View.GONE);
+            obtenerDatosServidor();
 
-        // ------------------------------
-        // Para poder deslizar RecyclerView
+            deslizarBorrar();
+
+
+        }
+
+    }
+
+    private void deslizarBorrar() {
 
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
             @Override
@@ -64,11 +76,12 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             adaptadorPrendas.notifyItemRemoved(position); //item removed from recylcerview
-                            // TODO En este caso borrar el elemento del Arraylist y de la BBDD
-                            //sqldatabase.execSQL("delete from " + TABLE_NAME + " where _id='" + (position + 1) + "'"); //query for delete
-                            prendas.remove(position); //then remove item
-                            // TODO Eliminar al elemento pulsado aquí, pasar el id de la prenda y el del usuario --> en prendas_usuarios
-
+                            try {
+                                objetoServidor.eliminarPrenda(uidUsuario, prendas.get(position).getId());
+                            } catch (ServidorPHPException e) {
+                                e.printStackTrace();
+                            }
+                            prendas.remove(position);
                             return;
                         }
                     }).setNegativeButton(getResources().getString(R.string.builderCancelarActividadEliminar), new DialogInterface.OnClickListener() { //not removing items if cancel is done
@@ -84,13 +97,11 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(listaPrendas); //set swipe to recylcerview
-
-        // ------------------------------
-
     }
 
     private void inicializarVariables() {
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        obtenerDatosUsuario();
+        layoutSinElementos = findViewById(R.id.layoutSinElementosEliminar);
         objetoServidor = new ServidorPHP();
         appToolbar = findViewById(R.id.appToolbar);
         listaPrendas = findViewById(R.id.recyclerEliminar);
@@ -101,6 +112,15 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
         // Creo un layoutmanager para el recyclerview
         LinearLayoutManager llm = new LinearLayoutManager(this);
         listaPrendas.setLayoutManager(llm);
+    }
+
+    private void obtenerDatosUsuario() {
+        Intent intentActividadActual = getIntent();
+        Bundle b = intentActividadActual.getExtras();
+        if(b!=null) {
+            uidUsuario = (String) b.get(UID_USUARIO_KEY);
+            cantidadPrendas = b.getInt(NUMERO_PRENDAS);
+        }
     }
 
     private void inicializarToolbar() {
@@ -117,11 +137,13 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
 
     private void obtenerDatosServidor() {
         Handler handler = new Handler();
+        final String filtrado = "sin_filtros";
+        final String valorFiltrado = "";
 
         handler.postDelayed(new Runnable() {
             public void run() {
                 try {
-                    prendas = objetoServidor.obtenerPrendas(user.getUid(), null, null);
+                    prendas = objetoServidor.obtenerPrendas(uidUsuario, filtrado, valorFiltrado);
                     // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
                     adaptadorPrendas = new AdaptadorPrendas(ActividadEliminar.this, prendas);
                     listaPrendas.setAdapter(adaptadorPrendas);

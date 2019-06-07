@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import static com.example.armariovirtual.MiArmario.ARRAY_LIST_CALZADO;
+import static com.example.armariovirtual.MiArmario.CANTIDAD_DE_PRENDAS;
 import static com.example.armariovirtual.MiArmario.UID_USUARIO;
 
 
@@ -23,6 +24,7 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
     private RecyclerView listaCalzado;
     private ArrayList<Prenda> calzado;
     private String uidUsuario;
+    private int cantidad_prendas;
     private AdaptadorPrendas adaptadorPrendas;
     private LinearLayoutManager llm;
 
@@ -39,6 +41,7 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
         if (getArguments() != null) {
             uidUsuario = getArguments().getString(UID_USUARIO);
             calzado = getArguments().getParcelableArrayList(ARRAY_LIST_CALZADO);
+            cantidad_prendas = getArguments().getInt(CANTIDAD_DE_PRENDAS);
         }
     }
 
@@ -47,11 +50,11 @@ public class MiArmarioCalzado extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         View vista = inflater.inflate(R.layout.fragment_calzado, container, false);
         listaCalzado = vista.findViewById(R.id.recyclerViewCalzado);
+
         listaCalzado.setOnClickListener(this);
 
         iniciarRecyclerView();
 
-        // Inflate the layout for this fragment
         return vista;
     }
 

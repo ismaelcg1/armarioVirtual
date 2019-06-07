@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreenInicial extends AppCompatActivity {
 
-    private final int TIEMPO_SPLASH_INICIAL = 700;
+    private final int TIEMPO_SPLASH_INICIAL = 600;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

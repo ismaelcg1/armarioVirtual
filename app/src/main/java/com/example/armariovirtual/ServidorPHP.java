@@ -1,9 +1,7 @@
 package com.example.armariovirtual;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,20 +25,22 @@ public class ServidorPHP {
     private String urlServidor = "http://192.168.0.106:80/armarioVirtual/";  // 192.168.2.65  // 192.168.0.106:80
     private String registrarUsuario = urlServidor + "registrarUsuario.php";
     private String actualizarUsuario = urlServidor + "actualizarUsuario.php";
-    private String eliminarUsuario = urlServidor + "eliminarUsuario.php";
     private String obtenerUsuario = urlServidor + "obtenerUsuario.php";
-    private String insertarPrenda = urlServidor + "insertarPrenda.php";
     private String insertarPrendaPost = urlServidor + "insertarPrendaPost.php?";
     private String obtenerPrendas = urlServidor + "obtenerPrendas.php";
+    private String contarPrendasUsuario = urlServidor + "obtenerCantidadPrendas.php";
+    private String eliminarArmario = urlServidor + "eliminarArmarioUsuario.php";
+    private String eliminarUsuario= urlServidor + "eliminarUsuario.php";
+    private String eliminarPrenda= urlServidor + "eliminarPrendaTurno.php";
 
-    private String PARAMETRO_TALLA = "";
-    private String PARAMETRO_ESTILO = "";
-    private String PARAMETRO_COLOR = "";
-    private String PARAMETRO_EPOCA = "";
-    private String PARAMETRO_CATEGORIA = "";
-    private String PARAMETRO_SUBCATEGORIA = "";
-    private String PARAMETRO_MARCA = "";
-    private String PARAMETRO_ESTADO = "";
+    private String parametro_talla = "";
+    private String parametro_estilo = "";
+    private String parametro_color = "";
+    private String parametro_epoca = "";
+    private String parametro_categoria = "";
+    private String parametro_subcategoria = "";
+    private String parametro_marca = "";
+    private String parametro_estado = "";
 
     private HashMap<String, String> parametros;
 
@@ -136,14 +136,7 @@ public class ServidorPHP {
                                  final String epoca, final String categoria, final String subcategoria, final int cantidad, final String marca, final String imagenConvertida) {
         final int ESTADO_LIMPIO_TRUE = 1;
         StringRequest stringRequest;
-        // Para mostrar al usuario que se está subiendo la prenda
-        /*
-        final ProgressDialog progreso;
 
-        progreso=new ProgressDialog(contexto);
-        progreso.setMessage(contexto.getResources().getString(R.string.subiendoFotoActividadInsertar));
-        progreso.show();
-*/
         stringRequest=new StringRequest(Request.Method.POST, insertarPrendaPost, new Response.Listener<String>() {
 
             @Override
@@ -189,6 +182,62 @@ public class ServidorPHP {
     }
 
 
+    public int obtenerCantidadPrendas (String uid) {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        int contarPrendas = 0;
+        parametros = new HashMap<>();
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(contarPrendasUsuario, parametros);
+            String prendasTotales = datos.getString("cantidadPrendas");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                contarPrendas = Integer.parseInt(prendasTotales);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return contarPrendas;
+    }
+
+
+    public boolean eliminarArmario (String uid) throws ServidorPHPException {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        parametros = new HashMap<>();
+        Boolean borradoRealizado = false;
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(eliminarArmario, parametros);
+            Boolean borrado = datos.getBoolean("resultado");
+            if (borrado) {
+                borradoRealizado = true;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return borradoRealizado;
+    }
+
 
     public ArrayList<Prenda> obtenerPrendas(String uid, String filtrado, String valorFiltrado) throws ServidorPHPException {
         JSONParser parser = new JSONParser();
@@ -200,17 +249,13 @@ public class ServidorPHP {
         ArrayList<Prenda> todasPrendas = new ArrayList<>();
 
         Prenda prenda = null;
-
         parametros = new HashMap<>();
         if (uid.isEmpty() ) {
             parametros = null;
         } else {
             parametros.put("uid", uid);
-
-            if (filtrado != null) {
-                verFiltrado(filtrado, valorFiltrado);
-            }
-            asignarParametrosHashMap();
+            parametros.put("filtrado", filtrado);
+            parametros.put("valorFiltrado", valorFiltrado);
         }
 
         try {
@@ -245,7 +290,6 @@ public class ServidorPHP {
                     prenda = new Prenda(id, talla, estilo, color, epoca, categoria, subcategoria, imagenPrendaConvertida, cantidad, marca, limpio);
                     todasPrendas.add(prenda);
                 }
-                Log.d("LONGITUD ARRAY", ""+todasPrendas.size());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -253,38 +297,6 @@ public class ServidorPHP {
             e.printStackTrace();
         }
         return todasPrendas;
-    }
-
-    private void asignarParametrosHashMap() {
-        parametros.put("talla", PARAMETRO_TALLA);
-        parametros.put("estilo", PARAMETRO_ESTILO);
-        parametros.put("color", PARAMETRO_COLOR);
-        parametros.put("epoca", PARAMETRO_EPOCA);
-        parametros.put("categoria", PARAMETRO_CATEGORIA);
-        parametros.put("subcategoria", PARAMETRO_SUBCATEGORIA);
-        parametros.put("marca", PARAMETRO_MARCA);
-        parametros.put("estado_limpio", PARAMETRO_ESTADO);
-    }
-
-    private void verFiltrado(String filtrado, String valorFiltrado) {
-
-        if (filtrado.equalsIgnoreCase("talla")) {
-            PARAMETRO_TALLA = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("estilo")) {
-            PARAMETRO_ESTILO = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("color")) {
-            PARAMETRO_COLOR = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("epoca")) {
-            PARAMETRO_EPOCA = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("categoria")) {
-            PARAMETRO_CATEGORIA = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("subcategoria")) {
-            PARAMETRO_SUBCATEGORIA = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("marca")) {
-            PARAMETRO_MARCA = valorFiltrado;
-        } else if (filtrado.equalsIgnoreCase("estado_limpio")) {
-            PARAMETRO_ESTADO = valorFiltrado;
-        }
     }
 
 
@@ -317,67 +329,18 @@ public class ServidorPHP {
     }
 
 
-    public boolean insertarPrenda(String talla, String estilo, String color, String epoca, String categoria, String subcategoria,
-                                  int cantidad, String marca, String imagen, boolean estado_limpio, String uid ) throws ServidorPHPException {
-        boolean insertada = false;
-        JSONParser parser = new JSONParser();
-        JSONObject datos;
-        parametros = new HashMap<>();
-
-        if (uid.isEmpty() && talla.isEmpty() && estilo.isEmpty() && color.isEmpty() && categoria.isEmpty() && subcategoria.isEmpty()
-                && cantidad == 0 && marca.isEmpty() && imagen.isEmpty() ) {
-            parametros = null;
-        } else {
-            parametros.put("talla", talla);
-            parametros.put("estilo", estilo);
-            parametros.put("color", color);
-            parametros.put("epoca", epoca);
-            parametros.put("categoria", categoria);
-            parametros.put("subcategoria", subcategoria);
-            parametros.put("cantidad", ""+cantidad);
-            parametros.put("marca", marca);
-            parametros.put("imagenString", imagen);
-            parametros.put("estado_limpio", ""+estado_limpio);
-            parametros.put("uidUsuario", uid);
-        }
-
-        try {
-            datos = parser.getJSONObjectFromUrl(insertarPrenda, parametros);
-            // Pruebas:
-            Log.d("Parametros: ", ""+parametros);
-            insertada = datos.getBoolean("resultado");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return insertada;
-    }
-
-
-
-    public boolean eliminarUsuario(String usuario) throws ServidorPHPException {
+    public boolean eliminarUsuario(String uid) throws ServidorPHPException {
         boolean eliminado = false;
 
-
-
-
-
-
-
-        /*
         JSONParser parser = new JSONParser();
         JSONObject datos;
 
         HashMap<String, String> parametros = new HashMap<>();
-        if (usuario.isEmpty()) {
+        if (uid.isEmpty()) {
             parametros = null;
         } else {
-            parametros.put("usuario", usuario);
+            parametros.put("uid", uid);
         }
-
-        // Obtengo los datos del usuario del servidor
 
         try {
             datos = parser.getJSONObjectFromUrl(eliminarUsuario, parametros);
@@ -387,10 +350,36 @@ public class ServidorPHP {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
+
         return eliminado;
     }
 
+
+    public boolean eliminarPrenda (String uid, int id) throws ServidorPHPException {
+        boolean eliminado = false;
+
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+
+        HashMap<String, String> parametros = new HashMap<>();
+        if (uid.isEmpty()) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+            parametros.put("id", ""+id);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(eliminarPrenda, parametros);
+            eliminado = datos.getBoolean("resultado");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return eliminado;
+    }
 
 
     public ArrayList<String> obtenerTodosUsuarios(String usuario) throws ServidorPHPException {
@@ -398,11 +387,6 @@ public class ServidorPHP {
         JSONParser parser = new JSONParser();
         JSONObject datos;
         ArrayList<String> usuarios = new ArrayList<>();
-
-
-
-
-
 
         /*
         HashMap<String, String> parametros = new HashMap<>();

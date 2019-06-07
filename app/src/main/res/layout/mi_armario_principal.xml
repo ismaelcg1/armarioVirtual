@@ -13,18 +13,50 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <LinearLayout
+            android:id="@+id/layoutSinElementos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView43"
+                    style="@style/textoMiArmarioNoElementos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/NoPrendasAMostrarMiArmario" />
+
+                <ImageView
+                    android:id="@+id/imageView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/no_elementos" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorfragmentMenu"
+        app:itemIconTint="@drawable/item_selected"
+        app:itemTextColor="@drawable/item_selected"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_navigation_mi_armario"
-        app:itemIconTint="@drawable/item_selected"
-        app:itemTextColor="@drawable/item_selected"
-        />
+        app:menu="@menu/menu_navigation_mi_armario" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

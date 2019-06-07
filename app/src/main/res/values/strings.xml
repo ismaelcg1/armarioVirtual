@@ -83,8 +83,7 @@
     <!-- Textos MainActivityDrawer -->
     <string name="saludoMainActivityDrawer">Hola %1$s</string>
     <string name="saludoMainActivityDrawerAdmin">¡Hola Administrador!</string>
-    <string name="prendasAnadidasMainActivityDrawer">Has añadido un total de %1$d prenda/s </string>
-    <string name="accesoriosAnadidosMainActivityDrawer">Y un total de %1$d accesorio/s </string>
+    <string name="prendasAnadidasMainActivityDrawer">Ha añadido un total de %1$d prendas </string>
     <string name="verMiArmarioMainActivityDrawer">Ver mi armario</string>
 
     <string name="usuariosRegistradosMainActivityDrawerAdmin">Los usuarios registrados son un total de %1$d</string>
@@ -125,7 +124,6 @@
     <string name="filtroEpocaActividadConsultar">Época</string>
     <string name="filtroSubcategoriaActividadConsultar">Subcategoría</string>
     <string name="filtroMarcaActividadConsultar">Marca</string>
-    <string name="filtroEstadoActividadConsultar">Estado prenda</string>
     <string name="textoBusquedaActividadConsultar">Búsqueda: %1$s  ➭  %2$s</string>
 
     <string-array name="arrayFiltros">
@@ -136,7 +134,6 @@
         <item>@string/filtroEpocaActividadConsultar</item>
         <item>@string/filtroSubcategoriaActividadConsultar</item>
         <item>@string/filtroMarcaActividadConsultar</item>
-        <item>@string/filtroEstadoActividadConsultar</item>
     </string-array>
 
     <!-- Textos MiCuenta -->
@@ -152,6 +149,8 @@
     <string name="eliminarTodoContenidoArmarioMiCuenta">Eliminar todo el contenido de Mi Armario</string>
     <string name="eliminarTodoContenidoAdminArmarioMiCuenta">Resetear la base de datos global de Mi Armario</string>
     <string name="eliminarCuentaMiCuenta">Eliminar mi cuenta</string>
+    <string name="eliminarCuentaCorrectoMiCuenta">¡Cuenta borrada correctamente!</string>
+    <string name="eliminarCuentaFalloMiCuenta">Ocurrió algún fallo...</string>
 
     <string name="cerrarSesionTituloDialogMiCuenta">Cerrar sesión</string>
     <string name="cerrarSesionDialogMiCuenta">¿Realmente desea cerrar la sesión?</string>
@@ -162,6 +161,8 @@
     <string name="eliminarArmarioTituloDialogMiCuenta">Eliminar mi Armario</string>
     <string name="eliminarArmarioTituloDialogMiCuentaAdmin">Resetear BBDD mi Armario</string>
     <string name="eliminarArmarioDialogMiCuenta">¿Desea borrar todo el contenido de Mi Armario?</string>
+    <string name="eliminarArmarioCorrectoMiCuenta">¡Su armario ha sido borrado correctamente!</string>
+    <string name="eliminarArmarioFalloMiCuenta">Ha habido un error a la hora de borrar su armario...</string>
     <string name="resetearArmarioDialogMiCuentaAdmin">¿Desea resetear todo el contenido de la BBDD global de Mi Armario?</string>
 
     <string name="eliminarCuentaTituloDialogMiCuenta">Eliminar mi Cuenta</string>
@@ -216,7 +217,7 @@
     <string name="builderBorrarActividadEliminar">Eliminar</string>
     <string name="builderCancelarActividadEliminar">Cancelar</string>
 
-    <string name="textoInfoActividadEliminar">Desliza tu prenda/accesorio hacia la derecha o izquierda para eliminarla/o</string>
+    <string name="textoInfoActividadEliminar">Deslizar hacia la derecha o izquierda para eliminar</string>
 
     <!-- TEXTOS Informacion -->
     <string name="nombreInicialActividadInformacion">Información</string>
@@ -224,11 +225,14 @@
     <string name="nombreDesarrolladorInformacion">Ismael C. G.</string>
     <string name="copyRightInformacion">© 2019</string>
     <string name="agradecimientosInformacion">Agradecimientos:</string>
-    <string name="agradecimientosInfoInformacion">Al director, mis compañeros y profesores de IT Poniente</string>
+    <string name="agradecimientosInfoInformacion">A mis compañeros y todo el equipo de IT Poniente</string>
 
     <!-- DialogPersonalizados -->
     <string name="textoDialogColor">Selecciona el color principal de la prenda:</string>
     <string name="textoDialogEstacion">Selecciona la época del año en la que te pondrías dicha prenda:</string>
+    <string name="textoInfoDialogEliminarCuenta">Para poder eliminar la sesión, debe introducir su contraseña:</string>
+    <string name="aceptarDialogEliminarCuenta">Aceptar</string>
+    <string name="cancelarDialogEliminarCuenta">Cancelar</string>
 
     <!-- NumberPickerString -->
 
@@ -247,6 +251,7 @@
     <string name="tallaL">L</string>
     <string name="tallaXL">XL</string>
     <string name="tallaXXL">XXL</string>
+    <string name="talla3XL">3XL</string>
 
     <string-array name="arrayTallas">
         <item>@string/tallaXS</item>
@@ -255,6 +260,7 @@
         <item>@string/tallaL</item>
         <item>@string/tallaXL</item>
         <item>@string/tallaXXL</item>
+        <item>@string/talla3XL</item>
     </string-array>
 
     <!-- STRING COLORES -->
@@ -356,12 +362,14 @@
     <string name="rebeca">Rebeca</string>
     <string name="abrigo">Abrigo</string>
 
+
     <!-- MARCAS -->
-    <string name="sinMarca">Sin definir</string>
+    <string name="sinMarca">No definida</string>
     <string name="filsMarca">Fils</string>
     <string name="adidasMarca">Adidas</string>
     <string name="lottoMarca">Lotto</string>
     <string name="jommaMarca">Jack &amp; Jones</string>
+    <string name="springfieldMarca">Springfield</string>
     <string name="jackMarca">Joma</string>
     <string name="kappaMarca">Kappa</string>
     <string name="kelmeMarca">Kelme</string>
@@ -391,7 +399,7 @@
         <item>@string/bershkaMarca</item>
         <item>@string/billabongMarca</item>
         <item>@string/cyaMarca</item>
-       <item>@string/calvinKleinMarca</item>
+        <item>@string/calvinKleinMarca</item>
         <item>@string/chanelMarca</item>
         <item>@string/dieselMarca</item>
         <item>@string/filsMarca</item>
@@ -409,6 +417,7 @@
         <item>@string/pumaMarca</item>
         <item>@string/quicksilverMarca</item>
         <item>@string/ralphMarca</item>
+        <item>@string/springfieldMarca</item>
         <item>@string/umbroMarca</item>
         <item>@string/vansMarca</item>
         <item>@string/zaraMarca</item>
@@ -435,13 +444,13 @@
     <string name="boxer">Boxér</string>
     <string name="slipHombre">Slip</string>
     <string name="banador">Bañador</string>
+    <string name="calcetines">Calcetines</string>
     <!-- MUEJRES ROPA INTERIOR -->
     <string name="braga">Braga</string>
     <string name="tanga">Tanga</string>
     <string name="sujetador">Sujetador</string>
     <string name="slipMujer">Slip</string>
     <string name="bikini">Bikini</string>
-
 
     <!-- HOMBRES/MUJRES CALZADO -->
     <string name="zapatos">Zapatos</string>
@@ -452,8 +461,7 @@
     <!-- MUEJRES CALZADO -->
     <string name="tacones">Tacones</string>
 
-    <!-- HOMBRES/MUEJRES COMPLEMENTOS -->  <!-- QUITAR ACCESORIOS Y PONER COMPLEMENTOS (GLOBAL Y MEJOR) -->
-    <string name="calcetines">Calcetines</string>
+    <!-- HOMBRES/MUEJRES COMPLEMENTOS -->
     <string name="gorro">Gorro</string>
     <string name="gorra">Gorra</string>
     <string name="corbata">Corbata</string>
@@ -518,6 +526,7 @@
     <string-array name="arrayRopaParteInteriorHombre">
         <item>@string/banador</item>
         <item>@string/boxer</item>
+        <item>@string/calcetines</item>
         <item>@string/calzoncillos</item>
         <item>@string/slipHombre</item>
     </string-array>
@@ -525,6 +534,7 @@
     <string-array name="arrayRopaParteInteriorMujer">
         <item>@string/bikini</item>
         <item>@string/braga</item>
+        <item>@string/calcetines</item>
         <item>@string/slipMujer</item>
         <item>@string/sujetador</item>
         <item>@string/tanga</item>
@@ -551,7 +561,6 @@
         <item>@string/anillo</item>
         <item>@string/bolso</item>
         <item>@string/bufanda</item>
-        <item>@string/calcetines</item>
         <item>@string/cartera</item>
         <item>@string/colgante</item>
         <item>@string/corbata</item>
@@ -577,9 +586,15 @@
 
     <string name="botonSalirSplashScreen">Salir</string>
 
+    <!-- Mi Armario -->
+    <string name="NoPrendasAMostrarMiArmario">No hay elementos a mostrar</string>
+
     <!-- TabbedActivity -->
     <string name="nombreInicialMainIntercambio">Intercambio</string>
     <string name="texto_tab_1_MainIntercambio">Mis prendas</string>
     <string name="texto_tab_2_MainIntercambio">Otras prendas</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

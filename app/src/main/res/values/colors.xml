@@ -6,7 +6,7 @@
 
     <!-- Colores personalizados -->
     <color name="colorNegro">#BE000000</color>
-    <color name="colorGris">#73000000</color>
+    <color name="colorGris">#E64B4B4B</color>
     <color name="colorBlanco">#FFFFFF</color>
 
     <!-- Color pruebas -->
@@ -14,11 +14,14 @@
 
 
     <!-- Colores fragment -->
-    <color name="colorfragment1">#FCF3CF</color> <!-- F9E79F -->
-    <color name="colorfragment2">#D6EAF8</color> <!-- A9CCE3 -->
-    <color name="colorfragment3">#F6DDCC</color> <!-- EDBB99 -->
-    <color name="colorfragment4">#E8DAEF</color> <!-- F5B7B1 -->
-    <color name="colorfragment5">#D6DBDF</color> <!-- CCD1D1 -->
+    <color name="colorfragmentMenu">#E6F39100</color>
+    <color name="colorfragmentMenuSeleccionado">#663300</color>
+    <color name="colorfragmentMenuNoSeleccionado">#AA6511</color>
+    <color name="colorfragment1">#59FCF3CF</color>
+    <color name="colorfragment2">#59D6EAF8</color>
+    <color name="colorfragment3">#59F6DDCC</color>
+    <color name="colorfragment4">#59E8DAEF</color>
+    <color name="colorfragment5">#59D6D8DF</color>
 
 
     <!-- Color eliminar -->

@@ -57,17 +57,10 @@
                     android:layout_height="wrap_content"
                     android:text="@string/prendasAnadidasMainActivityDrawer" />
 
-                <TextView
-                    android:id="@+id/accesoriosAdd"
-                    style="@style/prendasAddContentMain"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/accesoriosAnadidosMainActivityDrawer" />
-
             </LinearLayout>
 
             <LinearLayout
-                style="@style/layoutInfeiorBotonContentMain"
+                style="@style/layoutInferiorBotonContentMain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">

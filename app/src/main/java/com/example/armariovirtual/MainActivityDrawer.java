@@ -30,15 +30,19 @@ public class MainActivityDrawer extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private String nombreUsuarioString;
-    private TextView nombreUser, prendasAdd, accesoriossAdd;
-    // Para mostrar las prendas y accesorios añadidos
-    private int prendas, accesorios;
+    private TextView nombreUser, prendasAdd;
+    // Para mostrar las prendas añadidos
+    private int prendas;
     // Creamos el intent de la nueva actividad
     private Intent intent;
     private Button btnVerArmario;
     private Usuario userActual;
     private ImageView imagenDrawerInicial;
     private FirebaseUser user;
+    private ServidorPHP objetoServidor;
+    protected static final String UID_USUARIO_KEY = "UID";
+    protected static final String NUMERO_PRENDAS = "CANTIDAD_PRENDAS";
+    protected static final String SEXO_USUARIO = "SEXO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,8 @@ public class MainActivityDrawer extends AppCompatActivity
         super.onResume();
         // TODO aqui actualizamos el objeto usuario ¿se puede hacer sólo si venimos de la actividad MiCuenta???
         actualizarDatosUsuario();
+        prendas = obtenerPrendas();
+        prendasAdd.setText( getResources().getString(R.string.prendasAnadidasMainActivityDrawer, prendas ) );
     }
 
     private void actualizarDatosUsuario() {
@@ -127,18 +133,28 @@ public class MainActivityDrawer extends AppCompatActivity
 
     @SuppressLint("StringFormatMatches")
     private void inicializarVariables() {
-        prendas = 0;
-        accesorios = 0;
+        objetoServidor = new ServidorPHP();
         user = FirebaseAuth.getInstance().getCurrentUser();
+        prendas = obtenerPrendas();
         nombreUser.setText( getResources().getString(R.string.saludoMainActivityDrawer, nombreUsuarioString) );
         prendasAdd.setText( getResources().getString(R.string.prendasAnadidasMainActivityDrawer, prendas ) );
-        accesoriossAdd.setText( getResources().getString(R.string.accesoriosAnadidosMainActivityDrawer, accesorios ) );
+    }
+
+    private int obtenerPrendas() {
+        int cantidadPrendas;
+
+        cantidadPrendas = objetoServidor.obtenerCantidadPrendas(user.getUid());
+
+        return cantidadPrendas;
+    }
+
+    public void cerrarMainDrawer() {
+        finish();
     }
 
     private void conectarVariablesConVista () {
         nombreUser = findViewById(R.id.nombreUsuario);
         prendasAdd = findViewById(R.id.prendasAdd);
-        accesoriossAdd = findViewById(R.id.accesoriosAdd);
         btnVerArmario = findViewById(R.id.bVerArmario);
     }
 
@@ -150,21 +166,32 @@ public class MainActivityDrawer extends AppCompatActivity
 
         if (id == R.id.mi_armario) {
             intent = new Intent(this, MiArmario.class);
-            intent.putExtra("uidUsuario", user.getUid());
+            intent.putExtra(UID_USUARIO_KEY, user.getUid());
+            intent.putExtra(NUMERO_PRENDAS, prendas);
             startActivity(intent);
+
         } else if (id == R.id.add_elemento) {
             intent = new Intent(this, ActividadAddPrenda.class);
             intent.putExtra("sexoUsuario", userActual.getSexo());
             intent.putExtra("tallaPorDefecto", userActual.getTallaPorDefecto());
             startActivity(intent);
+
         } else if (id == R.id.eliminar_elemento) {
             intent = new Intent(this, ActividadEliminar.class);
+            intent.putExtra(UID_USUARIO_KEY, user.getUid());
+            intent.putExtra(NUMERO_PRENDAS, prendas);
             startActivity(intent);
+
         } else if (id == R.id.consultar_elemento) {
             intent = new Intent(this, ActividadConsultar.class);
+            intent.putExtra(UID_USUARIO_KEY, user.getUid());
+            intent.putExtra(SEXO_USUARIO, userActual.getSexo());
+            intent.putExtra(NUMERO_PRENDAS, prendas);
             startActivity(intent);
+
         } else if (id == R.id.intercambio) {
             intent = new Intent(this, MainIntercambio.class);
+            intent.putExtra(UID_USUARIO_KEY, user.getUid());
             startActivity(intent);
 
         } else if (id == R.id.configuracion_usuario) {
@@ -175,6 +202,7 @@ public class MainActivityDrawer extends AppCompatActivity
             intent = new Intent(this, MiCuenta.class);
             intent.putExtras(bundle);
             startActivity(intent);
+
         } else if (id == R.id.informacion) {
             intent = new Intent(this, Informacion.class);
             startActivity(intent);
@@ -190,6 +218,9 @@ public class MainActivityDrawer extends AppCompatActivity
         int id = v.getId();
         if(id == R.id.bVerArmario) {
             intent = new Intent(this, MiArmario.class);
+            intent.putExtra(UID_USUARIO_KEY, user.getUid());
+            intent.putExtra(NUMERO_PRENDAS, prendas);
+
             startActivity(intent);
         }
     }
