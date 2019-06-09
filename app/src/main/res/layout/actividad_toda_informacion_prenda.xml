@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -32,8 +32,7 @@
 
                 <ImageView
                     android:id="@+id/imagenPrendaDetallada"
-                    style="@style/imagenActividadInfoPrendaCompleta"
-                    app:srcCompat="@drawable/gafas_r100" />
+                    style="@style/imagenActividadInfoPrendaCompleta" />
             </LinearLayout>
 
             <LinearLayout
@@ -241,6 +240,62 @@
                         android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="15dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView51"
+                        style="@style/estiloTextoInfoSwitchActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textoEstadoActividadInfoPrendaCompleta" />
+
+                    <Switch
+                        android:id="@+id/switchEstado"
+                        style="@style/estiloSwitchActividadInfoPrendaCompleta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:textCursorDrawable="@color/colorPrimaryDark"
+                        android:textSize="36dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView52"
+                        style="@style/estiloTextoInfoSwitchActividadInfoPrendaCompleta"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/textoIntercambioActividadInfoPrendaCompleta" />
+
+                    <Switch
+                        android:id="@+id/switchIntercambio"
+                        style="@style/estiloSwitchActividadInfoPrendaCompleta"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textCursorDrawable="@color/colorPrimaryDark"
+                        android:textSize="36dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

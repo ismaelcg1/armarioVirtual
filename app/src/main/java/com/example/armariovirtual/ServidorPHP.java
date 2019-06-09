@@ -32,6 +32,8 @@ public class ServidorPHP {
     private String eliminarArmario = urlServidor + "eliminarArmarioUsuario.php";
     private String eliminarUsuario= urlServidor + "eliminarUsuario.php";
     private String eliminarPrenda= urlServidor + "eliminarPrendaTurno.php";
+    private String obtenerPrendasIntercambio = urlServidor + "obtenerPrendasIntercambio.php";
+    private String actualizarIntercambio = urlServidor + "actualizarIntercambio.php";
 
     private String parametro_talla = "";
     private String parametro_estilo = "";
@@ -127,7 +129,6 @@ public class ServidorPHP {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // TODO si la respuesta es null mostrar un toast en la clase que obtiene el resultado
         return miUsuario;
     }
 
@@ -243,7 +244,7 @@ public class ServidorPHP {
         JSONParser parser = new JSONParser();
         JSONObject datos;
         // Variables;
-        int id, cantidad;
+        int id, cantidad, es_intercambio;
         String talla, estilo, color, epoca, categoria, subcategoria, fotoString, marca, estadoLimpio;
         boolean limpio;
         ArrayList<Prenda> todasPrendas = new ArrayList<>();
@@ -278,6 +279,7 @@ public class ServidorPHP {
                     cantidad = obj.getInt("cantidad");
                     marca = obj.getString("marca");
                     estadoLimpio = obj.getString("estado_limpio");
+                    es_intercambio = obj.getInt("es_intercambio");
 
                     if (estadoLimpio.equalsIgnoreCase("1")) {
                         limpio = true;
@@ -287,7 +289,7 @@ public class ServidorPHP {
 
                     Bitmap imagenPrendaConvertida = Prenda.convertirStringABitmap(fotoString);
 
-                    prenda = new Prenda(id, talla, estilo, color, epoca, categoria, subcategoria, imagenPrendaConvertida, cantidad, marca, limpio);
+                    prenda = new Prenda(id, talla, estilo, color, epoca, categoria, subcategoria, imagenPrendaConvertida, cantidad, marca, limpio, es_intercambio);
                     todasPrendas.add(prenda);
                 }
             }
@@ -379,6 +381,96 @@ public class ServidorPHP {
         }
 
         return eliminado;
+    }
+
+
+
+    public ArrayList<Prenda> obtenerPrendasIntercambio(String uid, String valor) throws ServidorPHPException {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        // Variables;
+        int id, cantidad, es_intercambio;
+        String talla, estilo, color, epoca, categoria, subcategoria, fotoString, marca, estadoLimpio;
+        boolean limpio;
+        ArrayList<Prenda> prendasIntercambio = new ArrayList<>();
+        Prenda prenda = null;
+        parametros = new HashMap<>();
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+            parametros.put("valor_pasado", valor);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(obtenerPrendasIntercambio, parametros);
+
+            JSONArray arrayPrendas = datos.getJSONArray("datos");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                for (int i = 0; i < arrayPrendas.length(); i++) {
+                    JSONObject obj = (JSONObject) arrayPrendas.get(i);
+                    id = obj.getInt("id");
+                    talla = obj.getString("talla");
+                    estilo = obj.getString("estilo");
+                    color = obj.getString("color");
+                    epoca = obj.getString("epoca");
+                    categoria = obj.getString("categoria");
+                    subcategoria = obj.getString("subcategoria");
+                    fotoString = obj.getString("foto");
+                    cantidad = obj.getInt("cantidad");
+                    marca = obj.getString("marca");
+                    estadoLimpio = obj.getString("estado_limpio");
+                    es_intercambio = obj.getInt("es_intercambio");
+
+                    if (estadoLimpio.equalsIgnoreCase("1")) {
+                        limpio = true;
+                    } else {
+                        limpio = false;
+                    }
+
+                    Bitmap imagenPrendaConvertida = Prenda.convertirStringABitmap(fotoString);
+
+                    prenda = new Prenda(id, talla, estilo, color, epoca, categoria, subcategoria, imagenPrendaConvertida, cantidad, marca, limpio, es_intercambio);
+                    prendasIntercambio.add(prenda);
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return prendasIntercambio;
+    }
+
+
+    public boolean actualizarIntercambio (String uid, int idPrenda, int valorSeleccionado) throws ServidorPHPException {
+
+        Boolean consultaCorrecta = false;
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        parametros = new HashMap<>();
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+            parametros.put("id_prenda", ""+idPrenda);
+            parametros.put("intercambio", ""+valorSeleccionado);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(actualizarIntercambio, parametros);
+            consultaCorrecta = datos.getBoolean("resultado");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return consultaCorrecta;
     }
 
 

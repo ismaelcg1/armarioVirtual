@@ -82,6 +82,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
         final String categoriaPrendaTurno = prendas.get(position).getCategoriaPrenda();
         final String subcategoriaPrendaTurno = prendas.get(position).getSubcategoriaPrenda();
         final boolean estadoPrendaTurno = prendas.get(position).isEstado_limpio();
+        final int estadoIntercambio = prendas.get(position).getEs_intercambio();
         final Bitmap imagenPrendaTurno  = prendas.get(position).getImagenPrenda();
         final String marcaPrendaTurno   = prendas.get(position).getMarca();
 
@@ -101,6 +102,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
                     case R.id.imagenPrenda:
 
                         intent = new Intent(v.getContext(), ActividadInfoPrendaCompleta.class);
+                        intent.putExtra("idPrenda",idPrendaTurno);
                         intent.putExtra("tallaPrenda",tallaPrendaTurno);
                         intent.putExtra("estiloPrenda",estiloPrendaTurno);
                         intent.putExtra("colorPrenda",colorPrendaTurno);
@@ -111,6 +113,7 @@ public class AdaptadorPrendas extends RecyclerView.Adapter<AdaptadorPrendas.Hold
                         intent.putExtra("imagenPrenda",imagenPrendaTurno);
                         intent.putExtra("cantidadPrenda",cantidadPrendaTurno);
                         intent.putExtra("marcaPrenda",marcaPrendaTurno);
+                        intent.putExtra("estado_intercambio",estadoIntercambio);
 
                         contexto.startActivity(intent);
 

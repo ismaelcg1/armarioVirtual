@@ -214,8 +214,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                         getResources().getString(R.string.toastRegistroCorrectoActividadLogin)+" "+email.getText().toString(), Toast.LENGTH_LONG).show();
                                 boolean correcto = true;
 
-                                //TODO insertar en bd de campos usuario
-
                                 ServidorPHP objetoServidor = new ServidorPHP();
                                 Boolean todoCorrecto = false;
                                 try {
@@ -225,7 +223,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
                                     e.printStackTrace();
                                 }
 
-                                // TODO comprobación de errores al insertar datos en la BBDD
                                 if (todoCorrecto) {
                                     Toast.makeText(RegistroInicial.this, "Todo correcto", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -234,15 +231,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
 
                                 updateUI(user, correcto);
-                            } else {
-                                /*
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(RegistroInicial.this, getResources().getString(R.string.toastRegistroIncorrectoActividadLogin), Toast.LENGTH_SHORT).show();
-                                // Si ha fallado el registro Hacemos invisible el progress bar
-                                layout_registro_inicial.setVisibility(View.VISIBLE);
-                                layout_progress_bar.setVisibility(View.GONE);
-                                updateUI(null, false);
-                                */
                             }
                         }
                     });
@@ -285,6 +273,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             email.setError(null);
         } else { // Formato incorrecto
             email.setError(getResources().getString(R.string.formatoEmailIncorrectoRegistroInicial));
+            valid = false;
         }
 
         if (TextUtils.isEmpty(aliasUser) ) {
@@ -292,9 +281,9 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             valid = false;
         } else if (aliasUser.length() > 20) {
             aliasUsuario.setError(getResources().getString(R.string.aliasNoCorrectoRegistroInicial));
+            valid = false;
         } else {
             aliasUsuario.setError(null);
-            //interfaz.cogerNombre(aliasUsuario.getText().toString());
         }
 
         if (TextUtils.isEmpty(passwordUser)) {
@@ -304,6 +293,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
             password.setError(null);
         } else {
             password.setError(getResources().getString(R.string.formatoPasswordIncorrectoRegistroInicial));
+            valid = false;
         }
 
         if (TextUtils.isEmpty(passwordUserRepetida)) {

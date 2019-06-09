@@ -111,6 +111,9 @@
     <string name="estadoSucioPrendaActividadInfoPrendaCompleta">Sucio</string>
     <string name="cantidadPrendaActividadInfoPrendaCompleta">Cantidad:</string>
     <string name="marcaPrendaActividadInfoPrendaCompleta">Marca:</string>
+
+    <string name="textoEstadoActividadInfoPrendaCompleta">¿Estado limpio?</string>
+    <string name="textoIntercambioActividadInfoPrendaCompleta">¿Intercambiar?</string>
     <!-- Epoca, color, estilo, categoría y subcategoría se cogen de ActividadInsertar-->
 
     <string name="nombreActividadConfiguracion">Configuración</string>
@@ -476,6 +479,7 @@
     <string name="gafas">Gafas</string>
     <string name="bolso">Bolso</string>
     <string name="cartera">Cartera</string>
+    <string name="cinturon">Cinturón</string>
 
     <string-array name="arrayRopaParteSuperiorHombre">
         <item>@string/abrigo</item>
@@ -562,6 +566,7 @@
         <item>@string/bolso</item>
         <item>@string/bufanda</item>
         <item>@string/cartera</item>
+        <item>@string/cinturon</item>
         <item>@string/colgante</item>
         <item>@string/corbata</item>
         <item>@string/gafas</item>
@@ -593,6 +598,9 @@
     <string name="nombreInicialMainIntercambio">Intercambio</string>
     <string name="texto_tab_1_MainIntercambio">Mis prendas</string>
     <string name="texto_tab_2_MainIntercambio">Otras prendas</string>
+
+    <string name="tituloDialogIntercambio">Intercambio</string>
+    <string name="subtituloDialogIntercambio">¿Desearía cambiar el estado de intercambio de dicha prenda?</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

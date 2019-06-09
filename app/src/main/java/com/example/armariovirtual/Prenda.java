@@ -9,12 +9,12 @@ import android.util.Base64;
 public class Prenda implements Parcelable {
 
     private String tallaPrenda, estiloPrenda, color, epocaPrenda, categoriaPrenda, subcategoriaPrenda, marca;
-    private int id, cantidadPrenda;
+    private int id, cantidadPrenda, es_intercambio;
     private Bitmap imagenPrenda;
     private boolean estado_limpio;
 
     public Prenda (int id, String tallaPrenda, String estiloPrenda, String color, String epocaPrenda, String categoriaPrenda,
-                   String subcategoriaPrenda, Bitmap imagenPrenda, int cantidadPrenda, String marca, boolean estado_limpio) {
+                   String subcategoriaPrenda, Bitmap imagenPrenda, int cantidadPrenda, String marca, boolean estado_limpio, int es_intercambio) {
         this.id = id;
         this.tallaPrenda = tallaPrenda;
         this.estiloPrenda = estiloPrenda;
@@ -26,7 +26,35 @@ public class Prenda implements Parcelable {
         this.cantidadPrenda = cantidadPrenda;
         this.marca = marca;
         this.estado_limpio = estado_limpio;
+        this.es_intercambio = es_intercambio;
     }
+
+    protected Prenda(Parcel in) {
+        tallaPrenda = in.readString();
+        estiloPrenda = in.readString();
+        color = in.readString();
+        epocaPrenda = in.readString();
+        categoriaPrenda = in.readString();
+        subcategoriaPrenda = in.readString();
+        marca = in.readString();
+        id = in.readInt();
+        cantidadPrenda = in.readInt();
+        es_intercambio = in.readInt();
+        imagenPrenda = in.readParcelable(Bitmap.class.getClassLoader());
+        estado_limpio = in.readByte() != 0;
+    }
+
+    public static final Creator<Prenda> CREATOR = new Creator<Prenda>() {
+        @Override
+        public Prenda createFromParcel(Parcel in) {
+            return new Prenda(in);
+        }
+
+        @Override
+        public Prenda[] newArray(int size) {
+            return new Prenda[size];
+        }
+    };
 
     public int getId() {
         return id;
@@ -128,6 +156,13 @@ public class Prenda implements Parcelable {
         }
     }
 
+    public int getEs_intercambio() {
+        return es_intercambio;
+    }
+
+    public void setEs_intercambio(int es_intercambio) {
+        this.es_intercambio = es_intercambio;
+    }
 
     @Override
     public String toString() {
@@ -141,10 +176,12 @@ public class Prenda implements Parcelable {
                 ", marca='" + marca + '\'' +
                 ", id=" + id +
                 ", cantidadPrenda=" + cantidadPrenda +
+                ", es_intercambio=" + es_intercambio +
                 ", imagenPrenda=" + imagenPrenda +
                 ", estado_limpio=" + estado_limpio +
                 '}';
     }
+
 
     @Override
     public int describeContents() {
@@ -153,6 +190,17 @@ public class Prenda implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        // Default required
+        dest.writeString(tallaPrenda);
+        dest.writeString(estiloPrenda);
+        dest.writeString(color);
+        dest.writeString(epocaPrenda);
+        dest.writeString(categoriaPrenda);
+        dest.writeString(subcategoriaPrenda);
+        dest.writeString(marca);
+        dest.writeInt(id);
+        dest.writeInt(cantidadPrenda);
+        dest.writeInt(es_intercambio);
+        dest.writeParcelable(imagenPrenda, flags);
+        dest.writeByte((byte) (estado_limpio ? 1 : 0));
     }
 }

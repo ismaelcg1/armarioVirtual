@@ -243,7 +243,7 @@
                             style="@style/LoginActivityEstiloBotonesInferiores"
                             android:layout_width="160sp"
                             android:layout_height="wrap_content"
-                            android:text="GOOGLE, NO VA" />
+                            android:text="GOOGLE" />
                     </LinearLayout>
 
                 </LinearLayout>
