@@ -26,6 +26,7 @@ public class ServidorPHP {
     private String registrarUsuario = urlServidor + "registrarUsuario.php";
     private String actualizarUsuario = urlServidor + "actualizarUsuario.php";
     private String obtenerUsuario = urlServidor + "obtenerUsuario.php";
+    private String obtenerTodosUsuarios = urlServidor + "obtenerTodosUsuarios.php";
     private String insertarPrendaPost = urlServidor + "insertarPrendaPost.php?";
     private String obtenerPrendas = urlServidor + "obtenerPrendas.php";
     private String contarPrendasUsuario = urlServidor + "obtenerCantidadPrendas.php";
@@ -34,6 +35,8 @@ public class ServidorPHP {
     private String eliminarPrenda= urlServidor + "eliminarPrendaTurno.php";
     private String obtenerPrendasIntercambio = urlServidor + "obtenerPrendasIntercambio.php";
     private String actualizarIntercambio = urlServidor + "actualizarIntercambio.php";
+    private String contarUsuarios = urlServidor + "obtenerCantidadUsuarios.php";
+    private String contarPrendasUsuariosTotales = urlServidor + "obtenerCantidadPrendasTotales.php";
 
     private String parametro_talla = "";
     private String parametro_estilo = "";
@@ -474,37 +477,116 @@ public class ServidorPHP {
     }
 
 
-    public ArrayList<String> obtenerTodosUsuarios(String usuario) throws ServidorPHPException {
-
+    public ArrayList<Usuario> obtenerTodosUsuarios(String uid) throws ServidorPHPException {
         JSONParser parser = new JSONParser();
         JSONObject datos;
-        ArrayList<String> usuarios = new ArrayList<>();
+        // Variables;
+        String uidUsuario, nickName, fechaNacimiento, tallaPorDefecto;
+        Sexo sexo;
+        int altura, peso;
+        int genero = 0;
+        ArrayList<Usuario> todosUsuarios = new ArrayList<>();
 
-        /*
-        HashMap<String, String> parametros = new HashMap<>();
-
-        if (usuario.isEmpty()) {
+        Usuario usuario = null;
+        parametros = new HashMap<>();
+        if (uid.isEmpty() ) {
             parametros = null;
         } else {
-            parametros.put("usuarioActual", usuario);
+            parametros.put("uid", uid);
         }
 
-        // Obtengo los datos de los usuario del servidor
-
         try {
-            datos = parser.getJSONObjectFromUrl(obtenerUsuario, parametros);
-            JSONArray usuariosJson = datos.getJSONArray("resultado");
-            for(int i = 0; i<usuariosJson.length(); i++) {
-                usuarios.add(usuariosJson.getString(i));
+            datos = parser.getJSONObjectFromUrl(obtenerTodosUsuarios, parametros);
+
+            JSONArray arrayUsuarios = datos.getJSONArray("datos");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                for (int i = 0; i < arrayUsuarios.length(); i++) {
+                    JSONObject obj = (JSONObject) arrayUsuarios.get(i);
+                    uidUsuario = obj.getString("uid");
+                    nickName = obj.getString("nick_usuario");
+                    fechaNacimiento = obj.getString("fecha_nacimiento");
+                    tallaPorDefecto = obj.getString("talla_por_defecto");
+                    genero = obj.getInt("genero_masculino");
+                    altura = obj.getInt("altura");
+                    peso = obj.getInt("peso");
+
+                    if (genero == 0) {
+                        sexo = Sexo.Masculino;
+                    } else {
+                        sexo = Sexo.Femenino;
+                    }
+
+                    usuario = new Usuario(nickName, sexo, tallaPorDefecto, fechaNacimiento, altura, peso, uidUsuario);
+                    todosUsuarios.add(usuario);
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return todosUsuarios;
+    }
 
-        */
-        return usuarios;
+    public int obtenerCantidadUsuarios (String uid) {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        int contadorUsuarios = 0;
+        parametros = new HashMap<>();
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(contarUsuarios, parametros);
+            String usuariosTotales = datos.getString("cantidadUsuarios");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                contadorUsuarios = Integer.parseInt(usuariosTotales);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return contadorUsuarios;
+    }
+
+
+    public int obtenerCantidadPrendasTotales (String uid) {
+        JSONParser parser = new JSONParser();
+        JSONObject datos;
+        int contarPrendas = 0;
+        parametros = new HashMap<>();
+
+        if (uid.isEmpty() ) {
+            parametros = null;
+        } else {
+            parametros.put("uid", uid);
+        }
+
+        try {
+            datos = parser.getJSONObjectFromUrl(contarPrendasUsuariosTotales, parametros);
+            String prendasTotales = datos.getString("cantidadPrendas");
+            Boolean consultaCorrecta = datos.getBoolean("resultado");
+
+            if (consultaCorrecta) {
+                contarPrendas = Integer.parseInt(prendasTotales);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return contarPrendas;
     }
 
 }

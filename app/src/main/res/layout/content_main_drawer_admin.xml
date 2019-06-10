@@ -51,14 +51,14 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/prendasAdd"
+                    android:id="@+id/tvUsuariosTotales"
                     style="@style/prendasAddContentMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/usuariosRegistradosMainActivityDrawerAdmin" />
 
                 <TextView
-                    android:id="@+id/accesoriosAdd"
+                    android:id="@+id/tvPrendasTotales"
                     style="@style/prendasAddContentMain"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

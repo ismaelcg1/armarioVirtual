@@ -83,7 +83,17 @@
             android:theme="@style/AppTheme.NoActionBar"/>
 
         <activity
+            android:name="com.example.armariovirtual.ActividadEliminarAdmin"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
             android:name="com.example.armariovirtual.ActividadConsultar"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.example.armariovirtual.ActividadConsultarAdmin"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 
@@ -94,6 +104,11 @@
 
         <activity
             android:name="com.example.armariovirtual.ActividadInfoPrendaCompleta"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <activity
+            android:name="com.example.armariovirtual.ActividadInfoUsuarioCompleto"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"/>
 

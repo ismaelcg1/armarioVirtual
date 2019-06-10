@@ -5,8 +5,6 @@ import android.content.Intent;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Bitmap;
-import android.os.Bundle;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

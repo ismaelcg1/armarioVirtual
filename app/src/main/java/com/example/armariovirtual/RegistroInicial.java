@@ -56,6 +56,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     private String fechaServidor;
 
     private RadioButton botonGeneroPulsado;
+    private Boolean es_administrador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
 
         inicializarVariables();
         conectarVariablesConVista();
+        obtenerDatos();
 
         // Pongo el titulo en la toolbar
         appToolbar.setTitle(R.string.nombreActividadRegistroInicial);
@@ -135,6 +137,15 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         layout_registro_inicial = findViewById(R.id.linearLayoutRegistroInicial);
     }
 
+    private void obtenerDatos() {
+        final String ADMINISTRADOR = "administrador";
+        Intent intentActividadActual = getIntent();
+        Bundle b = intentActividadActual.getExtras();
+        if(b!=null) {
+            es_administrador = b.getBoolean(ADMINISTRADOR);
+        }
+    }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -198,7 +209,6 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         String passwordUserRepetida = passwordRepetida.getText().toString();
         final String tallaPorDefecto = obtenerTalla();
 
-        // TODO cambiar orden if, para quitar este return
          if (!passwordUser.equalsIgnoreCase(passwordUserRepetida)) {
             Toast.makeText(this, getResources().getString(R.string.toastPasswordNoCoincidenRegistroIncial), Toast.LENGTH_LONG).show();
         } else if (validateForm(nombreUser, emailUser, passwordUser, passwordUserRepetida)) { // Si no hay ningún campo sin completar, registramos desde 0...
@@ -330,11 +340,26 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
     private void updateUI(FirebaseUser user, boolean correcto) {
         // hideProgressDialog();
         if (user != null && correcto) {
-            // Abrimos la actividad inicial:
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+            if (es_administrador) {
+                inicializarVariables();
+                resetearCampos();
+            } else { // Volvemos al login
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         }
+    }
+
+    private void resetearCampos() {
+
+        aliasUsuario.setText("");
+        email.setText("");
+        password.setText("");
+        passwordRepetida.setText("");
+        mMostrarFecha.setText(R.string.seleccionarFechaRegistroInicial);
+        textViewSeleccionarAltura.setText(R.string.textViewAlturaRegistroInicial);
+        textViewSeleccionarPeso.setText(R.string.textViewPesoRegistroInicial);
     }
 
     @Override

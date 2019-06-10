@@ -220,8 +220,6 @@ public class MiCuenta extends AppCompatActivity implements View.OnClickListener,
                     eliminarMiArmario(false);
                 } else if (opcion == 4){
                     new DialogoReautentificacion(MiCuenta.this, MiCuenta.this);
-                } else {
-
                 }
                 dialog.dismiss();
             }

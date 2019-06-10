@@ -118,6 +118,16 @@
 
     <string name="nombreActividadConfiguracion">Configuración</string>
 
+    <!-- Textos ActividadInfoUsuarioCompleto -->
+    <string name="nombreActividadInfoUsuarioCompleto">Información detallada</string>
+    <string name="uidActividadInfoUsuarioCompleto">Uid:</string>
+    <string name="nickNameActividadInfoUsuarioCompleto">Nickname:</string>
+    <string name="alturaActividadInfoUsuarioCompleto">Altura:</string>
+    <string name="pesoActividadInfoUsuarioCompleto">Peso:</string>
+    <string name="tallaActividadInfoUsuarioCompleto">Talla:</string>
+    <string name="fechaNacimientoActividadInfoUsuarioCompleto">Fecha de nacimiento:</string>
+    <string name="generoActividadInfoUsuarioCompleto">Género:</string>
+
     <!-- Textos Consultar -->
     <string name="nombreBotonActividadConsultar">Filtrar</string>
     <string name="sinFiltrosActividadConsultar">Sin filtros</string>

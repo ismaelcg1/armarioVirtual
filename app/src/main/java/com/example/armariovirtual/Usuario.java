@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Usuario implements Serializable {
 
-    private String nickName, email, fechaNacimiento, tallaPorDefecto;
+    private String uid, nickName, email, fechaNacimiento, tallaPorDefecto;
     private Sexo sexo;
     private int altura, peso;
 
@@ -17,6 +17,16 @@ public class Usuario implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
         this.altura = altura;
         this.peso = peso;
+    }
+
+    public Usuario (String nickName, Sexo sexo, String tallaPorDefecto, String fechaNacimiento, int altura, int peso, String uid) {
+        this.nickName = nickName;
+        this.sexo = sexo;
+        this.tallaPorDefecto = tallaPorDefecto;
+        this.fechaNacimiento = fechaNacimiento;
+        this.altura = altura;
+        this.peso = peso;
+        this.uid = uid;
     }
 
     public String getNickName() {
@@ -75,10 +85,19 @@ public class Usuario implements Serializable {
         this.tallaPorDefecto = tallaPorDefecto;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     @Override
     public String toString() {
         return "Usuario{" +
-                "nickName='" + nickName + '\'' +
+                "uid='" + uid + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
                 ", fechaNacimiento='" + fechaNacimiento + '\'' +
                 ", tallaPorDefecto='" + tallaPorDefecto + '\'' +
