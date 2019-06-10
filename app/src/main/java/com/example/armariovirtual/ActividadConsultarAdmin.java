@@ -42,7 +42,6 @@ public class ActividadConsultarAdmin extends AppCompatActivity {
     }
 
 
-
     private void inicializarVariables() {
         FirebaseUser user;
         user = FirebaseAuth.getInstance().getCurrentUser();
@@ -64,14 +63,14 @@ public class ActividadConsultarAdmin extends AppCompatActivity {
     }
 
     private void obtenerDatosServidor() {
-                try {
-                    usuarios = objetoServidor.obtenerTodosUsuarios(uidUsuario);
-                    // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
-                    AdaptadorUsuarios adaptadorUsuarios = new AdaptadorUsuarios(contexto, usuarios);
-                    listaUsuarios.setAdapter(adaptadorUsuarios);
-                    adaptadorUsuarios.refrescar();
-                } catch (ServidorPHPException e) {
-                    e.printStackTrace();
-                }
+        try {
+            usuarios = objetoServidor.obtenerTodosUsuarios(uidUsuario);
+            // Creamos un adaptador para incluirlo en la listaOptimizada -> RecyclerView
+            AdaptadorUsuarios adaptadorUsuarios = new AdaptadorUsuarios(contexto, usuarios);
+            listaUsuarios.setAdapter(adaptadorUsuarios);
+            adaptadorUsuarios.refrescar();
+        } catch (ServidorPHPException e) {
+            e.printStackTrace();
+        }
     }
 }

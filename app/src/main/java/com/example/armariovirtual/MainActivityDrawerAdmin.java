@@ -87,9 +87,8 @@ public class MainActivityDrawerAdmin extends AppCompatActivity
             intent.putExtra(ADMINISTRADOR,es_administrador);
             startActivity(intent);
         } else if (id == R.id.eliminar_elemento_admin) {
-
-
-
+            intent = new Intent(this, ActividadEliminarAdmin.class);
+            startActivity(intent);
         } else if (id == R.id.consultar_elemento_admin) {
             intent = new Intent(this, ActividadConsultarAdmin.class);
             startActivity(intent);
@@ -126,7 +125,8 @@ public class MainActivityDrawerAdmin extends AppCompatActivity
                 break;
 
             case R.id.bEliminarAdmin:
-
+                intent = new Intent(this, ActividadEliminarAdmin.class);
+                startActivity(intent);
                 break;
 
             case R.id.bConsultarAdmin:

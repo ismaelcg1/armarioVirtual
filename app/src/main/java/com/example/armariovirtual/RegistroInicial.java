@@ -164,6 +164,7 @@ public class RegistroInicial extends AppCompatActivity implements View.OnClickLi
         altura = 0;
         fechaServidor = "";
         mAuth = FirebaseAuth.getInstance();
+        es_administrador = false;
     }
 
     private boolean validarEmailPassword(String email, String password) {

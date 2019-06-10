@@ -1,13 +1,13 @@
 <resources>
-    <string name="app_name">Armario Virtual</string>
+    <string name="app_name">Virtual Clothes</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_subtitle">ARMARIO VIRTUAL</string>
+    <string name="nav_header_subtitle">VIRTUAL CLOTHES</string>
     <string name="nav_header_subtitle_admin">Modo Administrador</string>
 
     <!-- TEXTOS LOGIN -->
     <string name="nombreActividadLogin">Identificación</string>
-    <string name="textoInicialActividadLogin">Armario Virtual</string>
+    <string name="textoInicialActividadLogin">Virtual Clothes</string>
     <string name="aliasUsuarioActividadLogin">Introduzca su alias para identificarle</string>
     <string name="emailActividadLogin">Introduzca su email</string>
     <string name="passwordActividadLogin">Introduzca su contraseña</string>

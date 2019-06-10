@@ -51,7 +51,6 @@ public class ActividadEliminar extends AppCompatActivity implements View.OnClick
 
             deslizarBorrar();
 
-
         }
 
     }
