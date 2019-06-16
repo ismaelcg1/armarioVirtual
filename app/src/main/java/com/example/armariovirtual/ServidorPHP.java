@@ -22,7 +22,7 @@ import java.util.Map;
 
 public class ServidorPHP {
 
-    private String urlServidor = "http://192.168.0.106:80/armarioVirtual/";  // 192.168.2.65  // 192.168.0.106:80
+    private String urlServidor = "http://192.168.0.106:80/armarioVirtual/";
     private String registrarUsuario = urlServidor + "registrarUsuario.php";
     private String actualizarUsuario = urlServidor + "actualizarUsuario.php";
     private String obtenerUsuario = urlServidor + "obtenerUsuario.php";

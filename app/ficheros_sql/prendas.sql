@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS prendas ( 
+	id INT NOT NULL AUTO_INCREMENT, 		
+	talla VARCHAR(4) NOT NULL,
+	estilo VARCHAR(10) NOT NULL,
+	color VARCHAR(15) NOT NULL,
+	epoca VARCHAR(10) NOT NULL,
+	categoria VARCHAR(15) NOT NULL,
+	subcategoria VARCHAR(25) NOT NULL,
+	cantidad INT NOT NULL,
+	marca VARCHAR(20) NOT NULL,
+	ruta_foto VARCHAR(400) NOT NULL, 			
+	estado_limpio BOOLEAN NOT NULL,
+	PRIMARY KEY(id)
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+

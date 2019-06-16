@@ -390,6 +390,7 @@
     <string name="pumaMarca">Puma</string>
     <string name="umbroMarca">Umbro</string>
     <string name="vansMarca">Vans</string>
+    <string name="reebokMarca">Reebok</string>
     <string name="quicksilverMarca">Quicksilver</string>
     <string name="armaniMarca">Giorgio Armani</string>
     <string name="calvinKleinMarca">Calvin Klein</string>
@@ -430,6 +431,7 @@
         <item>@string/pumaMarca</item>
         <item>@string/quicksilverMarca</item>
         <item>@string/ralphMarca</item>
+        <item>@string/reebokMarca</item>
         <item>@string/springfieldMarca</item>
         <item>@string/umbroMarca</item>
         <item>@string/vansMarca</item>
@@ -591,7 +593,7 @@
 
 
     <!-- TEXTOS SplashScreen -->
-    <string name="textoInicioSplashScreen">ARMARIO VIRTUAL</string>
+    <string name="textoInicioSplashScreen">VIRTUAL CLOTHES</string>
     <string name="textoUsuarioCorrectoSplashScreen">Obteniendo los datos de su perfil...</string>
     <string name="textoObtenerDatosSplashScreen">Obteniendo los datos de sus prendas</string>
     <string name="textoCargarArmarioSplashScreen">Cargando los datos de su armario...</string>
